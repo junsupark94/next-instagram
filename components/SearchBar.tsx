@@ -21,7 +21,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ className }) => {
   return (
     <>
       {/* search bar */}
-
       <div
         className="grow z-10"
         onClick={() => {
