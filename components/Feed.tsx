@@ -1,4 +1,3 @@
-import React from "react";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import FeedItem from "./FeedItem";
 

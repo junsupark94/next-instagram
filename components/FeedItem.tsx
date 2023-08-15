@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import ProfileIcon from "./Icons/ProfileIcon";
 import OptionsIcon from "./Icons/OptionsIcon";
 import BookmarkIcon from "./Icons/BookmarkIcon";
@@ -9,12 +10,16 @@ import Image from "next/image";
 import { Post } from "@/util/dummy-data";
 import { getRelativeTimeString } from "@/util/relative-time";
 import FeedItemDescription from "./FeedItemDescription";
+import createDoubleClick from "@/util/double-click";
 
 type FeedItemProps = {
   item: Post;
 };
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
+  const [liked, setLiked] = useState(false)
+  const doubleClick = createDoubleClick(() => setLiked(true));
+
   return (
     <article>
       <div className="flex justify-between items-center px-4 py-[14px]">
@@ -32,38 +37,44 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
         </div>
         <OptionsIcon />
       </div>
-      {item.content.map((media, i) => {
-        if (media.type === "image")
+      <div onClick={doubleClick}>
+        {item.content.map((media, i) => {
+          if (media.type === "image")
+            return (
+              <Image
+                key={media.src}
+                src={media.src}
+                alt={media.type}
+                height={450}
+                width={450}
+                priority={i === 0}
+              />
+            );
           return (
-            <Image
+            <video
+              key={media.src}
               src={media.src}
-              alt={media.type}
+              controls
               height={450}
               width={450}
-              priority={i === 0}
             />
           );
-        return (
-          <video
-            key={media.src}
-            src={media.src}
-            controls
-            height={450}
-            width={450}
-          />
-        );
-      })}
+        })}
+      </div>
       <div className="px-4 mt-3">
-        <div className="flex justify-between my-1">
-          <div className="flex gap-3">
-            <HeartIcon />
+        <div className="flex justify-between items-center my-1">
+          <div className="flex gap-3 items-center">
+            <HeartIcon onClick={() => setLiked(prev => !prev)} className="h-7 w-7" liked={liked}/>
             <CommentIcon />
             <ShareIcon />
           </div>
           <BookmarkIcon />
         </div>
         <div>{item.likes.toLocaleString()} likes</div>
-        <FeedItemDescription account={item.account} description={item.description} />
+        <FeedItemDescription
+          account={item.account}
+          description={item.description}
+        />
         <div className="text-gray-500">
           View all {item.replies.length} comments
         </div>

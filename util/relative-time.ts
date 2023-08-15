@@ -7,6 +7,14 @@ export function getRelativeTimeString(
   // Get the amount of seconds between the given date and now
   const deltaSeconds = Math.round((timeMs - Date.now()) / 1000);
 
+  if (Math.abs(deltaSeconds) > (86400 * 30)) {
+    const options : any = {day: 'numeric', month: 'long'}
+    if (Math.abs(deltaSeconds) > 86400 * 365) {
+      options.year = 'numeric'
+    }
+    return date.toLocaleString('en', options)
+  }
+
   // Array reprsenting one minute, hour, day, week, month, etc in seconds
   const cutoffs = [60, 3600, 86400, 86400 * 7, 86400 * 30, 86400 * 365, Infinity];
 

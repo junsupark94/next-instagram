@@ -13,7 +13,7 @@ type Media = {
 
 export type Post = {
   account: string;
-  id: string;
+  id: number;
   date: Date;
   likes: number;
   replies: Reply[];
@@ -37,8 +37,8 @@ let day = 1;
 export const DUMMY_DATA: Post[] = [
   {
     account: "junsupark",
-    id: String(postId++),
-    date: new Date(2023, 7, day++),
+    id: postId++,
+    date: new Date(2023, 4, day++),
     likes: 10,
     replies: [
       {account: "bobsmith", id: replyId++, text: "Welcome to Instagram!", likes: 2},
@@ -49,7 +49,7 @@ export const DUMMY_DATA: Post[] = [
   },
   {
     account: "bobsmith",
-    id: String(postId++),
+    id: postId++,
     date: new Date(2023, 7, day++),
     likes: 129,
     replies: [
@@ -66,7 +66,7 @@ export const DUMMY_DATA: Post[] = [
   },
   {
     account: "notjunsupark",
-    id: String(postId++),
+    id: postId++,
     date: new Date(2023, 7, day++),
     likes: 3456,
     replies: [],
