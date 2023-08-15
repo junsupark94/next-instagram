@@ -23,7 +23,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const doubleClickHandler = () => {
     clearTimeout(timer);
     setLiked(true);
-    setOpacity("opacity-80");
+    setOpacity("opacity-70 animate-swell");
     timer = setTimeout(() => setOpacity("opacity-0"), 1000);
   };
   const doubleClick = createDoubleClick(doubleClickHandler);
@@ -86,7 +86,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           <div className="flex gap-3 items-center">
             <HeartIcon
               onClick={() => setLiked(prev => !prev)}
-              className="h-7 w-7"
+              className={`h-7 w-7 ${liked && "animate-swell"}`}
               {...likeIconProps}
             />
             <CommentIcon />

@@ -15,6 +15,20 @@ const config: Config = {
       },
       dropShadow: {
         'around': '0px 0px 10px rgba(0, 0, 0, 0.3)',
+      },
+      animation: {
+        wiggle: 'wiggle 1s ease-in-out infinite',
+        swell: 'swell 1s ease-in-out 1',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        swell: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.3)' },
+        }
       }
     },
   },
