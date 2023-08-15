@@ -3,17 +3,12 @@ import { twMerge } from "tailwind-merge";
 
 type HeartIconProps = {
   className?: string;
-  liked?: boolean;
   onClick?: any;
+  fill?: string;
+  stroke?: string;
 };
 
-const HeartIcon: React.FC<HeartIconProps> = ({ className, liked, onClick }) => {
-  let fill = "none";
-  let stroke = "currentColor";
-  if (liked) {
-    fill = "rgb(255, 48, 64)";
-    stroke = "rgb(255, 48, 64)";
-  }
+const HeartIcon: React.FC<HeartIconProps> = ({ className, onClick, fill = "none", stroke = "currentColor" }) => {
   return (
     <svg
       onClick={onClick}

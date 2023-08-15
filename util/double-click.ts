@@ -5,6 +5,7 @@ export default function createDoubleClick(cb : Function) {
     clearTimeout(timer);
     if (interval) {
       cb();
+      interval = false;
       return;
     }
     interval = true;
