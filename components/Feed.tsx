@@ -6,8 +6,8 @@ type FeedProps = {};
 
 const Feed: React.FC<FeedProps> = () => {
   return (
-    <main className="bg-blue-200 h-screen">
-      <section>
+    <main>
+      <section className="flex flex-col gap-2 text-[14px]">
         {DUMMY_DATA.map((item) => <FeedItem key={item.id} item={item} />)}
       </section>
     </main>
