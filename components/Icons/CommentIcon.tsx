@@ -7,8 +7,8 @@ const CommentIcon: React.FC<CommentIconProps> = () => {
     <svg
       aria-label="Comment"
       className="x1lliihq x1n2onr6"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="currentColor"
+      fill="currentColor"
       height="24"
       role="img"
       viewBox="0 0 24 24"

@@ -6,7 +6,7 @@ type Reply = {
   replying?: number;
 };
 
-type Media = {
+export type Media = {
   src: string;
   type: "image" | "video";
 };
@@ -45,7 +45,12 @@ export const DUMMY_DATA: Post[] = [
       {account: "junsupark", id: replyId++, text: "Thanks Bob!", likes: 3, replying: 1},
     ],
     description: "First post!",
-    content: [{ src: "/test.jpg", type: "image" }],
+    content: [
+      { src: "/test.jpg", type: "image" },
+      { src: "/test4.jpg", type: "image" },
+      { src: "/test5.jpg", type: "image" },
+      { src: "/video1.mp4", type: "video" },
+    ],
   },
   {
     account: "bobsmith",

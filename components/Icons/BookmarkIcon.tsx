@@ -7,8 +7,8 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = () => {
     <svg
       aria-label="Save"
       className="x1lliihq x1n2onr6"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="currentColor"
+      fill="currentColor"
       height="24"
       role="img"
       viewBox="0 0 24 24"
