@@ -8,7 +8,7 @@ type Props = {};
 
 export default function Footer({}: Props) {
   return (
-    <footer className="fixed bottom-0 p-2 bg-white dark:bg-black w-full border-t">
+    <footer className="fixed bottom-0 p-2 bg-white dark:bg-black w-full border-t border-gray-500">
       <nav className="flex justify-between">
         <HomeIcon />
         <SearchIcon />

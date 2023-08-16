@@ -8,7 +8,7 @@ import PostIcon from "@/components/Icons/PostIcon";
 export default function Home() {
   return (
     <div>
-      <header className="fixed top-0 flex items-center justify-between p-2 px-4 gap-4 border-b border-gray-500 w-full bg-white dark:bg-black dark:text-white z-10">
+      <header className="fixed top-0 flex items-center justify-between p-2 px-4 gap-4 border-b border-gray-500 w-full bg-white dark:bg-black dark:text-white z-10 sm:hidden">
         <InstagramLogo />
         <div className="flex gap-3 items-center">
           <PostIcon className="w-6 h-6"/>
@@ -16,11 +16,15 @@ export default function Home() {
         </div>
       </header>
       <div className="mt-[58px]" />
-      <div className="border-b border-gray-500">
-        <Stories />
-      </div>
-      <div className="mb-10">
-        <Feed />
+      <div className="mb-10 max-w-[630px] mx-auto border">
+        <div className="border border-green-500 mb-4 mt-6">
+          <Stories />
+        </div>
+        <div className="flex justify-center border border-blue-500">
+          <div className="max-w-[470px] border border-red-500">
+            <Feed />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

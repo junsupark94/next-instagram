@@ -11,6 +11,7 @@ import { getRelativeTimeString } from "@/util/relative-time";
 import FeedItemDescription from "./FeedItemDescription";
 import createDoubleClick from "@/util/double-click";
 import Carousel from "./Carousel";
+import CommentForm from "./CommentForm";
 
 type FeedItemProps = {
   item: Post;
@@ -40,7 +41,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
 
   return (
     <article>
-      <div className="flex justify-between items-center px-4 py-[14px]">
+      <section className="flex justify-between items-center px-4 py-[14px]">
         <div className="flex gap-2 items-center">
           <ProfileIcon className="w-8 h-8" />
           <div className="flex flex-col">
@@ -54,9 +55,9 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           </div>
         </div>
         <OptionsIcon />
-      </div>
-      <div className="relative overflow-auto" onClick={doubleClick}>
-        <Carousel content={item.content} opacity={opacity}/>
+      </section>
+      <div className="relative" onClick={doubleClick}>
+        <Carousel content={item.content} opacity={opacity} />
       </div>
       <div className="px-4 mt-3">
         <div className="flex justify-between items-center my-1">
@@ -76,12 +77,13 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           account={item.account}
           description={item.description}
         />
-        <div className="text-gray-500">
+        <button className="text-gray-500">
           View all {item.replies.length} comments
+        </button>
+        <div className="text-gray-500 text-[10px] sm:hidden">
+          {getRelativeTimeString(item.date).toUpperCase()}
         </div>
-        <div className="text-gray-500 text-[10px]">
-          {getRelativeTimeString(item.date)}
-        </div>
+        <CommentForm />
       </div>
     </article>
   );
