@@ -42,7 +42,7 @@ const MenuIcon: React.FC<MenuIconProps> = ({className}) => {
         fill="none"
         stroke="currentColor"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
         strokeWidth="2"
         x1="3"
         x2="21"
