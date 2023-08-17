@@ -1,13 +1,14 @@
 import React from "react";
 
 type InstagramLogoProps = {
+  className?: string;
 };
 
-const InstagramLogo: React.FC<InstagramLogoProps> = () => {
+const InstagramLogo: React.FC<InstagramLogoProps> = ({className}) => {
   return (
     <svg
       aria-label="Instagram"
-      className="_ab6-"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="29"

@@ -8,17 +8,17 @@ import PostIcon from "./Icons/PostIcon";
 
 type Props = {};
 
-export default function Footer({}: Props) {
+export default function BottomNavBar({}: Props) {
   return (
-    <footer className="p-3 bg-white dark:bg-black border-t border-gray-500">
-      <nav className="flex justify-evenly">
+    <nav className="p-3 bg-white dark:bg-black border-t border-gray-500">
+      <div className="flex justify-evenly">
         <HomeIcon />
         <ExploreIcon />
         <ReelsIcon />
         <PostIcon />
         <MessengerIcon />
         <ProfileIcon />
-      </nav>
-    </footer>
+      </div>
+    </nav>
   );
 }

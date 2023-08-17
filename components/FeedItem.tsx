@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import ProfileIcon from "./Icons/ProfileIcon";
 import OptionsIcon from "./Icons/OptionsIcon";
 import BookmarkIcon from "./Icons/BookmarkIcon";

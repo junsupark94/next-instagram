@@ -1,10 +1,10 @@
 import Stories from "@/components/Stories";
-import Footer from "@/components/Footer";
 import Feed from "@/components/Feed";
 import HeartIcon from "@/components/Icons/HeartIcon";
 import InstagramLogo from "@/components/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
 import NavBar from "@/components/NavBar";
+import BottomNavBar from "@/components/BottomNavBar";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         </div>
       </header>
       <div className="h-[52px]" />
-      <section className="flex justify-center w-full pt-6">
+      <section className="flex justify-center w-full pt-[22px]">
         <div className="max-w-[630px]">
           <div className="my-2">
             <Stories />
@@ -34,7 +34,7 @@ export default function Home() {
       </section>
       <div className="h-10" />
       <div className="sm:hidden fixed bottom-0 left-0 w-screen">
-        <Footer />
+        <BottomNavBar />
       </div>
     </div>
   );

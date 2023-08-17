@@ -1,7 +1,6 @@
 import { Media } from "@/util/dummy-data";
 import Image from "next/image";
 import React from "react";
-import { DUMMY_DATA } from "@/util/dummy-data";
 import HeartIcon from "./Icons/HeartIcon";
 
 type CarouselProps = {
