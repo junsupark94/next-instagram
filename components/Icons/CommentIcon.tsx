@@ -1,12 +1,14 @@
 import React from "react";
 
-type CommentIconProps = {};
+type CommentIconProps = {
+  className?: string;
+};
 
-const CommentIcon: React.FC<CommentIconProps> = () => {
+const CommentIcon: React.FC<CommentIconProps> = ({className}) => {
   return (
     <svg
       aria-label="Comment"
-      className="x1lliihq x1n2onr6"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="24"

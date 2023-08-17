@@ -1,12 +1,14 @@
 import React from "react";
 
-type BookmarkIconProps = {};
+type BookmarkIconProps = {
+  className?: string
+};
 
-const BookmarkIcon: React.FC<BookmarkIconProps> = () => {
+const BookmarkIcon: React.FC<BookmarkIconProps> = ({className}) => {
   return (
     <svg
       aria-label="Save"
-      className="x1lliihq x1n2onr6"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="24"

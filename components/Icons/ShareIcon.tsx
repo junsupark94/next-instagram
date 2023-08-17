@@ -1,12 +1,14 @@
 import React from "react";
 
-type ShareIconProps = {};
+type ShareIconProps = {
+  className?: string
+};
 
-const ShareIcon: React.FC<ShareIconProps> = () => {
+const ShareIcon: React.FC<ShareIconProps> = ({className}) => {
   return (
     <svg
       aria-label="Share Post"
-      className="x1lliihq x1n2onr6"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="24"

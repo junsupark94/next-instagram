@@ -19,7 +19,7 @@ const config: Config = {
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
-        swell: "swell 1s ease-in-out 1",
+        swell: "swell 0.6s ease-in-out 1",
       },
       keyframes: {
         wiggle: {

@@ -64,13 +64,13 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           <div className="flex gap-3 items-center">
             <HeartIcon
               onClick={() => setLiked((prev) => !prev)}
-              className={`h-7 w-7 ${liked && "animate-swell"}`}
+              className={`h-7 w-7 hover:text-[#a8a8a8] ${liked && "animate-swell"}`}
               {...likeIconProps}
             />
-            <CommentIcon />
-            <ShareIcon />
+            <CommentIcon className="hover:text-[#a8a8a8]"/>
+            <ShareIcon className="hover:text-[#a8a8a8]"/>
           </div>
-          <BookmarkIcon />
+          <BookmarkIcon className="hover:text-[#a8a8a8]"/>
         </div>
         <div>{item.likes.toLocaleString()} likes</div>
         <FeedItemDescription
