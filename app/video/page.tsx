@@ -1,5 +1,101 @@
-import VideoPlayer from "@/components/VideoPlayer";
+"use client";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+const elementIsVisibleInViewport = (
+  el: HTMLElement,
+  partiallyVisible = false
+) => {
+  const { top, left, bottom, right } = el.getBoundingClientRect();
+  const { innerHeight, innerWidth } = window;
+  return partiallyVisible
+    ? ((top > 0 && top < innerHeight) ||
+        (bottom > 0 && bottom < innerHeight)) &&
+        ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
+    : top >= 0 && left >= 0 && bottom <= innerHeight && right <= innerWidth;
+};
+
+function playOneVideo(videoEl: HTMLVideoElement) {
+  const videoHeight = videoEl.clientHeight;
+  const videoClientRect = videoEl.getBoundingClientRect().top;
+  if (
+    videoClientRect <= window.innerHeight - videoHeight * 0.5 &&
+    videoClientRect >= 0 - videoHeight * 0.5
+  ) {
+    videoEl.play();
+  } else {
+    videoEl.pause();
+  }
+}
+
+function videoScroll() {
+  const videoEls: NodeListOf<HTMLVideoElement> = document.querySelectorAll(
+    "[data-play='autoplay']"
+  );
+
+  const visibleVideos: HTMLVideoElement[] = [];
+  videoEls.forEach((videoEl) => {
+    if (elementIsVisibleInViewport(videoEl, true)) visibleVideos.push(videoEl);
+  });
+
+  if (visibleVideos.length === 1) {
+    playOneVideo(visibleVideos[0]);
+  } else if (visibleVideos.length > 1) {
+    const halfwayPoint = window.innerHeight / 2;
+    const upperBound = halfwayPoint - 50;
+    const lowerBound = halfwayPoint + 50;
+
+    let target = -1;
+    for (let i = visibleVideos.length - 1; i >= 0; i--) {
+      const video = visibleVideos[i];
+      const { top, bottom } = video.getBoundingClientRect();
+      if (lowerBound > bottom && bottom > upperBound) {
+        target = i;
+        break;
+      }
+      if (top < lowerBound && upperBound < top) {
+        target = i;
+        break;
+      }
+    }
+    if (target === -1) return;
+    visibleVideos.forEach((video, index) => {
+      if (index === target) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }
+}
+
+window.addEventListener("load", videoScroll);
+window.addEventListener("scroll", videoScroll);
 
 export default function VideoPage() {
-  return <VideoPlayer />
+  return (
+    <div>
+      <div className="flex items-center justify-center w-[400px] h-screen border">
+        Hi
+      </div>
+      <video
+        src="video1.mp4"
+        className="w-[400px] border"
+        data-play="autoplay"
+        loop
+        muted
+      />
+      <div className="flex items-center justify-center w-[400px] h-[50px] border">
+        Hi
+      </div>
+      <video
+        src="video2.mp4"
+        className="w-[400px] border"
+        data-play="autoplay"
+        loop
+      />
+      <div className="fixed h-screen w-[300px] top-0 left-0 flex items-center">
+        <div className="h-[100px] w-[400px] border border-pink-400" />
+      </div>
+    </div>
+  );
 }

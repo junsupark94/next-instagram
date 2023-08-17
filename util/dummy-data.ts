@@ -67,7 +67,10 @@ export const DUMMY_DATA: Post[] = [
       {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
     ],
     description: "Second post!",
-    content: [{ src: "/test7.jpg", type: "image" }],
+    content: [
+      { src: "/test7.jpg", type: "image" },
+      { src: "/video2.mp4", type: "video" },
+  ],
   },
   {
     account: "notjunsupark",
