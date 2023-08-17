@@ -12,7 +12,7 @@ type CarouselProps = {
 const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
   return (
     <>
-      <section className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center w-[390px] h-[390px] sm:w-[470px] sm:h-[470px] sm:border sm:border-gray-500 sm:rounded-md">
+      <section className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border sm:border-gray-500 sm:rounded-md">
         {content.map((media, i) => {
           if (media.type === "image") {
             return (

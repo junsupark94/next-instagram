@@ -56,7 +56,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
         </div>
         <OptionsIcon />
       </section>
-      <div className="relative" onClick={doubleClick}>
+      <div onClick={doubleClick}>
         <Carousel content={item.content} opacity={opacity} />
       </div>
       <div className="px-4 mt-3">
