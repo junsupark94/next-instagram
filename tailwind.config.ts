@@ -14,12 +14,19 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      backgroundColor: {
+        'hover': '#ffffff11',
+      },
+      colors: {
+        'icon-hover': '#a8a8a8',
+      },
       dropShadow: {
         around: "0px 0px 10px rgba(0, 0, 0, 0.3)",
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
         swell: "swell 0.6s ease-in-out 1",
+        'swell-tiny': 'swell-tiny 0.5s ease-in-out 1',
       },
       keyframes: {
         wiggle: {
@@ -29,6 +36,10 @@ const config: Config = {
         swell: {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.3)" },
+        },
+        'swell-tiny': {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.07)" },
         },
       },
       screens: {
