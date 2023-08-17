@@ -9,7 +9,7 @@ const ProfileIcon: React.FC<ProfileIconProps> = ({className}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+      viewBox="1 1 22 22"
       fill="currentColor"
       className={twMerge("w-6 h-6", className)}
     >

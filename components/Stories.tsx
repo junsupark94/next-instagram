@@ -7,7 +7,14 @@ type Props = {};
 
 export default function Stories({}: Props) {
   return (
-    <ul className="flex gap-2">
+    <ul className="flex gap-[14px] w-[630px] overflow-auto">
+      <StoryButton />
+      <StoryButton />
+      <StoryButton />
+      <StoryButton />
+      <StoryButton />
+      <StoryButton />
+      <StoryButton />
       <StoryButton />
       <StoryButton />
       <StoryButton />

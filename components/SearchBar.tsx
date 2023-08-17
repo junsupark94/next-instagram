@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import SearchIcon from "./Icons/SearchIcon";
 
 type SearchBarProps = {
   className?: string;
@@ -28,18 +29,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ className }) => {
         }}
         ref={ref}
       >
-        <label className={"flex items-center bg-gray-200 p-2 rounded-md"}>
-          <Image
-            src="/search.svg"
-            alt="search"
-            width={25}
-            height={25}
-            className={`mr-2 ${focus && "hidden"}`}
-          />
+        <label className={"flex items-center bg-gray-200 dark:bg-[#262626] p-[6px] rounded-md"}>
+          <SearchIcon className={`mr-2 ${focus && "hidden"} dark:text-[#8e8e8e]`}/>
           <input
             type="text"
             placeholder="Search"
-            className={`outline-none bg-gray-200 grow ${
+            className={`outline-none bg-gray-200 dark:bg-[#262626] dark:text-[#a8a8a8] grow ${
               !focus && "text-gray-400"
             }`}
             value={searchValue}
