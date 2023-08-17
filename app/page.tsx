@@ -20,20 +20,19 @@ export default function Home() {
         </div>
       </header>
       <div className="h-[52px]" />
-      <div className="grow flex justify-center gap-16">
-        <section className="max-w-[630px] pt-[22px]">
-          <div className="my-2">
+      <section className="grow flex justify-center gap-16">
+        <div className="max-w-[630px] pt-[22px]">
+          <div className="my-2 xs:border-0 border-b border-gray-800">
             <Stories />
           </div>
-          <div className="h-[16px]" />
-          <article className="flex justify-center">
+          <article className="flex justify-center xs:mt-4">
             <div className="max-w-[470px]">
               <Feed />
             </div>
           </article>
-        </section>
+        </div>
         <RightSideBar />
-      </div>
+      </section>
       <div className="h-10" />
       <div className="sm:hidden fixed bottom-0 left-0 w-screen">
         <BottomNavBar />

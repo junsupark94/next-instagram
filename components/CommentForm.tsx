@@ -23,7 +23,7 @@ const CommentForm: React.FC<CommentFormProps> = () => {
         value={value}
         onChange={e => setValue(e.target.value)}
       />
-      <button className="font-bold text-[#0095f6]">Post</button>
+      <button className={`font-bold text-[#0095f6] ${value === "" && "invisible"}`}>Post</button>
     </form>
   );
 };

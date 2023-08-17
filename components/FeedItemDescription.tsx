@@ -74,15 +74,15 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
       <span className="font-bold">{account}</span>{" "}
       {!showMore && (
         <>
-          <h1 className="whitespace-pre-wrap">{shortDescription}</h1>
+          <h1 className="inline whitespace-pre-wrap">{shortDescription}</h1>
           {isTruncated && (
-            <button onClick={() => setShowMore(true)} className="text-gray-400">
+            <button onClick={() => setShowMore(true)} className="block text-gray-400">
               more
             </button>
           )}
         </>
       )}
-      {showMore && <h1 className="whitespace-pre-wrap">{fullDescription}</h1>}
+      {showMore && <h1 className="inline whitespace-pre-wrap">{fullDescription}</h1>}
     </div>
   );
 };
