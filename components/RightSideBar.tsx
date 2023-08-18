@@ -16,11 +16,11 @@ const RightSideBar: React.FC<RightSideBarProps> = () => {
             <div className="dark:text-[#a8a8a8] text-[#737373]">display name</div>
           </div>
         </section>
-        <button className="text-xs text-[#0095f6]">Switch</button>
+        <button className="text-xs text-[#0095f6] cursor-default">Switch</button>
       </article>
       <article className="flex justify-between py-1">
         <div className="dark:text-[#a8a8a8] text-[#737373] font-semibold">Suggested for you</div>
-        <button className="text-xs font-semibold">See All</button>
+        <button className="text-xs font-semibold cursor-default">See All</button>
       </article>
       <ul className="py-2 gap-4 flex flex-col">
         <FollowSuggestion />

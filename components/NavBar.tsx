@@ -34,32 +34,32 @@ const NavBar: React.FC<NavBarProps> = () => (
             <div className="group-hover:scale-110 transition-transform">
               <HomeIcon />
             </div>
-            <span className="font-bold hidden lg:inline">Home</span>
+            <span className="font-bold hidden lg:inline line-through">Home</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
           >
             <SearchIcon className="group-hover:scale-110 transition-transform" />
-            <span className="hidden lg:inline">Search</span>
+            <span className="hidden lg:inline line-through">Search</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
           >
             <div className="group-hover:scale-110 transition-transform">
               <ExploreIcon />
             </div>
-            <span className="hidden lg:inline">Explore</span>
+            <span className="hidden lg:inline line-through">Explore</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
           >
             <div className="group-hover:scale-110 transition-transform">
               <ReelsIcon />
             </div>
-            <span className="hidden lg:inline">Reels</span>
+            <span className="hidden lg:inline line-through">Reels</span>
           </Link>
           <Link
             href="/"
@@ -70,11 +70,11 @@ const NavBar: React.FC<NavBarProps> = () => (
             </div>
             <span className="hidden lg:inline">Messages</span>
           </Link>
-          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group">
+          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default">
             <div className="group-hover:scale-110 transition-transform">
               <HeartIcon />
             </div>
-            <span className="hidden lg:inline">Notifications</span>
+            <span className="hidden lg:inline line-through">Notifications</span>
           </button>
           <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group">
             <div className="group-hover:scale-110 transition-transform">
