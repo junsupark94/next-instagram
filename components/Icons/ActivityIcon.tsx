@@ -9,8 +9,8 @@ const ActivityIcon: React.FC<ActivityIconProps> = ({className}) => {
     <svg
       aria-label="Your activity"
       className={className}
-      color="rgb(245, 245, 245)"
-      fill="rgb(245, 245, 245)"
+      color="currentColor"
+      fill="currentColor"
       role="img"
       viewBox="0 0 24 24"
     >

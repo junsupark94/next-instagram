@@ -9,8 +9,8 @@ const DarkModeIcon: React.FC<DarkModeIconProps> = ({className}) => {
     <svg
       aria-label="Theme icon"
       className={className}
-      color="rgb(245, 245, 245)"
-      fill="rgb(245, 245, 245)"
+      color="currentColor"
+      fill="currentColor"
       role="img"
       viewBox="0 0 24 24"
     >

@@ -48,6 +48,9 @@ const config: Config = {
         md: '1160px',
         lg: '1264px',
       },
+      transitionProperty: {
+        'height' : 'height'
+      }
     },
   },
   plugins: [],
