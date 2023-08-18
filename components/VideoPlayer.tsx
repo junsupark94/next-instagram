@@ -72,7 +72,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative text-white", className)}>
       <video
         onPlay={playHandler}
         onPause={pauseHandler}

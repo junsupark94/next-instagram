@@ -40,7 +40,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   }, [liked]);
 
   return (
-    <article className="pb-4 xs:border-b border-gray-800">
+    <article className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
       <section className="flex justify-between items-center px-4 xs:py-[14px]">
         <div className="flex gap-2 items-center">
           <ProfileIcon className="w-8 h-8" />

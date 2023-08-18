@@ -19,7 +19,7 @@ const links = [
 
 const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="text-xs text-[#737373]">
+    <footer className="text-xs dark:text-[#737373] text-[#c7c7c7]">
       <ul className="flex flex-wrap">
         {links.map((link) => (
           <li

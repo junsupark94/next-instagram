@@ -11,7 +11,7 @@ const FollowSuggestion: React.FC<FollowSuggestionProps> = () => {
         <ProfileIcon className="w-10 h-10" />
         <div>
           <Link href="/" className="font-bold">account name</Link>
-          <div className="text-[#a8a8a8] text-xs">Reason to follow them</div>
+          <div className="dark:text-[#a8a8a8] text-[#737373] text-xs">Reason to follow them</div>
         </div>
       </section>
       <button className="text-xs text-[#0095f6] font-semibold">Follow</button>

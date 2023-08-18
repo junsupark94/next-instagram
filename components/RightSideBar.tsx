@@ -13,13 +13,13 @@ const RightSideBar: React.FC<RightSideBarProps> = () => {
           <ProfileIcon className="w-10 h-10" />
           <div>
             <div className="font-bold">account name</div>
-            <div className="text-[#a8a8a8]">display name</div>
+            <div className="dark:text-[#a8a8a8] text-[#737373]">display name</div>
           </div>
         </section>
         <button className="text-xs text-[#0095f6]">Switch</button>
       </article>
       <article className="flex justify-between py-1">
-        <div className="text-[#a8a8a8] font-semibold">Suggested for you</div>
+        <div className="dark:text-[#a8a8a8] text-[#737373] font-semibold">Suggested for you</div>
         <button className="text-xs font-semibold">See All</button>
       </article>
       <ul className="py-2 gap-4 flex flex-col">
