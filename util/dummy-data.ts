@@ -69,7 +69,7 @@ export const DUMMY_DATA: Post[] = [
     description: "Second post!",
     content: [
       { src: "/test7.jpg", type: "image" },
-      { src: "/video2.mp4", type: "video" },
+      { src: "/video3.mp4", type: "video" },
   ],
   },
   {
@@ -79,6 +79,9 @@ export const DUMMY_DATA: Post[] = [
     likes: 3456,
     replies: [],
     description: "Third post!  I just came back from Lisbon, Portugal working on a cool project!\nWe were filming the #NewJeans music video for Super Shy! I had such a great time and the girls and the dancers were fantastic! They learned my choreography really well and executed my vision. I hope to do this again soon!\nPlease stream Super Shy Bunnies! #kpop",
-    content: [{ src: "/test8.jpg", type: "image" }],
+    content: [
+      { src: "/test8.jpg", type: "image" },
+      { src: "/video4.mp4", type: "video" },
+  ],
   }
 ];

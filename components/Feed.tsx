@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import FeedItem from "./FeedItem";
 import { useEffect } from "react";
@@ -50,7 +50,7 @@ function videoScroll() {
     const lowerBound = halfwayPoint + 50;
 
     let target = -1;
-    for(let i = visibleVideos.length - 1; i >= 0 ; i--) {
+    for (let i = visibleVideos.length - 1; i >= 0; i--) {
       const video = visibleVideos[i];
       const { top, bottom } = video.getBoundingClientRect();
       if (lowerBound > bottom && bottom > upperBound) {
@@ -69,19 +69,25 @@ function videoScroll() {
       } else {
         video.pause();
       }
-    })
+    });
   }
 }
-
-window.addEventListener("load", videoScroll);
-window.addEventListener("scroll", videoScroll);
-
 const Feed: React.FC<FeedProps> = () => {
+  useEffect(() => {
+    window.addEventListener("load", videoScroll);
+    window.addEventListener("scroll", videoScroll);
+    return () => {
+      window.removeEventListener("load", videoScroll);
+      window.removeEventListener("scroll", videoScroll);
+    };
+  });
 
   return (
     <main>
       <section className="flex flex-col gap-2 text-[14px]">
-        {DUMMY_DATA.map((item) => <FeedItem key={item.id} item={item} />)}
+        {DUMMY_DATA.map((item) => (
+          <FeedItem key={item.id} item={item} />
+        ))}
       </section>
     </main>
   );

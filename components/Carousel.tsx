@@ -1,6 +1,6 @@
 import { Media } from "@/util/dummy-data";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import HeartIcon from "./Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
 
@@ -11,10 +11,12 @@ type CarouselProps = {
 };
 
 const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
+  const containerRef = useRef<HTMLElement>(null);
+
   return (
     <>
       <div className="relative" >
-        <section className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border xs:border-gray-800 sm:rounded-md">
+        <section className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border xs:border-gray-800 sm:rounded-md" ref={containerRef}>
           {content.map((media, i) => {
             if (media.type === "image") {
               return (
@@ -30,6 +32,7 @@ const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
             }
             return (
               <VideoPlayer
+                containerRef={containerRef}
                 key={media.src}
                 src={media.src}
                 className="snap-start shrink-0"

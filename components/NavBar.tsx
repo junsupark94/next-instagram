@@ -19,8 +19,8 @@ const NavBar: React.FC<NavBarProps> = () => (
     <div className="w-[72px] lg:w-[244px] hidden h-screen fixed top-0 left-0 dark:text-white pt-2 px-3 pb-3 sm:flex flex-col items-center lg:items-start border-r border-gray-500 justify-between">
       <section className="w-full">
         <Link href="/">
-          <div className="mt-4 p-3 lg:hidden hover:bg-hover transition rounded-lg">
-            <InstagramIcon className="w-6 h-6" />
+          <div className="mt-4 p-3 lg:hidden hover:bg-hover transition rounded-lg group">
+            <InstagramIcon className="w-6 h-6 group-hover:scale-110 transition-transform" />
           </div>
           <div className="hidden lg:block pt-8 px-3">
             <InstagramLogo />

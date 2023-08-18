@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 const elementIsVisibleInViewport = (
   el: HTMLElement,
@@ -68,22 +69,40 @@ function videoScroll() {
   }
 }
 
-window.addEventListener("load", videoScroll);
-window.addEventListener("scroll", videoScroll);
-
 export default function VideoPage() {
+  const videoRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    window.addEventListener("load", videoScroll);
+    window.addEventListener("scroll", videoScroll);
+    return () => {
+      window.removeEventListener("load", videoScroll);
+      window.removeEventListener("scroll", videoScroll);
+    };
+  });
+  function scrollHandler() {
+    if (!videoRef.current) return;
+    const {top, bottom, left, right, x, y} = videoRef.current.getBoundingClientRect()
+    // console.log('top', top, 'bottom', bottom, 'y', y)
+    console.log('left', left, 'right', right, 'x', x)
+    console.log(videoRef.current.scrollLeft)
+  }
+
   return (
-    <div>
+    <div className="ml-10">
       <div className="flex items-center justify-center w-[400px] h-screen border">
         Hi
       </div>
-      <video
-        src="video1.mp4"
-        className="w-[400px] border"
-        data-play="autoplay"
-        loop
-        muted
-      />
+      <div className="overflow-x-auto max-w-[400px] flex" onScroll={scrollHandler}>
+        <Image src="/test1.jpg" width={300} height={300} alt="image" className="shrink-0"/>
+
+        <video
+          src="video1.mp4"
+          className="w-[400px] border shrink-0"
+          data-play="autoplay"
+
+        />
+        <div className="w-[400px] h-[300px] shrink-0" ref={videoRef}>Test</div>
+      </div>
       <div className="flex items-center justify-center w-[400px] h-[50px] border">
         Hi
       </div>
@@ -93,8 +112,8 @@ export default function VideoPage() {
         data-play="autoplay"
         loop
       />
-      <div className="fixed h-screen w-[300px] top-0 left-0 flex items-center">
-        <div className="h-[100px] w-[400px] border border-pink-400" />
+      <div className="fixed h-screen w-[300px] top-0 left-0 flex items-center pointer-events-none">
+        <div className="h-[100px] min-w-[300px] border border-pink-400" />
       </div>
     </div>
   );
