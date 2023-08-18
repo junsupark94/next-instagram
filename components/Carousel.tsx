@@ -98,7 +98,6 @@ const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
                 </button>
                 <div className="absolute flex bottom-4 gap-1">
                   {content.map((media, i) => {
-                    console.log('render')
                     return (
                       <div
                         key={media.src}
