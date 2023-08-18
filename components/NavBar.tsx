@@ -1,20 +1,21 @@
 import Link from "next/link";
-import React from "react";
 import ExploreIcon from "./Icons/ExploreIcon";
 import HeartIcon from "./Icons/HeartIcon";
 import HomeIcon from "./Icons/HomeIcon";
 import InstagramIcon from "./Icons/InstagramIcon";
-import MenuIcon from "./Icons/MenuIcon";
 import MessengerIcon from "./Icons/MessengerIcon";
 import PostIcon from "./Icons/PostIcon";
 import ProfileIcon from "./Icons/ProfileIcon";
 import ReelsIcon from "./Icons/ReelsIcon";
 import SearchIcon from "./Icons/SearchIcon";
 import InstagramLogo from "./Icons/InstagramLogo";
+import NavBarMenuButton from "./NavBarMenuButton";
 
 type NavBarProps = {};
 
-const NavBar: React.FC<NavBarProps> = () => (
+const NavBar: React.FC<NavBarProps> = () => {
+
+  return (
   <nav className="w-[72px] lg:w-[244px]">
     <div className="w-[72px] lg:w-[244px] hidden h-screen fixed top-0 left-0 dark:text-white pt-2 px-3 pb-3 sm:flex flex-col items-center lg:items-start border-r border-gray-500 justify-between">
       <section className="w-full">
@@ -34,7 +35,9 @@ const NavBar: React.FC<NavBarProps> = () => (
             <div className="group-hover:scale-110 transition-transform">
               <HomeIcon />
             </div>
-            <span className="font-bold hidden lg:inline line-through">Home</span>
+            <span className="font-bold hidden lg:inline line-through">
+              Home
+            </span>
           </Link>
           <Link
             href="/"
@@ -93,13 +96,8 @@ const NavBar: React.FC<NavBarProps> = () => (
           </Link>
         </article>
       </section>
-      <button className="p-3 mb-3 dark:hover:bg-hover hover:bg-gray-100 rounded-lg transition flex gap-4 w-full group">
-        <div className="group-hover:scale-110 transition-transform">
-          <MenuIcon />
-        </div>
-        <span className="hidden lg:inline">More</span>
-      </button>
+      <NavBarMenuButton />
     </div>
   </nav>
-);
+)};
 export default NavBar;
