@@ -12,6 +12,7 @@ import FeedItemDescription from "./FeedItemDescription";
 import createDoubleClick from "@/util/double-click";
 import Carousel from "./Carousel";
 import CommentForm from "./CommentForm";
+import Link from "next/link";
 
 type FeedItemProps = {
   item: Post;
@@ -77,9 +78,9 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           account={item.account}
           description={item.description}
         />
-        <button className="text-gray-500 my-1">
+        <Link href="/p/1" className="text-gray-500 my-1">
           View all {item.replies.length} comments
-        </button>
+        </Link>
         <div className="text-gray-500 text-[10px] sm:hidden">
           {getRelativeTimeString(item.date).toUpperCase()}
         </div>

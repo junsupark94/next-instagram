@@ -25,7 +25,7 @@ export default function Stories({}: Props) {
   return (
     <div className="relative">
       <ul
-        className="flex gap-[14px] snap-mandatory scroll-smooth w-[630px] overflow-auto"
+        className="flex gap-[14px] snap-mandatory scroll-smooth max-w-[630px] overflow-auto"
         ref={containerRef}
         onScroll={scrollHandler}
       >

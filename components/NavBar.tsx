@@ -35,7 +35,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             <div className="group-hover:scale-110 transition-transform">
               <HomeIcon />
             </div>
-            <span className="font-bold hidden lg:inline line-through">
+            <span className="font-bold hidden lg:inline">
               Home
             </span>
           </Link>

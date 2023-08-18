@@ -6,14 +6,12 @@ import ShortcutsIcon from "./Icons/ShortcutsIcon";
 import DarkModeIcon from "./Icons/DarkModeIcon";
 import ProblemIcon from "./Icons/ProblemIcon";
 import { cn } from "@/util/cn";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { darkModeAtom } from "@/util/atoms";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
-
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   const [showDarkMode, setShowDarkMode] = useState(false);

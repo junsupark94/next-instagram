@@ -4,9 +4,8 @@ import PlayIcon from "./Icons/PlayIcon";
 import MutedIcon from "./Icons/MutedIcon";
 import UnmutedIcon from "./Icons/UnmutedIcon";
 
-import { atom, useAtom } from "jotai";
-
-const mutedAtom = atom(true);
+import { useAtom } from "jotai";
+import { mutedAtom } from "@/util/atoms";
 
 type VideoPlayerProps = {
   src: string;
@@ -42,7 +41,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     let copyContainerRef = containerRef;
 
     return () => {
-      copyContainerRef.current!.removeEventListener(
+      copyContainerRef.current?.removeEventListener(
         "scroll",
         isScrolledIntoView
       );
