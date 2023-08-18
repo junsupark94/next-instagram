@@ -1,9 +1,9 @@
 import { Media } from "@/util/dummy-data";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HeartIcon from "./Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
-
+import { cn } from "@/util/cn";
 
 type CarouselProps = {
   content: Media[];
@@ -12,11 +12,35 @@ type CarouselProps = {
 
 const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
   const containerRef = useRef<HTMLElement>(null);
+  const leftButtonRef = useRef<HTMLButtonElement>(null);
+  const rightButtonRef = useRef<HTMLButtonElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const scrollHandler: React.UIEventHandler<HTMLElement> = function (e) {
+    const scrollLeft = e.currentTarget.scrollLeft;
+    const scrolledAllToTheRight =
+      e.currentTarget.scrollWidth - scrollLeft <= 470;
+    if (scrollLeft > 0) leftButtonRef.current!.style.display = "flex";
+    else {
+      leftButtonRef.current!.style.display = "none";
+    }
+    if (scrolledAllToTheRight) {
+      rightButtonRef.current!.style.display = "none";
+    } else rightButtonRef.current!.style.display = "flex";
+    const newLeft = scrollLeft / 466;
+    if (newLeft % 1 === 0) {
+      setIndex(newLeft);
+    }
+  };
 
   return (
     <>
-      <div className="relative" >
-        <section className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border dark:border-gray-800" ref={containerRef}>
+      <div className="relative">
+        <section
+          className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border dark:border-gray-800"
+          ref={containerRef}
+          onScroll={scrollHandler}
+        >
           {content.map((media, i) => {
             if (media.type === "image") {
               return (
@@ -46,6 +70,48 @@ const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
               className={`${opacity} transition-opacity w-20 h-20`}
               fill="currentColor"
             />
+            {content.length > 1 && (
+              <>
+                <button
+                  ref={leftButtonRef}
+                  className="absolute left-1 bg-gray-300/60 rounded-full w-7 h-7 hidden items-center justify-center pointer-events-auto"
+                  onClick={() =>
+                    containerRef.current!.scrollBy({
+                      left: -466,
+                      behavior: "smooth",
+                    })
+                  }
+                >
+                  {"<"}
+                </button>
+                <button
+                  ref={rightButtonRef}
+                  className="absolute right-1 bg-gray-300/60 rounded-full w-7 h-7 flex items-center justify-center pointer-events-auto"
+                  onClick={() =>
+                    containerRef.current!.scrollBy({
+                      left: 466,
+                      behavior: "smooth",
+                    })
+                  }
+                >
+                  {">"}
+                </button>
+                <div className="absolute flex bottom-4 gap-1">
+                  {content.map((media, i) => {
+                    console.log('render')
+                    return (
+                      <div
+                        key={media.src}
+                        className={cn(
+                          "rounded-full p-[3px] bg-white/30",
+                          i === index && "bg-white"
+                        )}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </section>
       </div>

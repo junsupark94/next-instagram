@@ -7,12 +7,13 @@ import DarkModeIcon from "./Icons/DarkModeIcon";
 import ProblemIcon from "./Icons/ProblemIcon";
 import { cn } from "@/util/cn";
 import { atom, useAtom } from "jotai";
+import { darkModeAtom } from "@/util/atoms";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const darkModeAtom = atom(true);
+
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   const [showDarkMode, setShowDarkMode] = useState(false);
@@ -32,14 +33,10 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   }, [menuRef, setShowMenu]);
 
   useEffect(() => {
-    const html = document.getElementsByTagName("html")[0];
+    const html = document.querySelector('html');
     if (isDarkMode) html.classList.add("dark");
     else html.classList.remove("dark");
   }, [isDarkMode]);
-
-  function toggleHandler() {
-
-  }
 
   return (
     <div
