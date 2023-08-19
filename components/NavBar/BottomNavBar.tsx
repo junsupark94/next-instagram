@@ -4,7 +4,7 @@ import MessengerIcon from "../Icons/MessengerIcon";
 import ProfileIcon from "../Icons/ProfileIcon";
 import ExploreIcon from "../Icons/ExploreIcon";
 import ReelsIcon from "../Icons/ReelsIcon";
-import PostIcon from "../Icons/PostIcon";
+import PostIcon from "../Icons/CreateIcon";
 
 type Props = {};
 

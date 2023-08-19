@@ -4,7 +4,7 @@ import HeartIcon from "../Icons/HeartIcon";
 import HomeIcon from "../Icons/HomeIcon";
 import InstagramIcon from "../Icons/InstagramIcon";
 import MessengerIcon from "../Icons/MessengerIcon";
-import PostIcon from "../Icons/PostIcon";
+import PostIcon from "../Icons/CreateIcon";
 import ProfileIcon from "../Icons/ProfileIcon";
 import ReelsIcon from "../Icons/ReelsIcon";
 import SearchIcon from "../Icons/SearchIcon";

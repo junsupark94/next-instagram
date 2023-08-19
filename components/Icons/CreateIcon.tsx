@@ -1,10 +1,10 @@
 import React from "react";
 
-type PostIconProps = {
+type CreateIconProps = {
   className?: string;
 };
 
-const PostIcon: React.FC<PostIconProps> = ({className}) => {
+const CreateIcon: React.FC<CreateIconProps> = ({className}) => {
   return (
     <svg
       aria-label="New post"
@@ -49,4 +49,4 @@ const PostIcon: React.FC<PostIconProps> = ({className}) => {
     </svg>
   );
 };
-export default PostIcon;
+export default CreateIcon;

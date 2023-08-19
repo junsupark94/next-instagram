@@ -1,5 +1,5 @@
 import Stories from "@/components/Feed/Stories";
-import Feed from "@/components/Feed";
+import Feed from "@/components/Feed/Feed";
 import HeartIcon from "@/components/Icons/HeartIcon";
 import InstagramLogo from "@/components/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";

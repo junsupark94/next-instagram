@@ -19,6 +19,7 @@ import { darkModeAtom } from "@/util/atoms";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import { Theme } from "emoji-picker-react";
 import { useAtom } from "jotai";
+import PostIcons from "../RightSideBar/PostIcons";
 
 const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
 
@@ -27,8 +28,8 @@ type FeedItemProps = {
 };
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
-  const [liked, setLiked] = useState(false);
   const [opacity, setOpacity] = useState("opacity-0");
+  const [liked, setLiked] = useState(false);
 
   let timer: NodeJS.Timeout;
   const doubleClickHandler = () => {
@@ -39,14 +40,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   };
   const doubleClick = createDoubleClick(doubleClickHandler);
 
-  const likeIconProps = useMemo(() => {
-    const props: { fill?: string; stroke?: string } = {};
-    if (liked) {
-      props.fill = "rgb(255, 48, 64)";
-      props.stroke = "rgb(255, 48, 64)";
-    }
-    return props;
-  }, [liked]);
+
 
   const [darkMode] = useAtom(darkModeAtom);
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
@@ -73,24 +67,10 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
       <div onClick={doubleClick}>
         <Carousel content={item.content} opacity={opacity} />
       </div>
-      <div className="px-4 mt-3">
-        <div className="flex justify-between items-center my-1">
-          <div className="flex gap-3 items-center">
-            <HeartIcon
-              onClick={() => setLiked((prev) => !prev)}
-              className={cn(
-                "h-7 w-7 hover:text-icon-hover",
-                liked && "animate-swell"
-              )}
-              {...likeIconProps}
-            />
-            <Link href={"/p/1"}>
-              <CommentIcon className="hover:text-icon-hover" />
-            </Link>
-            <ShareIcon className="hover:text-icon-hover" />
-          </div>
-          <BookmarkIcon className="hover:text-icon-hover" />
-        </div>
+      <div className="px-4 mt-3 border border-green-500">
+        {/* start of icons */}
+        <PostIcons liked={liked} setLiked={setLiked}/>
+        {/* end of icons */}
         <div>{item.likes.toLocaleString()} likes</div>
         <FeedItemDescription
           account={item.account}

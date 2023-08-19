@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileIcon from "./Icons/ProfileIcon";
+import ProfileIcon from "../Icons/ProfileIcon";
 import Link from "next/link";
 
 type FollowSuggestionProps = {};
