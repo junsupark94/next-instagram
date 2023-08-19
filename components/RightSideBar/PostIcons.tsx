@@ -12,26 +12,20 @@ type PostIconsProps = {
 };
 
 const PostIcons: React.FC<PostIconsProps> = ({ liked, setLiked }) => {
-  const likeIconProps = useMemo(() => {
-    const props: { fill?: string; stroke?: string } = {};
-    if (liked) {
-      props.fill = "rgb(255, 48, 64)";
-      props.stroke = "rgb(255, 48, 64)";
-    }
-    return props;
-  }, [liked]);
-
+  const red = "rgb(255,48,64)"
   return (
     <div className="flex justify-between items-center my-1 border">
       <div className="flex gap-3 items-center">
-        <HeartIcon
-          onClick={() => setLiked((prev) => !prev)}
-          className={cn(
-            "h-7 w-7 hover:text-icon-hover",
-            liked && "animate-swell"
-          )}
-          {...likeIconProps}
-        />
+        <button onClick={() => setLiked((prev) => !prev)}>
+          <HeartIcon
+            className={cn(
+              "h-7 w-7 hover:text-icon-hover",
+              liked && "animate-swell"
+            )}
+            fill={liked ? red: "none"}
+            stroke={liked ? red: "currentColor"}
+          />
+        </button>
         <Link href={"/p/1"}>
           <CommentIcon className="hover:text-icon-hover" />
         </Link>
