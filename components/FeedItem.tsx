@@ -13,6 +13,7 @@ import createDoubleClick from "@/util/double-click";
 import Carousel from "./Carousel";
 import CommentForm from "./CommentForm";
 import Link from "next/link";
+import { cn } from "@/util/cn";
 
 type FeedItemProps = {
   item: Post;
@@ -65,10 +66,12 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           <div className="flex gap-3 items-center">
             <HeartIcon
               onClick={() => setLiked((prev) => !prev)}
-              className={`h-7 w-7 hover:text-icon-hover ${liked && "animate-swell"}`}
+              className={cn("h-7 w-7 hover:text-icon-hover", liked && "animate-swell")}
               {...likeIconProps}
             />
-            <CommentIcon className="hover:text-icon-hover"/>
+            <Link href={"/p/1"}>
+              <CommentIcon className="hover:text-icon-hover"/>
+            </Link>
             <ShareIcon className="hover:text-icon-hover"/>
           </div>
           <BookmarkIcon className="hover:text-icon-hover"/>

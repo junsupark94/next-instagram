@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CommentForm from "@/components/CommentForm";
 
 const elementIsVisibleInViewport = (
   el: HTMLElement,
@@ -91,13 +92,16 @@ export default function VideoPage() {
 
   return (
     <div className="ml-10">
-      <div className="fixed h-screen w-[300px] top-0 left-0 flex items-center">
-        <div className="h-[100px] min-w-[300px] border border-pink-400">
-          <Link href="/video">Go Top</Link>
+      <div className="w-[500px] h-[500px] flex flex-col justify-evenly">
+        <div>
+          <CommentForm />
         </div>
-      </div>
-      <div className="flex items-center justify-center w-[400px] h-screen border">
-        Hi
+        <div>
+          <CommentForm />
+        </div>
+        <div>
+          <CommentForm />
+        </div>
       </div>
       <div
         className="overflow-x-auto max-w-[400px] flex"
