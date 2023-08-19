@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import CommentForm from "@/components/CommentForm";
 
 const elementIsVisibleInViewport = (
   el: HTMLElement,
@@ -92,17 +91,6 @@ export default function VideoPage() {
 
   return (
     <div className="ml-10">
-      <div className="w-[500px] h-[500px] flex flex-col justify-evenly">
-        <div>
-          <CommentForm />
-        </div>
-        <div>
-          <CommentForm />
-        </div>
-        <div>
-          <CommentForm />
-        </div>
-      </div>
       <div
         className="overflow-x-auto max-w-[400px] flex"
         onScroll={scrollHandler}

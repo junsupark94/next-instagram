@@ -87,8 +87,3 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
   );
 };
 export default FeedItemDescription;
-
-// #kpop
-// (match) => (<Link href="/">{match}</Link>)
-// string.replace(/#\w+/g, )
-// <Link href="/">#kpop</Link>

@@ -1,6 +1,6 @@
 import { Media } from "@/util/dummy-data";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import HeartIcon from "./Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
 import { cn } from "@/util/cn";

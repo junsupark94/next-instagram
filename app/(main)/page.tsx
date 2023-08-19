@@ -1,10 +1,10 @@
-import Stories from "@/components/Stories";
+import Stories from "@/components/Feed/Stories";
 import Feed from "@/components/Feed";
 import HeartIcon from "@/components/Icons/HeartIcon";
 import InstagramLogo from "@/components/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
-import BottomNavBar from "@/components/BottomNavBar";
-import RightSideBar from "@/components/RightSideBar";
+import BottomNavBar from "@/components/NavBar/BottomNavBar";
+import RightSideBar from "@/components/RightSideBar/RightSideBar";
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import MenuIcon from "./Icons/MenuIcon";
+import MenuIcon from "../Icons/MenuIcon";
 import NavBarMenu from "./NavBarMenu";
 
 type NavBarMenuButtonProps = {};

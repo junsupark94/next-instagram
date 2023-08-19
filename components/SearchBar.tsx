@@ -1,7 +1,5 @@
 "use client";
-import Image from "next/image";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
 import SearchIcon from "./Icons/SearchIcon";
 
 type SearchBarProps = {

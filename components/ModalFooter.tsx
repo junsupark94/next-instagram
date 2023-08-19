@@ -34,8 +34,8 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
   useEffect(() => {
     if (!showEmojiPicker) return;
     function clickOutside(e: MouseEvent) {
-      if (buttonRef.current?.contains(e.target)) return;
-      if (!emojiRef.current?.contains(e.target)) {
+      if (buttonRef.current?.contains(e.target as Node)) return;
+      if (!emojiRef.current?.contains(e.target as Node)) {
         setShowEmojiPicker(false);
       }
     }
@@ -78,7 +78,7 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
               !showEmojiPicker && "hidden"
             )}
           >
-            <EmojiPicker theme={darkMode ? Theme.DARK: Theme.LIGHT} onEmojiClick={e => setValue(prev => prev + e.emoji)}/>
+            <EmojiPicker searchDisabled lazyLoadEmojis theme={darkMode ? Theme.DARK: Theme.LIGHT} onEmojiClick={e => setValue(prev => prev + e.emoji)}/>
           </div>
           <button
             className="active:text-gray-500"
