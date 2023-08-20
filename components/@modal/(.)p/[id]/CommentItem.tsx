@@ -1,11 +1,11 @@
 import React from "react";
-import ProfileIcon from "./Icons/ProfileIcon";
+import ProfileIcon from "@/components/Icons/ProfileIcon";
 
 type CommentItemProps = {};
 
 const CommentItem: React.FC<CommentItemProps> = () => {
   return (
-    <div className="pt-4">
+    <article className="">
       <div className="flex gap-2">
         <ProfileIcon />
         <div>
@@ -21,7 +21,7 @@ const CommentItem: React.FC<CommentItemProps> = () => {
           <div>--- View replies (#)</div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 export default CommentItem;

@@ -4,13 +4,19 @@ import React, { useRef, useState } from "react";
 import HeartIcon from "./Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
 import { cn } from "@/util/cn";
+import createDoubleClick from "@/util/double-click";
 
 type CarouselProps = {
   content: Media[];
-  opacity: string;
+  setLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
+  width?: number;
+  height?: number;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
+const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width = 470, height = 585 }) => {
+  const [opacity, setOpacity] = useState("opacity-0");
+
   const containerRef = useRef<HTMLElement>(null);
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
@@ -33,11 +39,20 @@ const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
     }
   };
 
+  let timer: NodeJS.Timeout;
+  const doubleClickHandler = () => {
+    clearTimeout(timer);
+    setLiked(true);
+    setOpacity("opacity-70 animate-swell");
+    timer = setTimeout(() => setOpacity("opacity-0"), 1000);
+  };
+  const doubleClick = createDoubleClick(doubleClickHandler);
+
   return (
     <>
-      <div className="relative">
+      <div className="relative" onClick={doubleClick}>
         <section
-          className="flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[468px] sm:border dark:border-gray-800"
+          className={cn("flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[585px] sm:border dark:border-gray-800", className)}
           ref={containerRef}
           onScroll={scrollHandler}
         >
@@ -48,8 +63,8 @@ const Carousel: React.FC<CarouselProps> = ({ content, opacity }) => {
                   key={media.src}
                   src={media.src}
                   alt={media.type}
-                  width={470}
-                  height={470}
+                  width={width}
+                  height={height}
                   className="snap-start shrink-0"
                 />
               );

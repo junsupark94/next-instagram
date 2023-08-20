@@ -1,20 +1,22 @@
 import { cn } from "@/util/cn";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
-import BookmarkIcon from "../Icons/BookmarkIcon";
-import CommentIcon from "../Icons/CommentIcon";
-import HeartIcon from "../Icons/HeartIcon";
-import ShareIcon from "../Icons/ShareIcon";
+import BookmarkIcon from "./Icons/BookmarkIcon";
+import CommentIcon from "./Icons/CommentIcon";
+import HeartIcon from "./Icons/HeartIcon";
+import ShareIcon from "./Icons/ShareIcon";
 
 type PostIconsProps = {
   liked: boolean;
   setLiked: React.Dispatch<React.SetStateAction<boolean>>;
+  likes: number;
 };
 
-const PostIcons: React.FC<PostIconsProps> = ({ liked, setLiked }) => {
+const PostIcons: React.FC<PostIconsProps> = ({ likes, liked, setLiked }) => {
   const red = "rgb(255,48,64)"
   return (
-    <div className="flex justify-between items-center my-1 border">
+    <>
+    <div className="flex justify-between items-center my-1">
       <div className="flex gap-3 items-center">
         <button onClick={() => setLiked((prev) => !prev)}>
           <HeartIcon
@@ -33,6 +35,8 @@ const PostIcons: React.FC<PostIconsProps> = ({ liked, setLiked }) => {
       </div>
       <BookmarkIcon className="hover:text-icon-hover" />
     </div>
+    <div>{likes + (liked ? 1 : 0)} likes</div>
+    </>
   );
 };
 export default PostIcons;

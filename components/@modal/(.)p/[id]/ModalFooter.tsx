@@ -1,30 +1,19 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import BookmarkIcon from "./Icons/BookmarkIcon";
-import CommentIcon from "./Icons/CommentIcon";
-import HeartIcon from "./Icons/HeartIcon";
-import ShareIcon from "./Icons/ShareIcon";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/util/cn";
 import EmojiPicker from "emoji-picker-react";
-import EmojiIcon from "./Icons/EmojiIcon";
+import EmojiIcon from "@/components/Icons/EmojiIcon";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import { darkModeAtom } from "@/util/atoms";
 import { Theme } from "emoji-picker-react";
 import { useAtom } from "jotai";
+import PostIcons from "@/components/PostIcons";
 
 type ModalFooterProps = {};
 
 const ModalFooter: React.FC<ModalFooterProps> = () => {
   const [liked, setLiked] = useState(false); // todo: initial state provided by database
-  const likeIconProps = useMemo(() => {
-    const props: { fill?: string; stroke?: string } = {};
-    if (liked) {
-      props.fill = "rgb(255, 48, 64)";
-      props.stroke = "rgb(255, 48, 64)";
-    }
-    return props;
-  }, [liked]);
-  const [darkMode] = useAtom(darkModeAtom)
+  const [darkMode] = useAtom(darkModeAtom);
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const emojiRef = useRef<HTMLDivElement>(null);
@@ -49,25 +38,7 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
     <>
       <footer>
         <section className="border-b border-gray-500 p-4">
-          <article className="flex justify-between">
-            <div className="flex gap-3">
-              <button onClick={() => setLiked((prev) => !prev)}>
-                <HeartIcon
-                  className={cn(
-                    "-m-0.5 w-7 h-7 hover:text-icon-hover",
-                    liked && "animate-swell"
-                  )}
-                  {...likeIconProps}
-                />
-              </button>
-              <button onClick={() => textAreaRef.current?.focus()}>
-                <CommentIcon className="hover:text-icon-hover" />
-              </button>
-              <ShareIcon className="hover:text-icon-hover" />
-            </div>
-            <BookmarkIcon />
-          </article>
-          <div className="pt-3">Likes</div>
+          <PostIcons liked={liked} setLiked={setLiked} likes={10} />
           <div>Time</div>
         </section>
         <section className="relative flex p-4 gap-4 items-center">
@@ -78,7 +49,12 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
               !showEmojiPicker && "hidden"
             )}
           >
-            <EmojiPicker searchDisabled lazyLoadEmojis theme={darkMode ? Theme.DARK: Theme.LIGHT} onEmojiClick={e => setValue(prev => prev + e.emoji)}/>
+            <EmojiPicker
+              searchDisabled
+              lazyLoadEmojis
+              theme={darkMode ? Theme.DARK : Theme.LIGHT}
+              onEmojiClick={(e) => setValue((prev) => prev + e.emoji)}
+            />
           </div>
           <button
             className="active:text-gray-500"
@@ -89,7 +65,7 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
           >
             <EmojiIcon />
           </button>
-          <div className="flex grow">
+          <form className="flex grow">
             <textarea
               className="dark:bg-black dark:text-white resize-none outline-none grow"
               placeholder="Add a comment..."
@@ -98,13 +74,17 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
               onChange={(e) => setValue(e.target.value)}
             />
             <button
-              className={`font-bold text-[#0095f6] ${
-                value === "" && "invisible"
-              }`}
+              className={cn(
+                "font-bold text-[#0095f6]",
+                value === ""
+                  ? "brightness-50 cursor-default"
+                  : "hover:text-white"
+              )}
+              onClick={(e) => e.preventDefault()}
             >
               Post
             </button>
-          </div>
+          </form>
         </section>
       </footer>
     </>

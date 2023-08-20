@@ -1,7 +1,7 @@
 "use client";
 import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useRef, useState } from "react";
-import EmojiIcon from "./Icons/EmojiIcon";
+import EmojiIcon from "@/components/Icons/EmojiIcon";
 import { cn } from "@/util/cn";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 
@@ -16,8 +16,8 @@ const ModalCommentForm: React.FC<ModalCommentFormProps> = () => {
   useEffect(() => {
     if (!showEmojiPicker) return;
     function clickOutside(e: MouseEvent) {
-      if (buttonRef.current?.contains(e.target)) return;
-      if (!emojiRef.current?.contains(e.target)) {
+      if (buttonRef.current?.contains(e.target as Node)) return;
+      if (!emojiRef.current?.contains(e.target as Node)) {
         setShowEmojiPicker(false);
       }
     }
