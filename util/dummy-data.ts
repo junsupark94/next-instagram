@@ -46,7 +46,7 @@ export const DUMMY_DATA: Post[] = [
     ],
     description: "First post!",
     content: [
-      { src: "/test.jpg", type: "image" },
+      { src: "/test1.jpg", type: "image" },
       { src: "/test4.jpg", type: "image" },
       { src: "/test5.jpg", type: "image" },
       { src: "/video1.mp4", type: "video" },

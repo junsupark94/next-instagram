@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";
-import CommentItem from "@/components/@modal/(.)p/[id]/CommentItem";
 import EmojiIcon from "@/components/Icons/EmojiIcon";
 import { cn } from "@/util/cn";
 import { Theme } from "emoji-picker-react";
@@ -14,6 +13,7 @@ import { useAtom } from "jotai";
 import { darkModeAtom } from "@/util/atoms";
 import dynamic from "next/dynamic";
 import Carousel from "@/components/Carousel";
+import CommentItem from "@/components/CommentItem";
 
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), {
   ssr: false,
