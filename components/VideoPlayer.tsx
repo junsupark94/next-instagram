@@ -78,7 +78,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         muted={isMuted}
         src={src}
         ref={videoRef}
-        className="w-[470px] h-[470px]"
+        className="w-[470px] h-[470px] bg-white"
         loop
       />
       <button

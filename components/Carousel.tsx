@@ -63,20 +63,21 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width
                   key={media.src}
                   src={media.src}
                   alt={media.type}
-                  width={width}
-                  height={height}
+                  width={500}
+                  height={500}
+                  // priority={i < 3}
                   className="snap-start shrink-0"
                 />
               );
             }
-            return (
-              <VideoPlayer
-                containerRef={containerRef}
-                key={media.src}
-                src={media.src}
-                className="snap-start shrink-0"
-              />
-            );
+            // return (
+            //   <VideoPlayer
+            //     containerRef={containerRef}
+            //     key={media.src}
+            //     src={media.src}
+            //     className="snap-start shrink-0"
+            //   />
+            // );
           })}
           <div
             className={`text-white absolute top-0 left-0 flex w-full h-full items-center justify-center pointer-events-none`}

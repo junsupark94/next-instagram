@@ -14,7 +14,7 @@ import { useAtom } from "jotai";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
 
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
+const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false, });
 
 type FeedItemProps = {
   item: Post;
@@ -54,13 +54,13 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
             ref={emojiRef}
             className={cn(
               "absolute -right-24 bottom-10",
-              !showEmojiPicker && "invisible"
+              !showEmojiPicker && "hidden"
             )}
           >
-            <Picker
+            {/* <Picker
               theme={darkMode ? Theme.DARK : Theme.LIGHT}
               onEmojiClick={(e) => setValue((prev) => prev + e.emoji)}
-            />
+            /> */}
           </div>
 
           <article className="flex grow gap-1">
