@@ -6,6 +6,7 @@ import UnmutedIcon from "./Icons/UnmutedIcon";
 
 import { useAtom } from "jotai";
 import { mutedAtom } from "@/util/atoms";
+import { usePathname } from "next/navigation";
 
 type VideoPlayerProps = {
   src: string;
@@ -21,11 +22,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [isPaused, setIsPaused] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useAtom(mutedAtom);
+  const path = usePathname();
 
   useEffect(() => {
     const { x: containerX } = containerRef.current!.getBoundingClientRect();
     const { x: videoX } = videoRef.current!.getBoundingClientRect();
     if (Math.abs(containerX - videoX) <= 10) {
+      if (path.startsWith('/p/')) videoRef.current?.play();
       videoRef.current!.setAttribute("data-play", "autoplay");
     }
   }, []);

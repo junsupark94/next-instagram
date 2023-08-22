@@ -1,7 +1,7 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";
@@ -11,14 +11,21 @@ import Carousel from "@/components/Carousel";
 import Image from "next/image";
 import CommentItem from "@/components/CommentItem";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import CarouselIcon from "@/components/Icons/CarouselIcon";
+import VideoIcon from "@/components/Icons/VideoIcon";
 
 export default function Page({ params }: { params: any }) {
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
   const [liked, setLiked] = useState(false);
 
   const item = DUMMY_DATA.find((item) => item.id === Number(params.id));
+  const accountItems = DUMMY_DATA.filter(
+    (post) => post.account === item?.account
+  ).slice(0, 6);
+
   if (!item) return <div>404 Post Not Found</div>;
+
+
   return (
     <div className="grow flex flex-col items-center mt-10">
       <main className="flex max-w-[850px] h-[600px] pb-10">
@@ -82,101 +89,75 @@ export default function Page({ params }: { params: any }) {
           <span className="font-white font-bold">{item.account}</span>
         </h1>
         <div className="grid grid-cols-3 gap-1">
-          <Image
-            src="/test1.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
-          <Image
-            src="/test5.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
-          <Image
-            src="/test7.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
-          <Image
-            src="/test8.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
-          <Image
-            src="/test4.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
-          <Image
-            src="/taylorswift.jpg"
-            alt="image"
-            width={400}
-            height={400}
-            className="w-[300px] h-[300px] object-cover"
-          />
+          {accountItems.map((accountItem) => {
+            const media = accountItem.content[0];
+            return (
+              <Link key={accountItem.id} href={`/p/${accountItem.id}`} className="relative">
+                {media.type === 'image' && <Image src={accountItem.content[0].src} alt="image" width={300} height={300} className="w-[300px] h-[300px] object-cover"/>}
+                {media.type === 'video' && <video src={accountItem.content[0].src} className="w-[300px] h-[300px] object-cover" muted/>}
+                {accountItem.content.length > 1 ? <CarouselIcon className="absolute top-2 right-2"/> : media.type === 'video' && <VideoIcon className="absolute top-2 right-2"/>}
+              </Link>
+            );
+          })}
         </div>
       </section>
-      <footer className="my-10 text-xs dark:text-[#737373] text-[#c7c7c7] flex flex-col gap-4 items-center">
-        <ul className="flex gap-4">
-          <li>
-            <Link href="/">Meta</Link>
-          </li>
-          <li>
-            <Link href="/">About</Link>
-          </li>
-          <li>
-            <Link href="/">Blog</Link>
-          </li>
-          <li>
-            <Link href="/">Jobs</Link>
-          </li>
-          <li>
-            <Link href="/">Help</Link>
-          </li>
-          <li>
-            <Link href="/">API</Link>
-          </li>
-          <li>
-            <Link href="/">Privacy</Link>
-          </li>
-          <li>
-            <Link href="/">Terms</Link>
-          </li>
-          <li>
-            <Link href="/">Top Accounts</Link>
-          </li>
-          <li>
-            <Link href="/">Locations</Link>
-          </li>
-          <li>
-            <Link href="/">Instagram Lite</Link>
-          </li>
-          <li>
-            <Link href="/">Threads</Link>
-          </li>
-          <li>
-            <Link href="/">Contact Uploading & Non-Users</Link>
-          </li>
-          <li>
-            <Link href="/">Meta Verified</Link>
-          </li>
-        </ul>
-        <div className="flex gap-4">
-          <Languages />
-          <span>© 2023 Instagram from Meta</span>
-        </div>
-      </footer>
+      <PhotoPageFooter />
     </div>
+  );
+}
+
+function PhotoPageFooter() {
+  return (
+    <footer className="my-10 text-xs dark:text-[#737373] text-[#c7c7c7] flex flex-col gap-4 items-center">
+      <ul className="flex gap-4">
+        <li>
+          <Link href="/">Meta</Link>
+        </li>
+        <li>
+          <Link href="/">About</Link>
+        </li>
+        <li>
+          <Link href="/">Blog</Link>
+        </li>
+        <li>
+          <Link href="/">Jobs</Link>
+        </li>
+        <li>
+          <Link href="/">Help</Link>
+        </li>
+        <li>
+          <Link href="/">API</Link>
+        </li>
+        <li>
+          <Link href="/">Privacy</Link>
+        </li>
+        <li>
+          <Link href="/">Terms</Link>
+        </li>
+        <li>
+          <Link href="/">Top Accounts</Link>
+        </li>
+        <li>
+          <Link href="/">Locations</Link>
+        </li>
+        <li>
+          <Link href="/">Instagram Lite</Link>
+        </li>
+        <li>
+          <Link href="/">Threads</Link>
+        </li>
+        <li>
+          <Link href="/">Contact Uploading & Non-Users</Link>
+        </li>
+        <li>
+          <Link href="/">Meta Verified</Link>
+        </li>
+      </ul>
+      <div className="flex gap-4">
+        <Languages />
+        <span>© 2023 Instagram from Meta</span>
+      </div>
+    </footer>
   );
 }
 

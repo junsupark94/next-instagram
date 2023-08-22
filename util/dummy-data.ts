@@ -99,7 +99,7 @@ export const DUMMY_DATA: Post[] = [
     replies: [    ],
     description: "Fifth post!",
     content: [
-      { src: "/taylorswift.jpg", type: "image" },
+      { src: "/video7.mp4", type: "video" },
     ],
   },
   {
