@@ -1,10 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import { Media } from "@/util/dummy-data";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import HeartIcon from "./Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
 import { cn } from "@/util/cn";
 import createDoubleClick from "@/util/double-click";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type CarouselProps = {
   content: Media[];
@@ -12,6 +21,7 @@ type CarouselProps = {
   className?: string;
   width?: number;
   height?: number;
+  img_index?: number;
 };
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -20,43 +30,64 @@ const Carousel: React.FC<CarouselProps> = ({
   className = "h-carousel",
   width = 500,
   height = 500,
+  img_index,
 }) => {
   const [opacity, setOpacity] = useState("opacity-0");
-
   const containerRef = useRef<HTMLElement>(null);
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
   const [index, setIndex] = useState(0);
+  const router = useRouter();
+  const path = usePathname();
 
-  const scrollHandler: React.UIEventHandler<HTMLElement> = function (e) {
-    const scrollLeft = e.currentTarget.scrollLeft;
+  useEffect(() => {
     const containerWidth =
       containerRef.current?.getBoundingClientRect().width! - 2;
-    const index = scrollLeft / containerWidth;
+    if (!img_index || !containerWidth) return;
 
-    if (index % 1 === 0) {
-      setIndex(index);
-      if (index === 0) {
-        leftButtonRef.current!.style.display = "none";
-        rightButtonRef.current!.style.display = "flex";
-      } else if (index === content.length - 1) {
-        rightButtonRef.current!.style.display = "none";
-        leftButtonRef.current!.style.display = "flex";
-      } else {
-        leftButtonRef.current!.style.display = "flex";
-        rightButtonRef.current!.style.display = "flex";
-      }
+    containerRef.current?.scrollTo({
+      left: img_index * containerWidth,
+      behavior: "instant",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (index === 0) return router.push(path);
+    router.push(`${path}/?img_index=${index}`);
+  }, [index]);
+
+  const scrollHandler: React.UIEventHandler<HTMLElement> = useCallback((e) => {
+    const containerWidth =
+      containerRef.current?.getBoundingClientRect().width! - 2;
+    const scrollLeft = e.currentTarget.scrollLeft;
+    const newIndex = scrollLeft / containerWidth;
+
+    if (newIndex % 1 !== 0) return;
+    setIndex(newIndex);
+    if (newIndex === 0) {
+      leftButtonRef.current!.style.display = "none";
+      rightButtonRef.current!.style.display = "flex";
+    } else if (newIndex === content.length - 1) {
+      rightButtonRef.current!.style.display = "none";
+      leftButtonRef.current!.style.display = "flex";
+    } else {
+      leftButtonRef.current!.style.display = "flex";
+      rightButtonRef.current!.style.display = "flex";
     }
-  };
+  }, []);
 
-  let timer: NodeJS.Timeout;
-  const doubleClickHandler = () => {
-    clearTimeout(timer);
-    setLiked(true);
-    setOpacity("opacity-70 animate-swell");
-    timer = setTimeout(() => setOpacity("opacity-0"), 1000);
-  };
-  const doubleClick = createDoubleClick(doubleClickHandler);
+  const doubleClick = useMemo(() => {
+    return createDoubleClick(() => {
+      let timer: NodeJS.Timeout;
+
+      clearTimeout(timer!);
+      setLiked(true);
+      setOpacity("opacity-70 animate-swell");
+      timer = setTimeout(() => setOpacity("opacity-0"), 1000);
+    });
+  }, []);
+
+  // const doubleClick = createDoubleClick(doubleClickHandler);
 
   return (
     <>
@@ -105,7 +136,7 @@ const Carousel: React.FC<CarouselProps> = ({
                   className="absolute left-1 bg-gray-300/60 rounded-full w-7 h-7 hidden items-center justify-center pointer-events-auto"
                   onClick={() =>
                     containerRef.current!.scrollBy({
-                      left: -466,
+                      left: -470,
                       behavior: "smooth",
                     })
                   }
@@ -117,7 +148,7 @@ const Carousel: React.FC<CarouselProps> = ({
                   className="absolute right-1 bg-gray-300/60 rounded-full w-7 h-7 flex items-center justify-center pointer-events-auto"
                   onClick={() =>
                     containerRef.current!.scrollBy({
-                      left: 466,
+                      left: 470,
                       behavior: "smooth",
                     })
                   }
