@@ -16,8 +16,6 @@ import { useSearchParams } from "next/navigation";
 export default function Page({ params }: { params: any }) {
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
   const [liked, setLiked] = useState(false);
-  const searchParams = useSearchParams();
-  const img_index = searchParams.get('img_index');
 
   const item = DUMMY_DATA.find((item) => item.id === Number(params.id));
   if (!item) return <div>404 Post Not Found</div>;
@@ -30,7 +28,6 @@ export default function Page({ params }: { params: any }) {
           width={600}
           height={600}
           className="h-full"
-          img_index={Number(img_index)}
         />
         <section className="w-[355px] flex flex-col border border-gray-800 shrink-0">
           <div className="p-4 border-b border-gray-500">
