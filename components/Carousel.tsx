@@ -14,7 +14,13 @@ type CarouselProps = {
   height?: number;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className = 'h-carousel', width = 500, height = 500 }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  content,
+  setLiked,
+  className = "h-carousel",
+  width = 500,
+  height = 500,
+}) => {
   const [opacity, setOpacity] = useState("opacity-0");
 
   const containerRef = useRef<HTMLElement>(null);
@@ -24,15 +30,18 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className = 'h-c
 
   const scrollHandler: React.UIEventHandler<HTMLElement> = function (e) {
     const scrollLeft = e.currentTarget.scrollLeft;
-    const containerWidth = containerRef.current?.getBoundingClientRect().width! - 2;
+    const containerWidth =
+      containerRef.current?.getBoundingClientRect().width! - 2;
     const index = scrollLeft / containerWidth;
 
     if (index % 1 === 0) {
       setIndex(index);
       if (index === 0) {
         leftButtonRef.current!.style.display = "none";
+        rightButtonRef.current!.style.display = "flex";
       } else if (index === content.length - 1) {
         rightButtonRef.current!.style.display = "none";
+        leftButtonRef.current!.style.display = "flex";
       } else {
         leftButtonRef.current!.style.display = "flex";
         rightButtonRef.current!.style.display = "flex";
@@ -53,7 +62,9 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className = 'h-c
     <>
       <div className={cn("relative", className)} onClick={doubleClick}>
         <section
-          className={"flex overflow-x-auto snap-x snap-mandatory scroll-smooth items-center sm:border dark:border-gray-800 w-full h-full"}
+          className={
+            "flex overflow-x-auto snap-x snap-mandatory scroll-smooth items-center sm:border dark:border-gray-800 w-full h-full"
+          }
           ref={containerRef}
           onScroll={scrollHandler}
         >
