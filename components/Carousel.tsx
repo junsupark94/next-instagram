@@ -69,7 +69,6 @@ const Carousel: React.FC<CarouselProps> = ({
       rightButtonRef.current!.style.display = "flex";
     }
     if (!path.startsWith("/p/")) return;
-    console.log('push', 'index', newIndex)
     if (newIndex === 0) return router.push(path);
     router.push(`${path}/?img_index=${newIndex}`);
   }, []);

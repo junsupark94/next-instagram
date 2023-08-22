@@ -35,7 +35,6 @@ function videoScroll() {
   const videoEls: NodeListOf<HTMLVideoElement> = document.querySelectorAll(
     "[data-play='autoplay']"
   );
-
   const visibleVideos: HTMLVideoElement[] = [];
   videoEls.forEach((videoEl) => {
     if (elementIsVisibleInViewport(videoEl, true)) visibleVideos.push(videoEl);

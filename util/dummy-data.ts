@@ -47,9 +47,59 @@ export const DUMMY_DATA: Post[] = [
     description: "First post!",
     content: [
       { src: "/test1.jpg", type: "image" },
+      { src: "/test2.jpg", type: "image" },
+      { src: "/test3.jpg", type: "image" },
+      { src: "/video1.mp4", type: "video" },
+    ],
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2023, 4, day++),
+    likes: 10,
+    replies: [
+      {account: "bobsmith", id: replyId++, text: "Great post", likes: 2},
+      {account: "notjunsupark", id: replyId++, text: "Love it!", likes: 3, replying: 1},
+    ],
+    description: "Second post!",
+    content: [
       { src: "/test4.jpg", type: "image" },
       { src: "/test5.jpg", type: "image" },
-      { src: "/video1.mp4", type: "video" },
+      { src: "/video2.mp4", type: "video" },
+      { src: "/test6.jpg", type: "image" },
+    ],
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2023, 4, day++),
+    likes: 10,
+    replies: [    ],
+    description: "Third post!",
+    content: [
+      { src: "/test7.jpg", type: "image" },
+    ],
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2023, 4, day++),
+    likes: 10,
+    replies: [    ],
+    description: "Fourth post!",
+    content: [
+      { src: "/video5.mp4", type: "video" },
+    ],
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2023, 4, day++),
+    likes: 10,
+    replies: [    ],
+    description: "Fifth post!",
+    content: [
+      { src: "/taylorswift.jpg", type: "image" },
     ],
   },
   {
@@ -66,10 +116,23 @@ export const DUMMY_DATA: Post[] = [
       {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
       {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
     ],
-    description: "Second post!",
+    description: "I'm Bob Smith!",
     content: [
       { src: "/test7.jpg", type: "image" },
       { src: "/video3.mp4", type: "video" },
+  ],
+  },
+  {
+    account: "bobsmith",
+    id: postId++,
+    date: new Date(2023, 7, day++),
+    likes: 129,
+    replies: [
+    ],
+    description: "I'm Bob Smith!",
+    content: [
+      { src: "/video6.mp4", type: "video" },
+      { src: "/test8.jpg", type: "image" },
   ],
   },
   {
@@ -80,8 +143,8 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: "Third post!  I just came back from Lisbon, Portugal working on a cool project!\nWe were filming the #NewJeans music video for Super Shy! I had such a great time and the girls and the dancers were fantastic! They learned my choreography really well and executed my vision. I hope to do this again soon!\nPlease stream Super Shy Bunnies! #kpop",
     content: [
-      { src: "/test8.jpg", type: "image" },
       { src: "/video4.mp4", type: "video" },
+      { src: "/test8.jpg", type: "image" },
   ],
   }
 ];

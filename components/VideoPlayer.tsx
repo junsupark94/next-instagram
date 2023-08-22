@@ -23,6 +23,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [isMuted, setIsMuted] = useAtom(mutedAtom);
 
   useEffect(() => {
+    const { x: containerX } = containerRef.current!.getBoundingClientRect();
+    const { x: videoX } = videoRef.current!.getBoundingClientRect();
+    if (Math.abs(containerX - videoX) <= 10) {
+      videoRef.current!.setAttribute("data-play", "autoplay");
+    }
+  }, []);
+
+  useEffect(() => {
     function isScrolledIntoView() {
       const { x: containerX } = containerRef.current!.getBoundingClientRect();
       const { x: videoX } = videoRef.current!.getBoundingClientRect();
