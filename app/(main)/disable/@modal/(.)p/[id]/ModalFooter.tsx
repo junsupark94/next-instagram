@@ -4,16 +4,15 @@ import { cn } from "@/util/cn";
 import EmojiPicker from "emoji-picker-react";
 import EmojiIcon from "@/components/Icons/EmojiIcon";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { darkModeAtom } from "@/util/atoms";
 import { Theme } from "emoji-picker-react";
-import { useAtom } from "jotai";
 import PostIcons from "@/components/PostIcons";
+import { useGlobalStore } from "@/util/zustand";
 
 type ModalFooterProps = {};
 
 const ModalFooter: React.FC<ModalFooterProps> = () => {
   const [liked, setLiked] = useState(false); // todo: initial state provided by database
-  const [darkMode] = useAtom(darkModeAtom);
+  const darkMode = useGlobalStore(state => state.darkMode);
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const emojiRef = useRef<HTMLDivElement>(null);

@@ -9,12 +9,6 @@ import EmojiIcon from "../Icons/EmojiIcon";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
-// import dynamic from "next/dynamic";
-// import { darkModeAtom } from "@/util/atoms";
-// import { Theme } from "emoji-picker-react";
-// import { useAtom } from "jotai";
-
-// const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false, });
 
 type FeedItemProps = {
   item: Post;
@@ -22,9 +16,8 @@ type FeedItemProps = {
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const [liked, setLiked] = useState(false);
-  // const [darkMode] = useAtom(darkModeAtom);
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const emojiRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -53,18 +46,18 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
         )}
         {/* start of comment form */}
         <form className="relative">
-          <div
+          {/* <div
             ref={emojiRef}
             className={cn(
               "absolute -right-24 bottom-10",
               !showEmojiPicker && "hidden"
             )}
           >
-            {/* <Picker
+            <Picker
               theme={darkMode ? Theme.DARK : Theme.LIGHT}
               onEmojiClick={(e) => setValue((prev) => prev + e.emoji)}
-            /> */}
-          </div>
+            />
+          </div> */}
 
           <article className="flex grow gap-1">
             <textarea
@@ -84,7 +77,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
               >
                 Post
               </button>
-              <button
+              {/* <button
                 className="active:text-gray-500"
                 onClick={(e) => {
                   e.preventDefault();
@@ -92,7 +85,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
                 }}
               >
                 <EmojiIcon className="w-3 h-3" />
-              </button>
+              </button> */}
             </div>
           </article>
         </form>

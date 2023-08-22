@@ -1,7 +1,7 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";

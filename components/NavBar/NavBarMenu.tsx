@@ -6,8 +6,7 @@ import ShortcutsIcon from "../Icons/ShortcutsIcon";
 import DarkModeIcon from "../Icons/DarkModeIcon";
 import ProblemIcon from "../Icons/ProblemIcon";
 import { cn } from "@/util/cn";
-import { useAtom } from "jotai";
-import { darkModeAtom } from "@/util/atoms";
+import { useGlobalStore } from "@/util/zustand";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,12 +14,12 @@ type NavBarMenuProps = {
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   const [showDarkMode, setShowDarkMode] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useAtom(darkModeAtom);
+  const [darkMode, toggleDarkMode] = useGlobalStore(state => [state.darkMode, state.toggleDarkMode])
   const menuRef = useRef<HTMLDivElement>(null);
   const mainMenuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     function clickOutside(e: MouseEvent) {
-      if (!menuRef.current?.contains(e.target)) {
+      if (!menuRef.current?.contains(e.target as Node)) {
         setShowMenu(false);
       }
     }
@@ -32,9 +31,9 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
 
   useEffect(() => {
     const html = document.querySelector('html');
-    if (isDarkMode) html.classList.add("dark");
-    else html.classList.remove("dark");
-  }, [isDarkMode]);
+    if (darkMode) html!.classList.add("dark");
+    else html!.classList.remove("dark");
+  }, [darkMode]);
 
   return (
     <div
@@ -65,7 +64,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           <span>Keyboard shortcuts</span>
         </Button>
         <Button onClick={() => setShowDarkMode(true)}>
-          {isDarkMode ? (
+          {darkMode ? (
             <DarkModeIcon className="w-4 h-4" />
           ) : (
             <LightModeIcon />
@@ -105,21 +104,21 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           <DarkModeIcon
             className={cn(
               "w-4 h-4 transition",
-              isDarkMode ? "opacity-100" : "opacity-0 hidden"
+              darkMode ? "opacity-100" : "opacity-0 hidden"
             )}
           />
           <LightModeIcon
             className={cn(
               "w-4 h-4 transition",
-              isDarkMode ? "opacity-0 hidden" : "opacity-100"
+              darkMode ? "opacity-0 hidden" : "opacity-100"
             )}
           />
         </div>
         <div className="p-2 text-sm">
           <div className="flex justify-between items-center p-4 dark:hover:bg-gray-600/30 hover:bg-gray-200 rounded-lg transition">
             <span>Dark mode</span>
-            <button onClick={() => setIsDarkMode((prev) => !prev)} className={cn("flex w-8 dark:bg-blue-500 bg-gray-400 rounded-lg px-1")}>
-              <div className={cn("p-2 bg-white drop-shadow-around rounded-full transition-transform", isDarkMode && "translate-x-[60%]")}/>
+            <button onClick={toggleDarkMode} className={cn("flex w-8 dark:bg-blue-500 bg-gray-400 rounded-lg px-1")}>
+              <div className={cn("p-2 bg-white drop-shadow-around rounded-full transition-transform", darkMode && "translate-x-[60%]")}/>
             </button>
           </div>
         </div>

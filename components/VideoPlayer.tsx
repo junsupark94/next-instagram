@@ -4,8 +4,7 @@ import PlayIcon from "./Icons/PlayIcon";
 import MutedIcon from "./Icons/MutedIcon";
 import UnmutedIcon from "./Icons/UnmutedIcon";
 
-import { useAtom } from "jotai";
-import { mutedAtom } from "@/util/atoms";
+import { useGlobalStore } from "@/util/zustand";
 import { usePathname } from "next/navigation";
 
 type VideoPlayerProps = {
@@ -21,7 +20,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
   const [isPaused, setIsPaused] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useAtom(mutedAtom);
+  const [muted, toggleMuted] = useGlobalStore(state => [state.muted, state.toggleMuted])
   const path = usePathname();
 
   useEffect(() => {
@@ -71,7 +70,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const toggleMuteHandler: React.MouseEventHandler<HTMLButtonElement> =
     function (e) {
       e.stopPropagation();
-      setIsMuted((prev) => !prev);
+      toggleMuted();
     };
 
   const playHandler = () => {
@@ -86,7 +85,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       <video
         onPlay={playHandler}
         onPause={pauseHandler}
-        muted={isMuted}
+        muted={muted}
         src={src}
         ref={videoRef}
         className="w-full h-full"
@@ -102,7 +101,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         onClick={toggleMuteHandler}
         className="absolute bottom-2 right-2 bg-[#262626] rounded-full w-6 h-6 flex items-center justify-center"
       >
-        {isMuted ? <MutedIcon /> : <UnmutedIcon className="w-4 h-4" />}
+        {muted ? <MutedIcon /> : <UnmutedIcon className="w-4 h-4" />}
       </button>
     </div>
   );
