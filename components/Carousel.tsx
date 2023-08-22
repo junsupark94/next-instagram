@@ -14,7 +14,7 @@ type CarouselProps = {
   height?: number;
 };
 
-const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width = 470, height = 585 }) => {
+const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className = 'h-carousel', width = 500, height = 500 }) => {
   const [opacity, setOpacity] = useState("opacity-0");
 
   const containerRef = useRef<HTMLElement>(null);
@@ -24,18 +24,19 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width
 
   const scrollHandler: React.UIEventHandler<HTMLElement> = function (e) {
     const scrollLeft = e.currentTarget.scrollLeft;
-    const scrolledAllToTheRight =
-      e.currentTarget.scrollWidth - scrollLeft <= 470;
-    if (scrollLeft > 0) leftButtonRef.current!.style.display = "flex";
-    else {
-      leftButtonRef.current!.style.display = "none";
-    }
-    if (scrolledAllToTheRight) {
-      rightButtonRef.current!.style.display = "none";
-    } else rightButtonRef.current!.style.display = "flex";
-    const newLeft = scrollLeft / 466;
-    if (newLeft % 1 === 0) {
-      setIndex(newLeft);
+    const containerWidth = containerRef.current?.getBoundingClientRect().width! - 2;
+    const index = scrollLeft / containerWidth;
+
+    if (index % 1 === 0) {
+      setIndex(index);
+      if (index === 0) {
+        leftButtonRef.current!.style.display = "none";
+      } else if (index === content.length - 1) {
+        rightButtonRef.current!.style.display = "none";
+      } else {
+        leftButtonRef.current!.style.display = "flex";
+        rightButtonRef.current!.style.display = "flex";
+      }
     }
   };
 
@@ -50,9 +51,9 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width
 
   return (
     <>
-      <div className="relative" onClick={doubleClick}>
+      <div className={cn("relative", className)} onClick={doubleClick}>
         <section
-          className={cn("flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth items-center max-w-[468px] max-h-[585px] sm:border dark:border-gray-800", className)}
+          className={"flex overflow-x-auto snap-x snap-mandatory scroll-smooth items-center sm:border dark:border-gray-800 w-full h-full"}
           ref={containerRef}
           onScroll={scrollHandler}
         >
@@ -63,21 +64,21 @@ const Carousel: React.FC<CarouselProps> = ({ content, setLiked, className, width
                   key={media.src}
                   src={media.src}
                   alt={media.type}
-                  width={500}
-                  height={500}
+                  width={width}
+                  height={height}
                   // priority={i < 3}
-                  className="snap-start shrink-0"
+                  className="snap-start shrink-0 object-contain w-full h-full"
                 />
               );
             }
-            // return (
-            //   <VideoPlayer
-            //     containerRef={containerRef}
-            //     key={media.src}
-            //     src={media.src}
-            //     className="snap-start shrink-0"
-            //   />
-            // );
+            return (
+              <VideoPlayer
+                containerRef={containerRef}
+                key={media.src}
+                src={media.src}
+                className="snap-start shrink-0"
+              />
+            );
           })}
           <div
             className={`text-white absolute top-0 left-0 flex w-full h-full items-center justify-center pointer-events-none`}

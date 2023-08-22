@@ -38,8 +38,7 @@ function videoScroll() {
 
   const visibleVideos: HTMLVideoElement[] = [];
   videoEls.forEach((videoEl) => {
-    if (elementIsVisibleInViewport(videoEl, true))
-      visibleVideos.push(videoEl);
+    if (elementIsVisibleInViewport(videoEl, true)) visibleVideos.push(videoEl);
   });
 
   if (visibleVideos.length === 1) {
@@ -72,6 +71,7 @@ function videoScroll() {
     });
   }
 }
+
 const Feed: React.FC<FeedProps> = () => {
   useEffect(() => {
     window.addEventListener("load", videoScroll);
@@ -83,12 +83,10 @@ const Feed: React.FC<FeedProps> = () => {
   });
 
   return (
-    <main>
-      <section className="flex flex-col gap-2 text-[14px]">
-        {DUMMY_DATA.map((item) => (
-          <FeedItem key={item.id} item={item} />
-        ))}
-      </section>
+    <main className="max-w-feed flex flex-col gap-2 text-[14px]">
+      {DUMMY_DATA.map((item) => (
+        <FeedItem key={item.id} item={item} />
+      ))}
     </main>
   );
 };

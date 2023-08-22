@@ -16,7 +16,7 @@ type NavBarProps = {};
 const NavBar: React.FC<NavBarProps> = () => {
 
   return (
-  <nav className="w-[72px] lg:w-[244px]">
+  <nav className="w-[72px] lg:w-[244px] shrink-0">
     <div className="w-[72px] lg:w-[244px] hidden h-screen fixed top-0 left-0 dark:text-white pt-2 px-3 pb-3 sm:flex flex-col items-center lg:items-start border-r border-gray-500 justify-between">
       <section className="w-full">
         <Link href="/">

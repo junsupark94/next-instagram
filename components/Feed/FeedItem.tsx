@@ -6,15 +6,15 @@ import Carousel from "../Carousel";
 import Link from "next/link";
 import { cn } from "@/util/cn";
 import EmojiIcon from "../Icons/EmojiIcon";
-import dynamic from "next/dynamic";
-import { darkModeAtom } from "@/util/atoms";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { Theme } from "emoji-picker-react";
-import { useAtom } from "jotai";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
+// import dynamic from "next/dynamic";
+// import { darkModeAtom } from "@/util/atoms";
+// import { Theme } from "emoji-picker-react";
+// import { useAtom } from "jotai";
 
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false, });
+// const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false, });
 
 type FeedItemProps = {
   item: Post;
@@ -22,7 +22,7 @@ type FeedItemProps = {
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const [liked, setLiked] = useState(false);
-  const [darkMode] = useAtom(darkModeAtom);
+  // const [darkMode] = useAtom(darkModeAtom);
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const emojiRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,10 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   return (
     <div className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
       <PostHeader account={item.account} date={item.date} />
-      <Carousel content={item.content} setLiked={setLiked} />
+      <Carousel
+        content={item.content}
+        setLiked={setLiked}
+      />
 
       <section className="px-4 mt-3">
         <PostIcons liked={liked} setLiked={setLiked} likes={item.likes} />

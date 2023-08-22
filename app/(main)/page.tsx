@@ -16,21 +16,17 @@ export default function Home() {
           <HeartIcon className="w-8 h-8" />
         </div>
       </header>
-      <div className="h-[52px] sm:hidden" />
-      <section className="grow flex justify-center gap-16">
+      <section className="grow flex justify-center gap-16 mt-[52px] mb-10 sm:m-0">
         <div className="max-w-[630px] pt-[22px]">
           <div className="my-2 xs:border-0 border-b border-gray-800">
             <Stories />
           </div>
-          <article className="flex justify-center xs:mt-4">
-            <div className="max-w-[470px]">
-              <Feed />
-            </div>
-          </article>
+          <div className="flex justify-center xs:mt-4">
+            <Feed />
+          </div>
         </div>
         <RightSideBar />
       </section>
-      <div className="h-10" />
       <div className="sm:hidden fixed bottom-0 left-0 w-screen">
         <BottomNavBar />
       </div>

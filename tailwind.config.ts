@@ -50,6 +50,18 @@ const config: Config = {
       },
       transitionProperty: {
         'height' : 'height'
+      },
+      width: {
+        feed: '470px',
+      },
+      maxWidth: {
+        feed: '470px',
+      },
+      height: {
+        carousel: '500px',
+      },
+      maxHeight: {
+        carousel: '500px',
       }
     },
   },

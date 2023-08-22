@@ -71,14 +71,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
   };
 
   return (
-    <div className={cn("relative text-white", className)}>
+    <div className={cn("relative text-white h-full w-full", className)}>
       <video
         onPlay={playHandler}
         onPause={pauseHandler}
         muted={isMuted}
         src={src}
         ref={videoRef}
-        className="w-[470px] h-[470px] bg-white"
+        className="w-full h-full"
         loop
       />
       <button
