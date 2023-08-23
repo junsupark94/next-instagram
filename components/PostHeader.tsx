@@ -25,4 +25,4 @@ const PostHeader: React.FC<PostHeaderProps> = ({ account, date }) => {
     </header>
   );
 };
-export default PostHeader;
+export default React.memo(PostHeader);

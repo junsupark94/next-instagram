@@ -1,24 +1,39 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { Post } from "@/util/dummy-data";
+import React, { useState } from "react";
+import { Post, Reply } from "@/util/dummy-data";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
 import Link from "next/link";
 import { cn } from "@/util/cn";
-import EmojiIcon from "../Icons/EmojiIcon";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
+import NewReply from "./NewReply";
 
 type FeedItemProps = {
   item: Post;
 };
 
+
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const [liked, setLiked] = useState(false);
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
-  // const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const emojiRef = useRef<HTMLDivElement>(null);
+  const [newReplies, setNewReplies] = useState<Reply[]>([]);
+
+  const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (value.trim() === '') return;
+    console.log(value)
+    const newReply = {
+      account: item.account,
+      text: value,
+      likes: 0,
+    }
+    console.log(newReply.text);
+    //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
+    setNewReplies(prev => [...prev, newReply])
+    setValue('');
+  }
 
   return (
     <div className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
@@ -37,28 +52,8 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
         <Link href={`/p/${item.id}`} className="text-gray-500 my-1">
           View all {item.replies.length} comments
         </Link>
-        {/* todo: show submitted comment. Can show more than one */}
-        {false && (
-          <div className="flex gap-1">
-            <span className="font-bold">account name</span>
-            <span>comment</span>
-          </div>
-        )}
-        {/* start of comment form */}
-        <form className="relative">
-          {/* <div
-            ref={emojiRef}
-            className={cn(
-              "absolute -right-24 bottom-10",
-              !showEmojiPicker && "hidden"
-            )}
-          >
-            <Picker
-              theme={darkMode ? Theme.DARK : Theme.LIGHT}
-              onEmojiClick={(e) => setValue((prev) => prev + e.emoji)}
-            />
-          </div> */}
-
+        {newReplies.map((reply, i) => <NewReply key={i} reply={reply}/>)}
+        <form className="relative" onSubmit={submitHandler}>
           <article className="flex grow gap-1">
             <textarea
               className="dark:bg-black dark:text-white resize-none outline-none grow"
@@ -73,19 +68,9 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
                   "font-bold text-[#0095f6]",
                   value === "" ? "hidden" : "hover:text-white"
                 )}
-                onClick={(e) => e.preventDefault()}
               >
                 Post
               </button>
-              {/* <button
-                className="active:text-gray-500"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowEmojiPicker((prev) => !prev);
-                }}
-              >
-                <EmojiIcon className="w-3 h-3" />
-              </button> */}
             </div>
           </article>
         </form>

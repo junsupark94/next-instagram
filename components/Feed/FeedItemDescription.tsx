@@ -1,5 +1,5 @@
 "use client";
-import { createElement, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import parse from "html-react-parser";
 import Link from "next/link";
 
@@ -86,4 +86,5 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
     </div>
   );
 };
-export default FeedItemDescription;
+
+export default React.memo(FeedItemDescription);
