@@ -1,6 +1,6 @@
 import { cn } from "@/util/cn";
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import React from "react";
 import BookmarkIcon from "./Icons/BookmarkIcon";
 import CommentIcon from "./Icons/CommentIcon";
 import HeartIcon from "./Icons/HeartIcon";
@@ -39,4 +39,4 @@ const PostIcons: React.FC<PostIconsProps> = ({ likes, liked, setLiked }) => {
     </>
   );
 };
-export default PostIcons;
+export default React.memo(PostIcons);

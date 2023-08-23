@@ -1,6 +1,6 @@
-type Reply = {
+export type Reply = {
   account: string;
-  id: number;
+  id?: number;
   text: string;
   likes: number;
   replying?: number;
