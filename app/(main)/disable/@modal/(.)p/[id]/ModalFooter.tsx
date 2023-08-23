@@ -1,37 +1,31 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { cn } from "@/util/cn";
-import EmojiPicker from "emoji-picker-react";
-import EmojiIcon from "@/components/Icons/EmojiIcon";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { Theme } from "emoji-picker-react";
 import PostIcons from "@/components/PostIcons";
-import { useGlobalStore } from "@/util/zustand";
+import { Reply } from "@/util/dummy-data";
 
-type ModalFooterProps = {};
+type ModalFooterProps = {
+  account: string;
+};
 
-const ModalFooter: React.FC<ModalFooterProps> = () => {
+const ModalFooter: React.FC<ModalFooterProps> = ({ account }) => {
   const [liked, setLiked] = useState(false); // todo: initial state provided by database
-  const darkMode = useGlobalStore(state => state.darkMode);
-
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const emojiRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
+  const [newReplies, setNewReplies] = useState<Reply[]>([]);
 
-  useEffect(() => {
-    if (!showEmojiPicker) return;
-    function clickOutside(e: MouseEvent) {
-      if (buttonRef.current?.contains(e.target as Node)) return;
-      if (!emojiRef.current?.contains(e.target as Node)) {
-        setShowEmojiPicker(false);
-      }
-    }
-    document.addEventListener("mousedown", clickOutside);
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (value.trim() === "") return;
+    const newReply = {
+      account: account,
+      text: value,
+      likes: 0,
     };
-  }, [showEmojiPicker]);
+    //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
+    setNewReplies((prev) => [...prev, newReply]);
+    setValue("");
+  };
 
   return (
     <>
@@ -41,30 +35,7 @@ const ModalFooter: React.FC<ModalFooterProps> = () => {
           <div>Time</div>
         </section>
         <section className="relative flex p-4 gap-4 items-center">
-          <div
-            ref={emojiRef}
-            className={cn(
-              "absolute left-2 bottom-11",
-              !showEmojiPicker && "hidden"
-            )}
-          >
-            <EmojiPicker
-              searchDisabled
-              lazyLoadEmojis
-              theme={darkMode ? Theme.DARK : Theme.LIGHT}
-              onEmojiClick={(e) => setValue((prev) => prev + e.emoji)}
-            />
-          </div>
-          <button
-            className="active:text-gray-500"
-            ref={buttonRef}
-            onClick={(e) => {
-              setShowEmojiPicker((prev) => !prev);
-            }}
-          >
-            <EmojiIcon />
-          </button>
-          <form className="flex grow">
+          <form className="flex grow" onSubmit={submitHandler}>
             <textarea
               className="dark:bg-black dark:text-white resize-none outline-none grow"
               placeholder="Add a comment..."

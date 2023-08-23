@@ -1,53 +1,32 @@
 "use client";
-import EmojiPicker from "emoji-picker-react";
-import React, { useEffect, useRef, useState } from "react";
-import EmojiIcon from "@/components/Icons/EmojiIcon";
-import { cn } from "@/util/cn";
+import React, { useState } from "react";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
+import { Reply } from "@/util/dummy-data";
 
-type ModalCommentFormProps = {};
+type ModalCommentFormProps = {
+  account: string;
+};
 
-const ModalCommentForm: React.FC<ModalCommentFormProps> = () => {
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const emojiRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const {value, setValue, textAreaRef} = useAutoSizeTextArea();
+const ModalCommentForm: React.FC<ModalCommentFormProps> = ({ account }) => {
+  const { value, setValue, textAreaRef } = useAutoSizeTextArea();
+  const [newReplies, setNewReplies] = useState<Reply[]>([]);
 
-  useEffect(() => {
-    if (!showEmojiPicker) return;
-    function clickOutside(e: MouseEvent) {
-      if (buttonRef.current?.contains(e.target as Node)) return;
-      if (!emojiRef.current?.contains(e.target as Node)) {
-        setShowEmojiPicker(false);
-      }
-    }
-    document.addEventListener("mousedown", clickOutside);
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (value.trim() === "") return;
+    const newReply = {
+      account: account,
+      text: value,
+      likes: 0,
     };
-  }, [showEmojiPicker]);
+    //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
+    setNewReplies((prev) => [...prev, newReply]);
+    setValue("");
+  };
 
   return (
     <div className="relative flex p-4 gap-4 items-center">
-      <div
-        ref={emojiRef}
-        className={cn(
-          "absolute left-2 bottom-11",
-          !showEmojiPicker && "hidden"
-        )}
-      >
-        <EmojiPicker />
-      </div>
-      <button
-        className="active:text-gray-500"
-        ref={buttonRef}
-        onClick={(e) => {
-          setShowEmojiPicker((prev) => !prev);
-        }}
-      >
-        <EmojiIcon />
-      </button>
-      <form action="" className="flex grow">
+      <form action="" className="flex grow" onSubmit={submitHandler}>
         <textarea
           className="dark:bg-black dark:text-white resize-none outline-none grow"
           placeholder="Add a comment..."
