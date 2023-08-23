@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import { Reply } from "@/util/dummy-data";
 
-type ModalCommentFormProps = {
+type ModalReplyFormProps = {
   account: string;
 };
 
-const ModalCommentForm: React.FC<ModalCommentFormProps> = ({ account }) => {
+const ModalReplyForm: React.FC<ModalReplyFormProps> = ({ account }) => {
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
   const [newReplies, setNewReplies] = useState<Reply[]>([]);
 
@@ -18,6 +18,7 @@ const ModalCommentForm: React.FC<ModalCommentFormProps> = ({ account }) => {
       account: account,
       text: value,
       likes: 0,
+      date: new Date()
     };
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies((prev) => [...prev, newReply]);
@@ -43,4 +44,4 @@ const ModalCommentForm: React.FC<ModalCommentFormProps> = ({ account }) => {
     </div>
   );
 };
-export default ModalCommentForm;
+export default ModalReplyForm;

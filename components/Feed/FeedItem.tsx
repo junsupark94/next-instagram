@@ -23,16 +23,18 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (value.trim() === '') return;
-    console.log(value)
     const newReply = {
       account: item.account,
       text: value,
       likes: 0,
+      date: new Date(),
     }
-    console.log(newReply.text);
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies(prev => [...prev, newReply])
     setValue('');
+  }
+  const foo : React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+
   }
 
   return (
@@ -61,6 +63,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
               ref={textAreaRef}
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onKeyDown={foo}
             />
             <div className="flex gap-2">
               <button

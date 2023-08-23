@@ -9,7 +9,7 @@ type NewReplyProps = {
 const NewReply: React.FC<NewReplyProps> = ({ reply }) => {
   const [showMore, setShowMore] = useState(false);
   const [shortText, fullText, isTruncated] = useMemo(
-    () => {console.log('useMemo'); return truncateText(reply.text, 40)},
+    () => truncateText(reply.text, 40),
     [reply.text]
   );
 

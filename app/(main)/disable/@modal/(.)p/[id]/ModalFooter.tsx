@@ -21,6 +21,7 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ account }) => {
       account: account,
       text: value,
       likes: 0,
+      date: new Date()
     };
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies((prev) => [...prev, newReply]);

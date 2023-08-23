@@ -4,6 +4,7 @@ export type Reply = {
   text: string;
   likes: number;
   replying?: number;
+  date: Date;
 };
 
 export type Media = {
@@ -41,8 +42,8 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2023, 4, day++),
     likes: 10,
     replies: [
-      {account: "bobsmith", id: replyId++, text: "Welcome to Instagram!", likes: 2},
-      {account: "junsupark", id: replyId++, text: "Thanks Bob!", likes: 3, replying: 1},
+      {account: "bobsmith", id: replyId++, text: "Welcome to Instagram!", likes: 2, date: new Date()},
+      {account: "junsupark", id: replyId++, text: "Thanks Bob!", likes: 3, replying: 1, date: new Date()},
     ],
     description: "First post!",
     content: [
@@ -58,8 +59,8 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2023, 4, day++),
     likes: 10,
     replies: [
-      {account: "bobsmith", id: replyId++, text: "Great post", likes: 2},
-      {account: "notjunsupark", id: replyId++, text: "Love it!", likes: 3, replying: 1},
+      {account: "bobsmith", id: replyId++, text: "Great post", likes: 2, date: new Date()},
+      {account: "notjunsupark", id: replyId++, text: "Love it!", likes: 3, replying: 1, date: new Date()},
     ],
     description: "Second post!",
     content: [
@@ -108,13 +109,13 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2023, 7, day++),
     likes: 129,
     replies: [
-      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
-      {account: "junsupark", id: replyId++, text: "Where did you take this picture? We need to hang out again soon!", likes: 10},
-      {account: "rihanna", id: replyId++, text: "Sick", likes: 45679},
-      {account: "drake", id: replyId++, text: "CLB", likes: 3},
-      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
-      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
-      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3},
+      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3, date: new Date()},
+      {account: "junsupark", id: replyId++, text: "Where did you take this picture? We need to hang out again soon!", likes: 10, date: new Date()},
+      {account: "rihanna", id: replyId++, text: "Sick", likes: 45679, date: new Date()},
+      {account: "drake", id: replyId++, text: "CLB", likes: 3, date: new Date()},
+      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3, date: new Date()},
+      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3, date: new Date()},
+      {account: "notjunsupark", id: replyId++, text: "Cool picture!", likes: 3, date: new Date()},
     ],
     description: "I'm Bob Smith!",
     content: [

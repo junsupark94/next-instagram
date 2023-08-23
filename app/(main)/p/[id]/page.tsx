@@ -1,15 +1,15 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useState } from "react";
-import { DUMMY_DATA } from "@/util/dummy-data";
+import { FormEventHandler, KeyboardEventHandler, useEffect, useState } from "react";
+import { DUMMY_DATA, Reply } from "@/util/dummy-data";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";
 import { cn } from "@/util/cn";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import Carousel from "@/components/Carousel";
 import Image from "next/image";
-import CommentItem from "@/components/CommentItem";
+import ReplyItem from "@/components/ReplyItem";
 import Link from "next/link";
 import CarouselIcon from "@/components/Icons/CarouselIcon";
 import VideoIcon from "@/components/Icons/VideoIcon";
@@ -22,6 +22,31 @@ export default function Page({ params }: { params: any }) {
   const accountItems = DUMMY_DATA.filter(
     (post) => post.account === item?.account
   ).slice(0, 6);
+
+  const [replies, setReplies] = useState<Reply[]>([]);
+
+  useEffect(() => {
+    setReplies(item!.replies);
+  }, [setReplies, item])
+
+  const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (value.trim() === '') return;
+    const newReply = {
+      account: item!.account,
+      text: value,
+      likes: 0,
+      date: new Date(),
+    }
+    //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
+    setReplies(prev => [newReply, ...prev])
+    setValue('');
+  }
+
+  const enterKeyDown : KeyboardEventHandler<HTMLFormElement> = (e) => {
+    if (e.code !== 'Enter') return;
+    submitHandler(e);
+  }
 
   if (!item) return <div>404 Post Not Found</div>;
 
@@ -50,17 +75,14 @@ export default function Page({ params }: { params: any }) {
             </article>
           </div>
           <article className="overflow-auto p-4 flex flex-col gap-2">
-            <CommentItem />
-            <CommentItem />
-            <CommentItem />
-            <CommentItem />
+            {replies.map(reply => <ReplyItem key={reply.id} reply={reply}/>)}
           </article>
           <div className="p-4 border-t border-gray-500">
-            <PostIcons liked={liked} setLiked={setLiked} likes={10} />
+            <PostIcons liked={liked} setLiked={setLiked} likes={item.likes} />
             <span>{getRelativeTimeString(item.date)}</span>
           </div>
           <article className=" flex p-4 gap-4 items-center">
-            <form className="flex grow">
+            <form className="flex grow" onSubmit={submitHandler} onKeyDown={enterKeyDown}>
               <ProfileIcon className="mr-2" />
               <textarea
                 className="dark:bg-black dark:text-white resize-none outline-none grow"
