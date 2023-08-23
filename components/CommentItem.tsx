@@ -24,4 +24,4 @@ const CommentItem: React.FC<CommentItemProps> = () => {
     </article>
   );
 };
-export default CommentItem;
+export default React.memo(CommentItem);
