@@ -13,6 +13,7 @@ type PostIconsProps = {
 };
 
 const PostIcons: React.FC<PostIconsProps> = ({ likes, liked, setLiked }) => {
+  console.log("PostIcons render")
   const red = "rgb(255,48,64)"
   return (
     <>

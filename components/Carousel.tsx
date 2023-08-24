@@ -30,6 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({
   width = 500,
   height = 500,
 }) => {
+  console.log('Carousel render')
   const [opacity, setOpacity] = useState("opacity-0");
   const containerRef = useRef<HTMLElement>(null);
   const leftButtonRef = useRef<HTMLButtonElement>(null);

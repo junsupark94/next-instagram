@@ -1,23 +1,36 @@
-'use client'
-import Feed from "@/components/Feed/Feed";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+"use client";
+
+import { useState } from "react";
+
+let value = "";
+let obj = {
+  name: "Junsu"
+}
 
 export default function Page() {
-  const queryParams = useSearchParams();
-  const params = useParams();
-  console.log('params', params)
-  // console.log('params', params);
-  console.log('queryParams', queryParams.getAll('img'));
-  // console.log('router', router);
+  console.log("Page render")
+  return <div className="">
+    <ComponentA foo={obj}/>
+    <ComponentB />
+  </div>;
+}
 
-  // return <Feed />
+function ComponentA({foo} : {foo: {name: string}}) {
+  console.log("ComponentA render")
   return (
-    <div className="border-2 w-[400px] h-[200px] flexz">
-      {/* <Image src="/test1.jpg" alt="image" width={400} height={400} className="w-[600px] h-[400px] object-contain border border-blue-500"/> */}
-      <Link href="/test/?img=1">Test</Link>
-      <Link href="/test?img=2">Test 2</Link>
+    <div>
+      <input className="text-black" type="text" onChange={(e) => (obj = {name: e.target.value})} />
     </div>
-  )
+  );
+}
+function ComponentB() {
+  console.log("ComponentB render")
+  const [display, setDisplay] = useState('');
+
+  return (
+    <div>
+      <div>{display}</div>
+      <button onClick={() => setDisplay(obj.name)}>Update</button>
+    </div>
+  );
 }

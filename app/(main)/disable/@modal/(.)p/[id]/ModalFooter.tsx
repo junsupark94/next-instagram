@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/util/cn";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import PostIcons from "@/components/PostIcons";
-import { Reply } from "@/util/dummy-data";
+import { Reply, getReplyId } from "@/util/dummy-data";
 
 type ModalFooterProps = {
   account: string;
@@ -21,7 +21,9 @@ const ModalFooter: React.FC<ModalFooterProps> = ({ account }) => {
       account: account,
       text: value,
       likes: 0,
-      date: new Date()
+      date: new Date(),
+      id: getReplyId(),
+      thread: []
     };
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies((prev) => [...prev, newReply]);

@@ -9,8 +9,9 @@ type PostHeaderProps = {
 };
 
 const PostHeader: React.FC<PostHeaderProps> = ({ account, date }) => {
+  console.log('PostHeader render')
   return (
-    <header className="flex justify-between items-center xs:py-[14px]">
+    <header className="flex justify-between items-center xs:py-2">
       <div className="flex gap-2 items-center">
         <ProfileIcon className="w-8 h-8" />
         <div className="flex flex-col">

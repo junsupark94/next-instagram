@@ -1,31 +1,115 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState } from "react";
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { Reply } from "@/util/dummy-data";
-import { getRelativeTimeString } from "@/util/relative-time";
+import { getShortenedRelative } from "@/util/relative-time";
+import Link from "next/link";
 
-type CommentItemProps = {
-  reply: Reply
+type ReplyItemProps = {
+  reply: Reply;
 };
 
-const CommentItem: React.FC<CommentItemProps> = ({reply}) => {
+const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
+  console.log("ReplyItem render");
+  const [showReplies, setShowReplies] = useState(false);
+
+  const replyHandler = () => {
+    const textarea = document.querySelector('textarea');
+    textarea!.setAttribute(
+      "data-reply",
+      String(reply.id)
+    );
+    textarea!.value = `@${reply.account} `
+    textarea!.focus();
+  }
+
+  const showMoreButton =
+    reply.thread && reply.thread.length > 0 ? (
+      <button
+        className="flex items-center gap-2 mb-2"
+        onClick={() => setShowReplies((prev) => !prev)}
+      >
+        <div className="border-b border-[#555555] w-[22px]" />{" "}
+        <span className="text-xs text-gray-400">
+          {!showReplies && `View all ${reply.thread.length} replies`}
+          {showReplies && "Hide all replies"}
+        </span>
+      </button>
+    ) : null;
+
   return (
-    <article className="">
-      <div className="flex gap-2">
+    <article>
+      <div className="flex gap-2 font-semibold text-sm">
         <ProfileIcon />
         <div>
-          <div>
-            <h1>{reply.account}</h1>
-            <p>{reply.text}</p>
+          <div className="pb-2">
+            <div className="flex gap-2">
+              <h1>
+                <Link href={`/${reply.account}`}>{reply.account}</Link>
+              </h1>{" "}
+              <span className="text-gray-400 font-normal">
+                {getShortenedRelative(reply.date)}
+              </span>
+            </div>
+            <p className="font-normal">{reply.text}</p>
           </div>
-          <div className="flex gap-2">
-            <div>{getRelativeTimeString(reply.date)}</div>
-            <div>{reply.likes}</div>
-            {reply.replying && <div>{reply.replying}</div>}
+          <div className="flex gap-2 text-xs text-gray-400 pb-3">
+            {reply.likes > 0 && (
+              <span>
+                {reply.likes} like{reply.likes > 1 && "s"}
+              </span>
+            )}
+            <button
+              onClick={replyHandler}
+            >
+              Reply
+            </button>
           </div>
-          <div>--- View replies (#)</div>
+          {showMoreButton}
+          {showReplies &&
+            reply.thread.map((threadItem) => (
+              <MemoizedThreadItem key={threadItem.id} threadItem={threadItem} />
+            ))}
         </div>
       </div>
     </article>
   );
 };
-export default React.memo(CommentItem);
+// export default ReplyItem;
+export default React.memo(ReplyItem);
+
+function ThreadItem({ threadItem }: { threadItem: any }) {
+  console.log("ThreadItem render")
+  return (
+    <article>
+      <div className="flex gap-2">
+        <ProfileIcon />
+        <div>
+          <div className="pb-2">
+            <div className="flex gap-2">
+              <h1>
+                <Link href={`/${threadItem.account}`}>
+                  {threadItem.account}
+                </Link>
+              </h1>{" "}
+              <span className="text-gray-400">
+                {getShortenedRelative(threadItem.date)}
+              </span>
+            </div>
+            <p>{threadItem.text}</p>
+          </div>
+          <div className="flex gap-2 text-xs text-gray-400 pb-3">
+            {threadItem.likes > 0 && (
+              <span>
+                {threadItem.likes} like{threadItem.likes > 1 && "s"}
+              </span>
+            )}
+            <button>Reply</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+const MemoizedThreadItem = React.memo(ThreadItem);

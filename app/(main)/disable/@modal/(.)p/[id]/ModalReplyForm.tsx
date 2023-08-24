@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { Reply } from "@/util/dummy-data";
+import { Reply, getReplyId } from "@/util/dummy-data";
 
 type ModalReplyFormProps = {
   account: string;
@@ -18,7 +18,9 @@ const ModalReplyForm: React.FC<ModalReplyFormProps> = ({ account }) => {
       account: account,
       text: value,
       likes: 0,
-      date: new Date()
+      date: new Date(),
+      id: getReplyId(),
+      thread: [],
     };
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies((prev) => [...prev, newReply]);

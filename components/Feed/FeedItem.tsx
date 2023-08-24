@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Post, Reply } from "@/util/dummy-data";
+import { Post, Reply, getReplyId } from "@/util/dummy-data";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
 import Link from "next/link";
@@ -28,6 +28,8 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
       text: value,
       likes: 0,
       date: new Date(),
+      thread: [],
+      id: getReplyId(),
     }
     //todo: add fetch POST request to backend, await that before updating UI, need replyID from db
     setNewReplies(prev => [...prev, newReply])
