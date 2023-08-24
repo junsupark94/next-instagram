@@ -63,6 +63,5 @@ export function convertText(text: string) {
       }
     },
   });
-  console.log("convertedText", typeof convertedText, convertedText);
   return convertedText;
 }

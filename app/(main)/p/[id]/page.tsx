@@ -4,7 +4,6 @@ import PostIcons from "@/components/PostIcons";
 import { useCallback, useMemo, useState } from "react";
 import {
   DUMMY_DATA,
-  Post,
   Reply,
   ThreadItem,
   getReplyId,
@@ -12,14 +11,11 @@ import {
 import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";
 import Carousel from "@/components/Carousel";
-import Image from "next/image";
 import ReplyItem from "@/components/ReplyItem";
-import Link from "next/link";
-import CarouselIcon from "@/components/Icons/CarouselIcon";
-import VideoIcon from "@/components/Icons/VideoIcon";
 import React from "react";
 import Footer from "@/components/PhotoPage/Footer";
 import ReplyForm from "@/components/PhotoPage/ReplyForm";
+import MorePosts from "@/components/PhotoPage/MorePosts";
 
 export default function Page({ params }: { params: any }) {
   console.log("Page render");
@@ -66,7 +62,7 @@ export default function Page({ params }: { params: any }) {
           id: getReplyId(),
         };
 
-        targetReply.thread.push(newThreadItem)
+        targetReply.thread.push(newThreadItem);
         replies[targetIndex] = { ...targetReply };
         setReplies((prev) => [...prev]);
         textAreaRef.current?.removeAttribute("data-reply");
@@ -134,53 +130,3 @@ export default function Page({ params }: { params: any }) {
     </div>
   );
 }
-
-const MorePosts = React.memo(function MorePosts({ item }: { item: Post }) {
-  const accountItems = DUMMY_DATA.filter(
-    (post) => post.account === item?.account
-  ).slice(0, 6);
-  return (
-    <section className="border-t border-gray-500 w-[900px] pt-16">
-      <h1 className="font-gray-500 mb-5">
-        More posts from{" "}
-        <span className="font-white font-bold">{item.account}</span>
-      </h1>
-      <div className="grid grid-cols-3 gap-1">
-        {accountItems.map((accountItem) => {
-          const media = accountItem.content[0];
-          return (
-            <Link
-              key={accountItem.id}
-              href={`/p/${accountItem.id}`}
-              className="relative"
-            >
-              {media.type === "image" && (
-                <Image
-                  src={accountItem.content[0].src}
-                  alt="image"
-                  width={300}
-                  height={300}
-                  className="w-[300px] h-[300px] object-cover"
-                />
-              )}
-              {media.type === "video" && (
-                <video
-                  src={accountItem.content[0].src}
-                  className="w-[300px] h-[300px] object-cover"
-                  muted
-                />
-              )}
-              {accountItem.content.length > 1 ? (
-                <CarouselIcon className="absolute top-2 right-2" />
-              ) : (
-                media.type === "video" && (
-                  <VideoIcon className="absolute top-2 right-2" />
-                )
-              )}
-            </Link>
-          );
-        })}
-      </div>
-    </section>
-  );
-});

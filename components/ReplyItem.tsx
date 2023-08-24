@@ -15,14 +15,11 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
   const [showReplies, setShowReplies] = useState(false);
 
   const replyHandler = () => {
-    const textarea = document.querySelector('textarea');
-    textarea!.setAttribute(
-      "data-reply",
-      String(reply.id)
-    );
-    textarea!.value = `@${reply.account} `
+    const textarea = document.querySelector("textarea");
+    textarea!.setAttribute("data-reply", String(reply.id));
+    textarea!.value = `@${reply.account} `;
     textarea!.focus();
-  }
+  };
 
   const showMoreButton =
     reply.thread && reply.thread.length > 0 ? (
@@ -60,17 +57,19 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
                 {reply.likes} like{reply.likes > 1 && "s"}
               </span>
             )}
-            <button
-            className="text-blue-300"
-              onClick={replyHandler}
-            >
+            <button className="text-blue-300" onClick={replyHandler}>
               Reply
             </button>
           </div>
           {showMoreButton}
           {showReplies &&
             reply.thread.map((threadItem) => (
-              <MemoizedThreadItem key={threadItem.id} threadItem={threadItem} />
+              <MemoizedThreadItem
+                key={threadItem.id}
+                id={reply.id}
+                account={reply.account}
+                threadItem={threadItem}
+              />
             ))}
         </div>
       </div>
@@ -80,8 +79,24 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
 // export default ReplyItem;
 export default React.memo(ReplyItem);
 
-function ThreadItem({ threadItem }: { threadItem: any }) {
-  console.log("ThreadItem render")
+function ThreadItem({
+  threadItem,
+  id,
+  account,
+}: {
+  threadItem: any;
+  id: number;
+  account: string;
+}) {
+  console.log("ThreadItem render");
+
+  const replyHandler = () => {
+    const textarea = document.querySelector("textarea");
+    textarea!.setAttribute("data-reply", String(id));
+    textarea!.value = `@${account} `;
+    textarea!.focus();
+  };
+
   return (
     <article>
       <div className="flex gap-2">
@@ -106,7 +121,7 @@ function ThreadItem({ threadItem }: { threadItem: any }) {
                 {threadItem.likes} like{threadItem.likes > 1 && "s"}
               </span>
             )}
-            <button>Reply</button>
+            <button onClick={replyHandler}>Reply</button>
           </div>
         </div>
       </div>
