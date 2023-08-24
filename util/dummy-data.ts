@@ -74,7 +74,7 @@ export const DUMMY_DATA: Post[] = [
       {
         account: "champagepapi",
         id: replyId++,
-        text: "Dope",
+        text: "Dope @badgalriri #sexybitch",
         likes: 882341,
         date: new Date(2023, 7, 15),
         thread: [],

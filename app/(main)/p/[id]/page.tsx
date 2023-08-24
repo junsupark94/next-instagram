@@ -130,6 +130,7 @@ export default function Page({ params }: { params: any }) {
       </main>
       <MorePosts item={item} />
       <Footer />
+      <span className="text-[#00376b] dark:text-[#e0f1ff]" />
     </div>
   );
 }

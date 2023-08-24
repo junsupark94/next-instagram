@@ -62,7 +62,7 @@ const config: Config = {
       },
       maxHeight: {
         carousel: '500px',
-      }
+      },
     },
   },
   plugins: [],

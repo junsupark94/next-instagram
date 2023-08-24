@@ -4,6 +4,7 @@ import ProfileIcon from "@/components/Icons/ProfileIcon";
 import { Reply } from "@/util/dummy-data";
 import { getShortenedRelative } from "@/util/relative-time";
 import Link from "next/link";
+import { convertText } from "@/util/truncateText";
 
 type ReplyItemProps = {
   reply: Reply;
@@ -51,7 +52,7 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
                 {getShortenedRelative(reply.date)}
               </span>
             </div>
-            <p className="font-normal">{reply.text}</p>
+            <p className="font-normal">{convertText(reply.text)}</p>
           </div>
           <div className="flex gap-2 text-xs text-gray-400 pb-3">
             {reply.likes > 0 && (
@@ -60,6 +61,7 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
               </span>
             )}
             <button
+            className="text-blue-300"
               onClick={replyHandler}
             >
               Reply
