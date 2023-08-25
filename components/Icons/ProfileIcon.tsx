@@ -6,7 +6,7 @@ type ProfileIconProps = {
 };
 
 const ProfileIcon: React.FC<ProfileIconProps> = ({className}) => {
-  console.log("ProfileIcon render")
+  // console.log("ProfileIcon render")
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

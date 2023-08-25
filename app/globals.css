@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.test {
-  color: #e0f1ff;
-}
 
 body {
   height: 100%;
@@ -14,3 +11,4 @@ body {
   height: 0;
   width: 0;
 }
+

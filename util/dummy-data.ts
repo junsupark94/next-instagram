@@ -240,4 +240,40 @@ export const DUMMY_DATA: Post[] = [
       { src: "/test8.jpg", type: "image" },
     ],
   },
+  {
+    account: "charlixcx",
+    id: postId++,
+    date: new Date(2023, 7, day++),
+    likes: 129,
+    replies: [],
+    description: "it's Charli baby",
+    content: [
+      { src: "/video6.mp4", type: "video" },
+      { src: "/test8.jpg", type: "image" },
+    ],
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2023, 7, day++),
+    likes: 129,
+    replies: [],
+    description: "more dummy posts",
+    content: [
+      { src: "/test8.jpg", type: "image" },
+      { src: "/video6.mp4", type: "video" },
+    ],
+  },
+  {
+    account: "ethelcain",
+    id: postId++,
+    date: new Date(2023, 7, day++),
+    likes: 129,
+    replies: [],
+    description: "it's ethel cain baby",
+    content: [
+      { src: "/video6.mp4", type: "video" },
+      { src: "/test8.jpg", type: "image" },
+    ],
+  },
 ];

@@ -1,7 +1,7 @@
 "use client";
 import { DUMMY_DATA } from "@/util/dummy-data";
 import FeedItem from "./FeedItem";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FeedProps = {};
 
@@ -71,7 +71,12 @@ function videoScroll() {
   }
 }
 
+const width = 5
+
 const Feed: React.FC<FeedProps> = () => {
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(startIndex + width);
+  const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     window.addEventListener("load", videoScroll);
     window.addEventListener("scroll", videoScroll);
@@ -81,9 +86,41 @@ const Feed: React.FC<FeedProps> = () => {
     };
   });
 
+  useEffect(() => {
+    const scrollHandler = () => {
+      const foo = containerRef.current!.getBoundingClientRect();
+      if (foo.y <= -1500) {
+        setStartIndex((prev) => {
+          if (prev === DUMMY_DATA.length - width) return prev;
+          return prev + 1;
+        });
+        setEndIndex((prev) => {
+          if (prev === 20) return prev;
+          return prev + 1;
+        });
+      } else if (foo.y >= -500) {
+        setStartIndex((prev) => {
+          if (prev === 0) return prev;
+          return prev - 1;
+        });
+        setEndIndex((prev) => {
+          if (prev === width) return prev;
+          return prev - 1;
+        });
+      }
+    };
+    document.addEventListener("scroll", scrollHandler);
+    return () => {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  });
+
   return (
-    <main className="max-w-feed flex flex-col gap-2 text-[14px]">
-      {DUMMY_DATA.map((item) => (
+    <main
+      className="max-w-feed flex flex-col gap-2 text-[14px]"
+      ref={containerRef}
+    >
+      {DUMMY_DATA.slice(startIndex, endIndex).map((item) => (
         <FeedItem key={item.id} item={item} />
       ))}
     </main>
