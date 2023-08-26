@@ -1,5 +1,5 @@
 "use client";
-import { DUMMY_DATA } from "@/util/dummy-data";
+import { DUMMY_DATA } from "@/util/dummy-data-posts";
 import FeedItem from "./FeedItem";
 import { useEffect, useRef, useState } from "react";
 

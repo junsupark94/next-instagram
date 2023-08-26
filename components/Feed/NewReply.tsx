@@ -1,4 +1,4 @@
-import { Reply } from "@/util/dummy-data";
+import { Reply } from "@/util/dummy-data-posts";
 import truncateText from "@/util/truncateText";
 import React, { useMemo, useState } from "react";
 

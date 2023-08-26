@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/util/cn";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import PostIcons from "@/components/PostIcons";
-import { Reply, getReplyId } from "@/util/dummy-data";
+import { Reply, getReplyId } from "@/util/dummy-data-posts";
 
 type ModalFooterProps = {
   account: string;

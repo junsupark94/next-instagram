@@ -2,22 +2,19 @@
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
 import { useCallback, useMemo, useState } from "react";
-import {
-  DUMMY_DATA,
-  Reply,
-  ThreadItem,
-  getReplyId,
-} from "@/util/dummy-data";
-import ProfileIcon from "@/components/Icons/ProfileIcon";
+import { DUMMY_DATA, Reply, ThreadItem, getReplyId } from "@/util/dummy-data-posts";
+import ProfileIcon from "@/Icons/ProfileIcon";
 import { getRelativeTimeString } from "@/util/relative-time";
 import Carousel from "@/components/Carousel";
 import ReplyItem from "@/components/ReplyItem";
 import React from "react";
 import Footer from "@/components/PhotoPage/Footer";
-import ReplyForm from "@/components/PhotoPage/ReplyForm";
-import MorePosts from "@/components/PhotoPage/MorePosts";
+import ReplyForm from "@/components/ReplyForm";
+import MorePosts from "@/components/MorePosts";
+import { USERS } from "@/util/dummy-data-users";
+import Link from "next/link";
 
-export default function Page({ params }: { params: any }) {
+export default function Page({ params }: { params: { id: string } }) {
   console.log("Page render");
   const item = useMemo(() => {
     return DUMMY_DATA.find((item) => item.id === Number(params.id));
@@ -87,6 +84,8 @@ export default function Page({ params }: { params: any }) {
 
   if (!item) return <div>404 Post Not Found</div>;
 
+  const user = USERS.find(user => user.account === item.account);
+
   return (
     <div className="grow flex flex-col items-center mt-10 text-sm">
       <main className="flex max-w-[850px] h-[600px] pb-10">
@@ -124,7 +123,13 @@ export default function Page({ params }: { params: any }) {
           </article>
         </section>
       </main>
-      <MorePosts item={item} />
+      <section className="border-t border-gray-500 w-[900px] pt-16">
+        <h1 className="font-gray-500 mb-5">
+          More posts from
+          <Link href={`/${item.account}`} className="font-white font-bold"> {item.account}</Link>
+        </h1>
+        <MorePosts user={user!} exclude={params.id}/>
+      </section>
       <Footer />
       <span className="text-[#00376b] dark:text-[#e0f1ff]" />
     </div>

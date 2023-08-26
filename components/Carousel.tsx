@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { Media } from "@/util/dummy-data";
+import { Media } from "@/util/dummy-data-posts";
 import Image from "next/image";
 import React, {
   useCallback,
@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import HeartIcon from "./Icons/HeartIcon";
+import HeartIcon from "@/Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
 import { cn } from "@/util/cn";
 import createDoubleClick from "@/util/double-click";

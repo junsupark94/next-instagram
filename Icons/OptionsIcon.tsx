@@ -1,12 +1,14 @@
 import React from "react";
 
-type OptionsIconProps = {};
+type OptionsIconProps = {
+  className?: string
+};
 
-const OptionsIcon: React.FC<OptionsIconProps> = () => {
+const OptionsIcon: React.FC<OptionsIconProps> = ({className}) => {
   return (
     <svg
       aria-label="More options"
-      className="_ab6-"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="24"
@@ -20,4 +22,4 @@ const OptionsIcon: React.FC<OptionsIconProps> = () => {
     </svg>
   );
 };
-export default OptionsIcon;
+export default React.memo(OptionsIcon);

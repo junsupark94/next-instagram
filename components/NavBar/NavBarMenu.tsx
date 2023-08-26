@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import CogIcon from "../Icons/CogIcon";
-import ActivityIcon from "../Icons/ActivityIcon";
-import BookmarkIcon from "../Icons/BookmarkIcon";
-import ShortcutsIcon from "../Icons/ShortcutsIcon";
-import DarkModeIcon from "../Icons/DarkModeIcon";
-import ProblemIcon from "../Icons/ProblemIcon";
+import CogIcon from "@/Icons/CogIcon";
+import ActivityIcon from "@/Icons/ActivityIcon";
+import BookmarkIcon from "@/Icons/BookmarkIcon";
+import ShortcutsIcon from "@/Icons/ShortcutsIcon";
+import DarkModeIcon from "@/Icons/DarkModeIcon";
+import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/util/cn";
 import { useGlobalStore } from "@/util/zustand";
 

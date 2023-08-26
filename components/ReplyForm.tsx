@@ -1,7 +1,7 @@
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import { cn } from "@/util/cn";
 import React, { KeyboardEventHandler } from "react";
-import ProfileIcon from "../Icons/ProfileIcon";
+import ProfileIcon from "@/Icons/ProfileIcon";
 
 type ReplyFormProps = {
   submitHandler: (
@@ -17,8 +17,14 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ submitHandler }) => {
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
 
   const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
-    if (e.code !== "Enter") return;
-    submitHandler(e, value, setValue, textAreaRef);
+    console.log(e.key, e.shiftKey);
+    if (e.key !== "Enter") return;
+    if (e.shiftKey) {
+      return;
+    } else {
+      submitHandler(e, value, setValue, textAreaRef);
+    }
+
   };
 
   return (

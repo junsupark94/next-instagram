@@ -1,12 +1,14 @@
 import React from "react";
 
-type ReelsIconProps = {};
+type ReelsIconProps = {
+  className?: string;
+};
 
-const ReelsIcon: React.FC<ReelsIconProps> = () => {
+const ReelsIcon: React.FC<ReelsIconProps> = ({className}) => {
   return (
     <svg
       aria-label="Reels"
-      className="_ab6-"
+      className={className}
       color="currentColor"
       fill="currentColor"
       height="24"

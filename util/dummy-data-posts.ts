@@ -28,16 +28,9 @@ export type Post = {
   replies: Reply[];
   description: string;
   content: Media[];
+  pinned?: boolean;
 };
 
-type User = {
-  id: string;
-  name: string;
-  profilePicture: string;
-  bio: string;
-  postCount: number;
-  followerCount: number;
-};
 
 let postId = 1;
 let replyId = 1;

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Post, Reply, getReplyId } from "@/util/dummy-data";
+import { Post, Reply, getReplyId } from "@/util/dummy-data-posts";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
 import Link from "next/link";

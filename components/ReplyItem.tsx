@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
-import ProfileIcon from "@/components/Icons/ProfileIcon";
-import { Reply } from "@/util/dummy-data";
+import ProfileIcon from "@/Icons/ProfileIcon";
+import { Reply } from "@/util/dummy-data-posts";
 import { getShortenedRelative } from "@/util/relative-time";
 import Link from "next/link";
 import { convertText } from "@/util/truncateText";
@@ -49,7 +49,7 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
                 {getShortenedRelative(reply.date)}
               </span>
             </div>
-            <p className="font-normal">{convertText(reply.text)}</p>
+            <p className="font-normal whitespace-pre-wrap">{convertText(reply.text)}</p>
           </div>
           <div className="flex gap-2 text-xs text-gray-400 pb-3">
             {reply.likes > 0 && (

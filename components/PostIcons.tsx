@@ -1,10 +1,10 @@
 import { cn } from "@/util/cn";
 import Link from "next/link";
 import React from "react";
-import BookmarkIcon from "./Icons/BookmarkIcon";
-import CommentIcon from "./Icons/CommentIcon";
-import HeartIcon from "./Icons/HeartIcon";
-import ShareIcon from "./Icons/ShareIcon";
+import BookmarkIcon from "@/Icons/BookmarkIcon";
+import CommentIcon from "@/Icons/CommentIcon";
+import HeartIcon from "@/Icons/HeartIcon";
+import ShareIcon from "@/Icons/ShareIcon";
 
 type PostIconsProps = {
   liked: boolean;

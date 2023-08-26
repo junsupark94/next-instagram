@@ -1,8 +1,8 @@
 import { cn } from "@/util/cn";
 import React, { useEffect, useRef, useState } from "react";
-import PlayIcon from "./Icons/PlayIcon";
-import MutedIcon from "./Icons/MutedIcon";
-import UnmutedIcon from "./Icons/UnmutedIcon";
+import PlayIcon from "@/Icons/PlayIcon";
+import MutedIcon from "@/Icons/MutedIcon";
+import UnmutedIcon from "@/Icons/UnmutedIcon";
 
 import { useGlobalStore } from "@/util/zustand";
 import { usePathname } from "next/navigation";

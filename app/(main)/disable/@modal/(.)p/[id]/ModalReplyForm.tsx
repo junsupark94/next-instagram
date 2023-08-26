@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { Reply, getReplyId } from "@/util/dummy-data";
+import { Reply, getReplyId } from "@/util/dummy-data-posts";
 
 type ModalReplyFormProps = {
   account: string;
