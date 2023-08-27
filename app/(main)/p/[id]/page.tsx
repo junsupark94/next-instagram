@@ -4,7 +4,7 @@ import PostIcons from "@/components/PostIcons";
 import { useCallback, useMemo, useState } from "react";
 import { DUMMY_DATA, Reply, ThreadItem, getReplyId } from "@/util/dummy-data-posts";
 import ProfileIcon from "@/Icons/ProfileIcon";
-import { getRelativeTimeString } from "@/util/relative-time";
+import { getRelativeTimeString, getShortenedRelative } from "@/util/relative-time";
 import Carousel from "@/components/Carousel";
 import ReplyItem from "@/components/ReplyItem";
 import React from "react";
@@ -13,6 +13,8 @@ import ReplyForm from "@/components/ReplyForm";
 import MorePosts from "@/components/MorePosts";
 import { USERS } from "@/util/dummy-data-users";
 import Link from "next/link";
+import VerifiedIcon from "@/Icons/VerifiedIcon";
+import Image from "next/image";
 
 export default function Page({ params }: { params: { id: string } }) {
   console.log("Page render");
@@ -86,6 +88,8 @@ export default function Page({ params }: { params: { id: string } }) {
 
   const user = USERS.find(user => user.account === item.account);
 
+  if (!user) return <div>404 User Not Found</div>
+
   return (
     <div className="grow flex flex-col items-center mt-10 text-sm">
       <main className="flex max-w-[850px] h-[600px] pb-10">
@@ -98,13 +102,15 @@ export default function Page({ params }: { params: { id: string } }) {
         />
         <section className="w-[355px] flex flex-col border border-gray-800 shrink-0">
           <div className="px-4 border-b border-gray-500">
-            <PostHeader account={item.account} date={item.date} />
+            <PostHeader user={user} date={item.date} />
           </div>
-          <div className="flex gap-1 p-4">
-            <ProfileIcon />
+          <div className="flex gap-2 p-4 pb-1">
+            <Image src={user.profilePicture} alt="profile picture" width={50} height={50} className="w-6 h-6 rounded-full"/>
             <article>
-              <div>
-                <span>{item.account}</span>
+              <div className="flex gap-1 items-center">
+                <span>{user.account}</span>
+                {user.verified && <VerifiedIcon className="w-3 h-3"/>}
+                <span className="text-[#a8a8a8]">{getShortenedRelative(item.date)}</span>
               </div>
               <p>{item.description}</p>
             </article>
