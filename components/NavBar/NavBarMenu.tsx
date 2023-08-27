@@ -7,6 +7,7 @@ import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/utils/cn";
 import { useGlobalStore } from "@/utils/zustand";
+import { Switch } from "../ui/switch";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,7 +15,10 @@ type NavBarMenuProps = {
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   const [showDarkMode, setShowDarkMode] = useState(false);
-  const [darkMode, toggleDarkMode] = useGlobalStore(state => [state.darkMode, state.toggleDarkMode])
+  const [darkMode, toggleDarkMode] = useGlobalStore((state) => [
+    state.darkMode,
+    state.toggleDarkMode,
+  ]);
   const menuRef = useRef<HTMLDivElement>(null);
   const mainMenuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -30,7 +34,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   }, [menuRef, setShowMenu]);
 
   useEffect(() => {
-    const html = document.querySelector('html');
+    const html = document.querySelector("html");
     if (darkMode) html!.classList.add("dark");
     else html!.classList.remove("dark");
   }, [darkMode]);
@@ -64,11 +68,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           <span>Keyboard shortcuts</span>
         </Button>
         <Button onClick={() => setShowDarkMode(true)}>
-          {darkMode ? (
-            <DarkModeIcon className="w-4 h-4" />
-          ) : (
-            <LightModeIcon />
-          )}
+          {darkMode ? <DarkModeIcon className="w-4 h-4" /> : <LightModeIcon />}
           <span>Switch appearance</span>
         </Button>
         <Button className="cursor-default line-through">
@@ -89,7 +89,6 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           "translate-x-[100%] invisible opacity-0 w-full top-0 left-0 absolute rounded-2xl transition",
           `${showDarkMode && "translate-x-0 visible opacity-100"}`
         )}
-        onClick={() => console.log("hi")}
       >
         <div className="flex items-center justify-between border-b p-4 border-[#555555]">
           <div className="flex gap-2">
@@ -115,12 +114,13 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           />
         </div>
         <div className="p-2 text-sm">
-          <div className="flex justify-between items-center p-4 dark:hover:bg-gray-600/30 hover:bg-gray-200 rounded-lg transition">
+          <button
+            onClick={toggleDarkMode}
+            className="flex w-full justify-between items-center p-4 dark:hover:bg-gray-600/30 hover:bg-gray-200 rounded-lg transition"
+          >
             <span>Dark mode</span>
-            <button onClick={toggleDarkMode} className={cn("flex w-8 dark:bg-blue-500 bg-gray-400 rounded-lg px-1")}>
-              <div className={cn("p-2 bg-white drop-shadow-around rounded-full transition-transform", darkMode && "translate-x-[60%]")}/>
-            </button>
-          </div>
+            <Switch checked={darkMode}/>
+          </button>
         </div>
       </div>
     </div>
