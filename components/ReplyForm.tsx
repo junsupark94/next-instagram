@@ -1,5 +1,5 @@
-import useAutoSizeTextArea from "@/util/autoSizeTextArea";
-import { cn } from "@/util/cn";
+import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
+import { cn } from "@/utils/cn";
 import React, { KeyboardEventHandler } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
 

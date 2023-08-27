@@ -1,5 +1,5 @@
 import ProfileIcon from "@/Icons/ProfileIcon";
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

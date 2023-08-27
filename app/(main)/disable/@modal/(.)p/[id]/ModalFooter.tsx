@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { cn } from "@/util/cn";
-import useAutoSizeTextArea from "@/util/autoSizeTextArea";
+import { cn } from "@/utils/cn";
+import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 import PostIcons from "@/components/PostIcons";
-import { Reply, getReplyId } from "@/util/dummy-data-posts";
+import { Reply, getReplyId } from "@/utils/dummy-data-posts";
 
 type ModalFooterProps = {
   account: string;

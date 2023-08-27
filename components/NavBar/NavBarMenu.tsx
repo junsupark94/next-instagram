@@ -5,8 +5,8 @@ import BookmarkIcon from "@/Icons/BookmarkIcon";
 import ShortcutsIcon from "@/Icons/ShortcutsIcon";
 import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
-import { cn } from "@/util/cn";
-import { useGlobalStore } from "@/util/zustand";
+import { cn } from "@/utils/cn";
+import { useGlobalStore } from "@/utils/zustand";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;

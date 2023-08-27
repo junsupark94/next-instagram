@@ -1,10 +1,10 @@
-import { cn } from "@/util/cn";
+import { cn } from "@/utils/cn";
 import React, { useEffect, useRef, useState } from "react";
 import PlayIcon from "@/Icons/PlayIcon";
 import MutedIcon from "@/Icons/MutedIcon";
 import UnmutedIcon from "@/Icons/UnmutedIcon";
 
-import { useGlobalStore } from "@/util/zustand";
+import { useGlobalStore } from "@/utils/zustand";
 import { usePathname } from "next/navigation";
 
 type VideoPlayerProps = {

@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
-import { Reply } from "@/util/dummy-data-posts";
-import { getShortenedRelative } from "@/util/relative-time";
+import { Reply } from "@/utils/dummy-data-posts";
+import { getShortenedRelative } from "@/utils/relative-time";
 import Link from "next/link";
-import { convertText } from "@/util/truncateText";
+import { convertText } from "@/utils/truncateText";
 
 type ReplyItemProps = {
   reply: Reply;

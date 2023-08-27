@@ -253,8 +253,8 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: "more dummy posts",
     content: [
-      { src: "/test8.jpg", type: "image" },
-      { src: "/video6.mp4", type: "video" },
+      { src: "/test9.jpg", type: "image" },
+      { src: "/video5.mp4", type: "video" },
     ],
   },
   {
@@ -265,8 +265,8 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: "it's ethel cain baby",
     content: [
-      { src: "/video6.mp4", type: "video" },
-      { src: "/test8.jpg", type: "image" },
+      { src: "/test10.jpg", type: "image" },
+      { src: "/video7.mp4", type: "video" },
     ],
   },
 ];

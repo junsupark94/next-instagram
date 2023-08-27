@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { Post, Reply, getReplyId } from "@/util/dummy-data-posts";
+import { Post, Reply, getReplyId } from "@/utils/dummy-data-posts";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
 import Link from "next/link";
-import { cn } from "@/util/cn";
-import useAutoSizeTextArea from "@/util/autoSizeTextArea";
+import { cn } from "@/utils/cn";
+import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
 import NewReply from "./NewReply";
-import { USERS } from "@/util/dummy-data-users";
+import { USERS } from "@/utils/dummy-data-users";
 
 type FeedItemProps = {
   item: Post;

@@ -1,5 +1,5 @@
-import { Reply } from "@/util/dummy-data-posts";
-import truncateText from "@/util/truncateText";
+import { Reply } from "@/utils/dummy-data-posts";
+import truncateText from "@/utils/truncateText";
 import React, { useMemo, useState } from "react";
 
 type NewReplyProps = {

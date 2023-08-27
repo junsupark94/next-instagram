@@ -8,7 +8,7 @@ import SuggestedProfileIcon from "@/Icons/SuggestedProfileIcon";
 import TaggedIcon from "@/Icons/TaggedIcon";
 import VerifiedIcon from "@/Icons/VerifiedIcon";
 import MorePosts from "@/components/MorePosts";
-import { USERS } from "@/util/dummy-data-users";
+import { USERS } from "@/utils/dummy-data-users";
 import Image from "next/image";
 import { useState } from "react";
 import {

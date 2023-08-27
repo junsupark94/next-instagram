@@ -1,10 +1,10 @@
 "use client";
 import ModalFooter from "./ModalFooter";
-import useClickOutside from "@/util/useClickOutside";
+import useClickOutside from "@/utils/useClickOutside";
 import { useRouter } from "next/navigation";
 import PostHeader from "./PostHeader";
 import PostDescription from "./PostDescription";
-import ExitIcon from "@/components/Icons/ExitIcon";
+import ExitIcon from "@/Icons/ExitIcon";
 import CommentItem from "@/components/ReplyItem";
 
 export default function Page({ params }) {

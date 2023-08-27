@@ -1,7 +1,7 @@
 "use client";
 import FeedItem from "@/components/Feed/FeedItem";
-import { cn } from "@/util/cn";
-import { DUMMY_DATA } from "@/util/dummy-data-posts";
+import { cn } from "@/utils/cn";
+import { DUMMY_DATA } from "@/utils/dummy-data-posts";
 import React, { useEffect, useRef, useState } from "react";
 
 type PageProps = {};

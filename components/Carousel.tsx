@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { Media } from "@/util/dummy-data-posts";
+import { Media } from "@/utils/dummy-data-posts";
 import Image from "next/image";
 import React, {
   useCallback,
@@ -11,8 +11,8 @@ import React, {
 } from "react";
 import HeartIcon from "@/Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
-import { cn } from "@/util/cn";
-import createDoubleClick from "@/util/double-click";
+import { cn } from "@/utils/cn";
+import createDoubleClick from "@/utils/double-click";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type CarouselProps = {

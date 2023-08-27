@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DUMMY_DATA, Post } from "@/util/dummy-data-posts";
+import { DUMMY_DATA, Post } from "@/utils/dummy-data-posts";
 import VideoIcon from "@/Icons/VideoIcon";
 import CarouselIcon from "@/Icons/CarouselIcon";
-import { USERS, User } from "@/util/dummy-data-users";
+import { USERS, User } from "@/utils/dummy-data-users";
 import PinnedIcon from "@/Icons/PinnedIcon";
 
 type MorePostsProps = {
@@ -40,7 +40,7 @@ const MorePosts: React.FC<MorePostsProps> = ({
       (a, b) => b.date.valueOf() - a.date.valueOf()
     );
     return [...pinnedPosts, ...otherPostsSorted];
-  }, [user.account, user.pinned]);
+  }, [user.account, user.pinned, exclude]);
 
   const displayPosts = sortedUserPosts.slice(startIndex, endIndex);
 

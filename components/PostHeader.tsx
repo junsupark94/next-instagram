@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import OptionsIcon from "@/Icons/OptionsIcon";
 import Link from "next/link";
 import HoverDialog from "./HoverDialog";
-import ProfileIcon from "@/Icons/ProfileIcon";
-import { User } from "@/util/dummy-data-users";
+import { User } from "@/utils/dummy-data-users";
 import Image from "next/image";
+import { createPortal } from "react-dom";
+import UnfollowDialog from "./UnfollowDialog";
 
 type PostHeaderProps = {
   user: User;
@@ -13,6 +14,9 @@ type PostHeaderProps = {
 
 const PostHeader: React.FC<PostHeaderProps> = ({ user, date }) => {
   console.log("PostHeader render");
+  const [following, setFollowing] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+
   return (
     <header className="flex justify-between items-center xs:py-2">
       <div className="flex gap-2 items-center">
@@ -39,9 +43,27 @@ const PostHeader: React.FC<PostHeaderProps> = ({ user, date }) => {
             </HoverDialog>
             {}
             <span>{` • `}</span>
-            <button className="text-[#0095f6] hover:text-[#e0f1ff] font-semibold">
-              Follow
-            </button>
+            {!following && (
+              <button
+                className="text-[#0095f6] hover:text-[#e0f1ff] font-semibold"
+                onClick={() => setFollowing(true)}
+              >
+                Follow
+              </button>
+            )}
+            {following && (
+              <button
+                className="text-[#FAFAFA] hover:opacity-50 font-semibold"
+                onClick={() => setShowDialog(true)}
+              >
+                Following
+              </button>
+            )}
+            {showDialog &&
+              createPortal(
+                <UnfollowDialog setFollowing={setFollowing} setShowDialog={setShowDialog} user={user}/>,
+                document.body
+              )}
           </div>
           <div className="text-[12px]">Location or Original Audio</div>
         </div>
