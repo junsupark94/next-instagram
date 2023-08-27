@@ -7,6 +7,7 @@ export type User = {
   name?: string;
   profilePicture: string;
   bio: string;
+  location?: string;
   postCount: number;
   followerCount: number;
   followingCount: number;
@@ -34,7 +35,8 @@ export const USERS : User[] = [
     followingCount: 2,
     verified: true,
     pinned: [5],
-    date: new Date(2019, 5, 15)
+    date: new Date(2019, 5, 15),
+    location: "United States"
   },
   {
     account: 'bobsmith',

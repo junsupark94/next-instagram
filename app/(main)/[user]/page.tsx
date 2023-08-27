@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import FollowDialog from "@/components/FollowDialog";
+import UserDialog from "@/components/UserDialog";
 
 export default function ProfilePage({ params }: { params: { user: string } }) {
   const [startIndex, setStartIndex] = useState(0);
@@ -42,7 +43,7 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
         </div>
         <section className="grow-[2] flex flex-col">
           <div className="flex gap-2 items-center">
-            <h1>{user.name}</h1>
+            <UserDialog user={user}/>
             {user.verified && (
               <TooltipProvider>
                 <Tooltip>
@@ -62,24 +63,6 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
                 Follow
               </button>
             )}
-            {/* {following && (
-              <button className="ml-5 px-5 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm flex gap-2 items-center" onClick={() => setShowFollowDialog(true)}>
-                Following
-                <svg
-                  aria-label="Down chevron icon"
-                  className="rotate-180"
-                  color="rgb(0, 0, 0)"
-                  fill="rgb(0, 0, 0)"
-                  height="12"
-                  role="img"
-                  viewBox="0 0 24 24"
-                  width="12"
-                >
-                  <title>Down chevron icon</title>
-                  <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
-                </svg>
-              </button>
-            )} */}
             {following && <FollowDialog user={user} setFollowing={setFollowing} setShowFollowDialog={setShowFollowDialog} />}
             <button className="px-4 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm">
               Message
