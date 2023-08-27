@@ -16,11 +16,14 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/UI/tooltip";
+} from "@/components/ui/tooltip";
+import FollowDialog from "@/components/FollowDialog";
 
 export default function ProfilePage({ params }: { params: { user: string } }) {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(27);
+  const [following, setFollowing] = useState(false);
+  const [showFollowDialog, setShowFollowDialog] = useState(false);
 
   const user = USERS.find((user) => user.account === params.user);
   if (!user) return <div>Error could not find user: {params.user}</div>;
@@ -51,9 +54,33 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
               </TooltipProvider>
             )}
 
-            <button className="ml-5 px-5 py-1.5 font-semibold bg-[#0095f6] rounded-lg text-sm">
-              Follow
-            </button>
+            {!following && (
+              <button
+                onClick={() => setFollowing(true)}
+                className="ml-5 px-5 py-1.5 font-semibold bg-[#0095f6] rounded-lg text-sm"
+              >
+                Follow
+              </button>
+            )}
+            {/* {following && (
+              <button className="ml-5 px-5 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm flex gap-2 items-center" onClick={() => setShowFollowDialog(true)}>
+                Following
+                <svg
+                  aria-label="Down chevron icon"
+                  className="rotate-180"
+                  color="rgb(0, 0, 0)"
+                  fill="rgb(0, 0, 0)"
+                  height="12"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  width="12"
+                >
+                  <title>Down chevron icon</title>
+                  <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
+                </svg>
+              </button>
+            )} */}
+            {following && <FollowDialog user={user} setFollowing={setFollowing} setShowFollowDialog={setShowFollowDialog} />}
             <button className="px-4 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm">
               Message
             </button>
@@ -88,17 +115,17 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
           <PostsIcon />
           <span>POSTS</span>
         </button>
-        <button className="flex h-12 items-center gap-2 text-[#a8a8a8]">
+        <button className="flex h-12 items-center gap-2 text-[#a8a8a8] cursor-default">
           <ReelsIcon className="w-3 h-3" />
-          <span>REELS</span>
+          <span className="line-through">REELS</span>
         </button>
-        <button className="flex h-12 items-center gap-2 text-[#a8a8a8]">
+        <button className="flex h-12 items-center gap-2 text-[#a8a8a8] cursor-default">
           <GuidesIcon />
-          <span>GUIDES</span>
+          <span className="line-through">GUIDES</span>
         </button>
-        <button className="flex h-12 items-center gap-2 text-[#a8a8a8]">
+        <button className="flex h-12 items-center gap-2 text-[#a8a8a8] cursor-default">
           <TaggedIcon />
-          <span>TAGGED</span>
+          <span className="line-through">TAGGED</span>
         </button>
       </section>
       <MorePosts user={user} startIndex={startIndex} endIndex={endIndex} />
