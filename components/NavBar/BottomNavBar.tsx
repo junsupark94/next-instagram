@@ -1,10 +1,10 @@
 import React from "react";
-import HomeIcon from "../Icons/HomeIcon";
-import MessengerIcon from "../Icons/MessengerIcon";
-import ProfileIcon from "../Icons/ProfileIcon";
-import ExploreIcon from "../Icons/ExploreIcon";
-import ReelsIcon from "../Icons/ReelsIcon";
-import PostIcon from "../Icons/CreateIcon";
+import HomeIcon from "@/Icons/HomeIcon";
+import MessengerIcon from "@/Icons/MessengerIcon";
+import ProfileIcon from "@/Icons/ProfileIcon";
+import ExploreIcon from "@/Icons/ExploreIcon";
+import ReelsIcon from "@/Icons/ReelsIcon";
+import PostIcon from "@/Icons/CreateIcon";
 
 type Props = {};
 

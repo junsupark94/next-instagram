@@ -1,6 +1,6 @@
 "use client";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
-import SearchIcon from "./Icons/SearchIcon";
+import SearchIcon from "@/Icons/SearchIcon";
 
 type SearchBarProps = {
   className?: string;

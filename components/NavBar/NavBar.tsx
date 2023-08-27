@@ -21,7 +21,7 @@ const NavBar: React.FC<NavBarProps> = () => {
       <section className="w-full">
         <Link href="/">
           <div className="mt-4 p-3 lg:hidden dark:hover:bg-hover hover:bg-gray-100 transition rounded-lg group">
-            <InstagramIcon className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            <InstagramIcon className="w-6 h-6 group-hover:scale-110 transition-transform group-active:scale-100" />
           </div>
           <div className="hidden lg:block pt-8 px-3">
             <InstagramLogo />
@@ -30,9 +30,9 @@ const NavBar: React.FC<NavBarProps> = () => {
         <article className="flex flex-col gap-2 mt-8">
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
           >
-            <div className="group-hover:scale-110 transition-transform">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <HomeIcon />
             </div>
             <span className="font-bold hidden lg:inline">
@@ -41,55 +41,55 @@ const NavBar: React.FC<NavBarProps> = () => {
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
           >
-            <SearchIcon className="group-hover:scale-110 transition-transform" />
+            <SearchIcon className="group-hover:scale-110 transition-transform group-active:scale-100" />
             <span className="hidden lg:inline line-through">Search</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
           >
-            <div className="group-hover:scale-110 transition-transform">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <ExploreIcon />
             </div>
             <span className="hidden lg:inline line-through">Explore</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
           >
-            <div className="group-hover:scale-110 transition-transform">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <ReelsIcon />
             </div>
             <span className="hidden lg:inline line-through">Reels</span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
           >
-            <div className="group-hover:scale-110 transition-transform">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <MessengerIcon />
             </div>
             <span className="hidden lg:inline">Messages</span>
           </Link>
-          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group cursor-default">
-            <div className="group-hover:scale-110 transition-transform">
+          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <HeartIcon />
             </div>
             <span className="hidden lg:inline line-through">Notifications</span>
           </button>
-          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group">
-            <div className="group-hover:scale-110 transition-transform">
+          <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <PostIcon />
             </div>
             <span className="hidden lg:inline">Create</span>
           </button>
           <Link
             href="/"
-            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group"
+            className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
           >
-            <div className="group-hover:scale-110 transition-transform">
+            <div className="group-hover:scale-110 transition-transform group-active:scale-100">
               <ProfileIcon />
             </div>
             <span className="hidden lg:inline">Profile</span>

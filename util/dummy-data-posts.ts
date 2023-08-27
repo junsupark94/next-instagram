@@ -234,7 +234,7 @@ export const DUMMY_DATA: Post[] = [
     ],
   },
   {
-    account: "charlixcx",
+    account: "junsupark",
     id: postId++,
     date: new Date(2023, 7, day++),
     likes: 129,
@@ -258,7 +258,7 @@ export const DUMMY_DATA: Post[] = [
     ],
   },
   {
-    account: "ethelcain",
+    account: "junsupark",
     id: postId++,
     date: new Date(2023, 7, day++),
     likes: 129,

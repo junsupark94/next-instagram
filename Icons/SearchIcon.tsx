@@ -23,4 +23,4 @@ const SearchIcon: React.FC<SearchIconProps> = ({className}) => {
     </svg>
   );
 };
-export default SearchIcon;
+export default React.memo(SearchIcon);

@@ -1,6 +1,6 @@
 import ProfileIcon from "@/Icons/ProfileIcon";
 import { cn } from "@/util/cn";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MessengerIcon from "@/Icons/MessengerIcon";
@@ -28,6 +28,9 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
       dialogRef.current!.style.display = "none";
     }, 600);
   };
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, [])
 
   return (
     <div

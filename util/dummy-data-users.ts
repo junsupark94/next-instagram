@@ -33,7 +33,7 @@ export const USERS : User[] = [
     followerCount: 2,
     followingCount: 2,
     verified: true,
-    pinned: [1],
+    pinned: [5],
     date: new Date(2019, 5, 15)
   },
   {
@@ -51,7 +51,7 @@ export const USERS : User[] = [
   {
     account: 'notjunsupark',
     id: id(),
-    profilePicture: 'taylorswift.jpeg',
+    profilePicture: '/taylorswift.jpeg',
     bio: `cat lady`,
     postCount: 2,
     followerCount: 9992312,

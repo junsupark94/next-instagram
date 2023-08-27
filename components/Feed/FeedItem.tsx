@@ -9,6 +9,7 @@ import useAutoSizeTextArea from "@/util/autoSizeTextArea";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";
 import NewReply from "./NewReply";
+import { USERS } from "@/util/dummy-data-users";
 
 type FeedItemProps = {
   item: Post;
@@ -39,9 +40,13 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
 
   }
 
+  const user = USERS.find(user => user.account === item.account)
+
+  if (!user) return <div>Error unable to find user</div>
+
   return (
     <div className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
-      <PostHeader account={item.account} date={item.date} />
+      <PostHeader user={user} date={item.date} />
       <Carousel
         content={item.content}
         setLiked={setLiked}

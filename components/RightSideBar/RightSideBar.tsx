@@ -1,7 +1,7 @@
 import React from "react";
 import FollowSuggestion from "./FollowSuggestion";
 import Footer from "./Footer";
-import ProfileIcon from "../Icons/ProfileIcon";
+import ProfileIcon from "@/Icons/ProfileIcon";
 
 type RightSideBarProps = {};
 
