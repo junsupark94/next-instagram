@@ -12,8 +12,8 @@ type MorePostsProps = {
   startIndex?: number;
   endIndex?: number;
   exclude?: string;
-  setStartIndex: Dispatch<SetStateAction<number>>;
-  setEndIndex: Dispatch<SetStateAction<number>>;
+  setStartIndex?: Dispatch<SetStateAction<number>>;
+  setEndIndex?: Dispatch<SetStateAction<number>>;
 };
 
 const MorePosts: React.FC<MorePostsProps> = ({
@@ -48,6 +48,7 @@ const MorePosts: React.FC<MorePostsProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!setStartIndex || !setEndIndex) return;
     const scrollHandler = () => {
       const foo = containerRef.current!.getBoundingClientRect();
       if (foo.y <= -1515) {

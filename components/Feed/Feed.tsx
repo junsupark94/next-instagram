@@ -2,6 +2,7 @@
 import { DUMMY_DATA } from "@/utils/dummy-data-posts";
 import FeedItem from "./FeedItem";
 import { useEffect, useRef, useState } from "react";
+import { useGlobalStore } from "@/utils/zustand";
 
 type FeedProps = {};
 
@@ -71,7 +72,7 @@ function videoScroll() {
   }
 }
 
-const width = 5
+const width = 5;
 
 const Feed: React.FC<FeedProps> = () => {
   const [startIndex, setStartIndex] = useState(0);

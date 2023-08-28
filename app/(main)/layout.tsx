@@ -18,7 +18,7 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${inter.className} dark:bg-black dark:text-white`}>
         <div className="flex-col flex sm:flex-row items-center">
           <NavBar />

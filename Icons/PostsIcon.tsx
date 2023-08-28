@@ -9,8 +9,8 @@ const PostsIcon: React.FC<PostsIconProps> = ({ className }) => {
     <svg
       aria-label=""
       className={className}
-      color="rgb(245, 245, 245)"
-      fill="rgb(245, 245, 245)"
+      color="currentColor"
+      fill="currentColor"
       height="12"
       role="img"
       viewBox="0 0 24 24"

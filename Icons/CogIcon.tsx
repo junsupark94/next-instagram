@@ -5,7 +5,7 @@ type CogIconProps = {
   className?: string;
 };
 
-const CogIcon: React.FC<CogIconProps> = ({ className }) => {
+const CogIcon: React.FC<CogIconProps> = ({ className = "w-6 h-6" }) => {
   return (
     <svg
       aria-label="Settings"

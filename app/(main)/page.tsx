@@ -27,9 +27,6 @@ export default function Home() {
         </div>
         <RightSideBar />
       </section>
-      <div className="sm:hidden fixed bottom-0 left-0 w-screen">
-        <BottomNavBar />
-      </div>
     </>
   );
 }

@@ -7,7 +7,6 @@ import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/utils/cn";
 import { useGlobalStore } from "@/utils/zustand";
-import { Switch } from "../ui/switch";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,12 +31,6 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
       document.removeEventListener("mousedown", clickOutside);
     };
   }, [menuRef, setShowMenu]);
-
-  useEffect(() => {
-    const html = document.querySelector("html");
-    if (darkMode) html!.classList.add("dark");
-    else html!.classList.remove("dark");
-  }, [darkMode]);
 
   return (
     <div
@@ -89,6 +82,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           "translate-x-[100%] invisible opacity-0 w-full top-0 left-0 absolute rounded-2xl transition",
           `${showDarkMode && "translate-x-0 visible opacity-100"}`
         )}
+        onClick={() => console.log("hi")}
       >
         <div className="flex items-center justify-between border-b p-4 border-[#555555]">
           <div className="flex gap-2">
@@ -119,7 +113,18 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
             className="flex w-full justify-between items-center p-4 dark:hover:bg-gray-600/30 hover:bg-gray-200 rounded-lg transition"
           >
             <span>Dark mode</span>
-            <Switch checked={darkMode}/>
+            <div
+              className={cn(
+                "flex w-8 dark:bg-blue-500 bg-gray-400 rounded-lg px-1"
+              )}
+            >
+              <div
+                className={cn(
+                  "p-2 bg-white drop-shadow-around rounded-full transition-transform",
+                  darkMode && "translate-x-[60%]"
+                )}
+              />
+            </div>
           </button>
         </div>
       </div>

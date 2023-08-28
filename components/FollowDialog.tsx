@@ -26,7 +26,7 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
   const [isFavorite, setIsFavorite] = useState(false);
   return (
     <Dialog>
-      <DialogTrigger className="ml-5 px-5 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm flex gap-2 items-center">
+      <DialogTrigger className="ml-5 px-5 py-1.5 font-semibold bg-[#efefef] dark:bg-[#363636] rounded-lg text-sm flex gap-2 items-center">
         Following
         <svg
           aria-label="Down chevron icon"
@@ -42,9 +42,9 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
           <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
         </svg>
       </DialogTrigger>
-      <DialogContent className="p-0 max-w-[400px] bg-[#262626]">
+      <DialogContent className="p-0 max-w-[400px] bg-white dark:bg-[#262626]">
         <DialogHeader>
-          <DialogTitle className="flex flex-col items-center text-sm gap-1 py-4">
+          <DialogTitle className="flex flex-col items-center text-sm gap-1 py-4 border">
             <Image
               src={user.profilePicture}
               alt="profile picture"
@@ -54,7 +54,7 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
             />
             <span>{user.account}</span>
           </DialogTitle>
-          <DialogDescription className="text-[#f5f5f5]">
+          <DialogDescription className="dark:text-[#f5f5f5] text-black">
             <button
               className="hover:bg-[#ffffff19] transition p-4 flex justify-between items-center w-full"
               onClick={() => setIsCloseFriend((prev) => !prev)}
@@ -64,7 +64,7 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
               </span>
               <span
                 className={cn(
-                  "rounded-full border border-white text-black w-5 h-5 flex items-center justify-center",
+                  "rounded-full border border-black dark:border-white text-black w-5 h-5 flex items-center justify-center",
                   isCloseFriend && "border-0 bg-[#1cd14f] text-white"
                 )}
               >
@@ -117,8 +117,8 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
               {!isFavorite && (
                 <svg
                   aria-label="Favorited"
-                  color="rgb(245, 245, 245)"
-                  fill="rgb(245, 245, 245)"
+                  color="currentColor"
+                  fill="currentColor"
                   height="20"
                   role="img"
                   viewBox="0 0 24 24"

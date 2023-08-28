@@ -53,7 +53,7 @@ export const USERS : User[] = [
   {
     account: 'notjunsupark',
     id: id(),
-    profilePicture: '/taylorswift.jpeg',
+    profilePicture: '/taylorswift.jpg',
     bio: `cat lady`,
     postCount: 2,
     followerCount: 9992312,
