@@ -31,9 +31,17 @@ export type Post = {
   pinned?: boolean;
 };
 
+function getRandomInt(min: number = 0, max: number = 2000000) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
 
 let postId = 1;
 let replyId = 1;
+
+let postNumber = 1;
 
 export function getReplyId() {
   return replyId++;
@@ -269,4 +277,1107 @@ export const DUMMY_DATA: Post[] = [
       { src: "/video7.mp4", type: "video" },
     ],
   },
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 1),
+    likes: 123,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 2),
+    likes: 345,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 3),
+    likes: 99,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 4),
+    likes: 1032,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 5),
+    likes: 1032,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 6),
+    likes: 12,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 7),
+    likes: 12,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 8),
+    likes: 9123,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 9),
+    likes: 84232,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 10),
+    likes: 1300230,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 11),
+    likes: 1300230,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 12),
+    likes: 57,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 13),
+    likes: 57,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 14),
+    likes: 537,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 15),
+    likes: 198,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 16),
+    likes: 198,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 17),
+    likes: 32,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 18),
+    likes: 1,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 19),
+    likes: 38,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 20),
+    likes: 38,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 21),
+    likes: 55,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 22),
+    likes: 988,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 23),
+    likes: 230,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 24),
+    likes: 441,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 25),
+    likes: 33,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 26),
+    likes: 7421,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 27),
+    likes: 7421,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 28),
+    likes: 23,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 29),
+    likes: 500,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 1, 30),
+    likes: 321,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 1),
+    likes: 3,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 2),
+    likes: 2,
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 3),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 4),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 5),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 6),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 7),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 8),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 9),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 10),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 11),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 12),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 13),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 14),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 15),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 16),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 17),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 18),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 19),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 20),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 21),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 22),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 23),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 24),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 25),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 26),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 27),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 2, 28),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 1),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 2),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 3),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 3),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 4),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 5),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 6),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 7),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 8),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 9),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 10),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 11),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 12),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 13),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 14),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 15),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 16),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 17),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 18),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 19),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 20),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 21),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 22),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 23),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 24),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 25),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 26),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 27),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 28),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 29),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 3, 30),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 1),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 2),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 3),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 4),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 5),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 6),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 7),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 8),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 9),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 10),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+  {
+    account: "junsupark",
+    id: postId++,
+    date: new Date(2022, 4, 11),
+    likes: getRandomInt(),
+    replies: [],
+    description: `post${postNumber}.jpg`,
+    content: [
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+    ]
+  },
+
 ];
