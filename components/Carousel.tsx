@@ -52,10 +52,10 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [img_index]);
 
   const scrollHandler: React.UIEventHandler<HTMLElement> = useCallback((e) => {
-    const containerWidth =
-      containerRef.current?.getBoundingClientRect().width! - 2;
+    const containerWidth = e.currentTarget.getBoundingClientRect().width! - 2;
     const scrollLeft = e.currentTarget.scrollLeft;
     const newIndex = scrollLeft / containerWidth;
+    console.log('containerWidth', containerWidth, 'scrollLeft', scrollLeft, 'newIndex', newIndex)
 
     if (newIndex % 1 !== 0) return;
     setIndex(newIndex);

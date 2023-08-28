@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { KeyboardEventHandler, useState } from "react";
 import { Post, Reply, getReplyId } from "@/utils/dummy-data-posts";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
@@ -18,7 +18,8 @@ type FeedItemProps = {
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   const [liked, setLiked] = useState(false);
-  const { value, setValue, textAreaRef } = useAutoSizeTextArea();
+  const textAreaRef = useAutoSizeTextArea();
+  const [value, setValue] = useState("");
   const [newReplies, setNewReplies] = useState<Reply[]>([]);
 
   const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -36,9 +37,15 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
     setNewReplies(prev => [...prev, newReply])
     setValue('');
   }
-  const foo : React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-
-  }
+  const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
+    console.log(e.key, e.shiftKey);
+    if (e.key !== "Enter") return;
+    if (e.shiftKey) {
+      return;
+    } else {
+      submitHandler(e);
+    }
+  };
 
   const user = USERS.find(user => user.account === item.account)
 
@@ -46,7 +53,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
 
   return (
     <div className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
-      <PostHeader user={user} date={item.date} />
+      <PostHeader user={user} />
       <Carousel
         content={item.content}
         setLiked={setLiked}
@@ -62,7 +69,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
           View all {item.replies.length} comments
         </Link>
         {newReplies.map((reply, i) => <NewReply key={i} reply={reply}/>)}
-        <form className="relative" onSubmit={submitHandler}>
+        <form className="relative" onSubmit={submitHandler} onKeyDown={enterKeyDown}>
           <article className="flex grow gap-1">
             <textarea
               className="dark:bg-black dark:text-white resize-none outline-none grow"
@@ -70,7 +77,6 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
               ref={textAreaRef}
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              onKeyDown={foo}
             />
             <div className="flex gap-2">
               <button

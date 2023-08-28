@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
 import { Reply } from "@/utils/dummy-data-posts";
 import { getShortenedRelative } from "@/utils/relative-time";
@@ -8,17 +8,17 @@ import { convertText } from "@/utils/truncateText";
 
 type ReplyItemProps = {
   reply: Reply;
+  textAreaRef: RefObject<HTMLTextAreaElement>;
 };
 
-const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
+const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
   console.log("ReplyItem render");
   const [showReplies, setShowReplies] = useState(false);
 
   const replyHandler = () => {
-    const textarea = document.querySelector("textarea");
-    textarea!.setAttribute("data-reply", String(reply.id));
-    textarea!.value = `@${reply.account} `;
-    textarea!.focus();
+    textAreaRef.current!.setAttribute("data-reply", String(reply.id));
+    textAreaRef.current!.value = `@${reply.account} `;
+    textAreaRef.current!.focus();
   };
 
   const showMoreButton =
@@ -37,19 +37,21 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
 
   return (
     <article>
-      <div className="flex gap-2 font-semibold text-sm">
+      <div className="flex gap-2 text-sm">
         <ProfileIcon />
         <div>
           <div className="pb-2">
             <div className="flex gap-2">
-              <h1>
+              <h1 className="font-semibold ">
                 <Link href={`/${reply.account}`}>{reply.account}</Link>
               </h1>{" "}
               <span className="text-gray-400 font-normal">
                 {getShortenedRelative(reply.date)}
               </span>
             </div>
-            <p className="font-normal whitespace-pre-wrap">{convertText(reply.text)}</p>
+            <p className="font-normal whitespace-pre-wrap">
+              {convertText(reply.text)}
+            </p>
           </div>
           <div className="flex gap-2 text-xs text-gray-400 pb-3">
             {reply.likes > 0 && (
@@ -69,6 +71,7 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply }) => {
                 id={reply.id}
                 account={reply.account}
                 threadItem={threadItem}
+                textAreaRef={textAreaRef}
               />
             ))}
         </div>
@@ -83,18 +86,19 @@ function ThreadItem({
   threadItem,
   id,
   account,
+  textAreaRef,
 }: {
   threadItem: any;
   id: number;
   account: string;
+  textAreaRef: RefObject<HTMLTextAreaElement>;
 }) {
   console.log("ThreadItem render");
 
   const replyHandler = () => {
-    const textarea = document.querySelector("textarea");
-    textarea!.setAttribute("data-reply", String(id));
-    textarea!.value = `@${account} `;
-    textarea!.focus();
+    textAreaRef.current!.setAttribute("data-reply", String(id));
+    textAreaRef.current!.value = `@${account} `;
+    textAreaRef.current!.focus();
   };
 
   return (
@@ -104,7 +108,7 @@ function ThreadItem({
         <div>
           <div className="pb-2">
             <div className="flex gap-2">
-              <h1>
+              <h1 className="font-semibold">
                 <Link href={`/${threadItem.account}`}>
                   {threadItem.account}
                 </Link>

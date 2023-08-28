@@ -11,7 +11,6 @@ export default function useAutoSizeTextArea(props?: Props) {
   props.maxHeight = props.maxHeight || 80;
   const { minHeight, maxHeight } = props;
 
-  const [value, setValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (textAreaRef.current) {
@@ -22,7 +21,7 @@ export default function useAutoSizeTextArea(props?: Props) {
       );
       textAreaRef.current.style.height = scrollHeight + "px";
     }
-  }, [textAreaRef, value, minHeight, maxHeight]);
+  }, [textAreaRef, minHeight, maxHeight]);
 
-  return { value, setValue, textAreaRef };
+  return textAreaRef;
 }

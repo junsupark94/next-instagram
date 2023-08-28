@@ -1,12 +1,10 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   DUMMY_DATA,
   Reply,
-  ThreadItem,
-  getReplyId,
 } from "@/utils/dummy-data-posts";
 import { getRelativeTimeString } from "@/utils/relative-time";
 import Carousel from "@/components/Carousel";
@@ -28,9 +26,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [liked, setLiked] = useState(false);
 
   if (!post) return <div>404 Post Not Found</div>;
-
   const user = USERS.find((user) => user.account === post.account);
-
   if (!user) return <div>404 User Not Found</div>;
 
   return (

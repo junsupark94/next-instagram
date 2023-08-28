@@ -9,8 +9,8 @@ type HoverDialogProps = {
   children: JSX.Element;
 };
 
-let timer: NodeJS.Timer;
 const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
+  let timer: NodeJS.Timer;
   const dialogRef = useRef<HTMLDivElement>(null);
   const mouseEnterHandler: React.MouseEventHandler<HTMLDivElement> = () => {
     clearTimeout(timer);

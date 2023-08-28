@@ -4,7 +4,7 @@ type ExitIconProps = {
   className?: string;
 };
 
-const ExitIcon: React.FC<ExitIconProps> = ({ className }) => {
+const ExitIcon: React.FC<ExitIconProps> = ({ className = "w-4 h-4" }) => {
   return (
     <svg
       aria-label="Close"
