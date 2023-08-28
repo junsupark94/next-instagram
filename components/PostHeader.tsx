@@ -6,19 +6,23 @@ import { User } from "@/utils/dummy-data-users";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import UnfollowDialog from "./UnfollowDialog";
+import { Post } from "@/utils/dummy-data-posts";
+import VerifiedIcon from "@/Icons/VerifiedIcon";
+import { cn } from "@/utils/cn";
 
 type PostHeaderProps = {
   user: User;
-  date: Date;
+  location?: string;
+  className?: string;
 };
 
-const PostHeader: React.FC<PostHeaderProps> = ({ user, date }) => {
+const PostHeader: React.FC<PostHeaderProps> = ({ user, location, className }) => {
   console.log("PostHeader render");
   const [following, setFollowing] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
   return (
-    <header className="flex justify-between items-center xs:py-2">
+    <header className={cn("flex justify-between items-center xs:py-2 px-4 border-b dark:border-gray-800 border-[#dbdbdb]", className)}>
       <div className="flex gap-2 items-center">
         <HoverDialog>
           <Link href={`/${user.account}`}>
@@ -41,7 +45,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ user, date }) => {
                 {user.account}
               </Link>
             </HoverDialog>
-            {}
+            {user.verified && <VerifiedIcon className="w-3 h-3"/>}
             <span>{` • `}</span>
             {!following && (
               <button
@@ -65,7 +69,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ user, date }) => {
                 document.body
               )}
           </div>
-          <div className="text-[12px]">Location or Original Audio</div>
+          {location && <div className="text-[12px]">{location}</div>}
         </div>
       </div>
       <OptionsIcon />

@@ -6,7 +6,7 @@ import HomeIcon from "@/Icons/HomeIcon";
 import InstagramIcon from "@/Icons/InstagramIcon";
 import MessengerIcon from "@/Icons/MessengerIcon";
 import PostIcon from "@/Icons/CreateIcon";
-import ProfileIcon from "@/Icons/ProfileIcon";
+import Image from "next/image";
 import ReelsIcon from "@/Icons/ReelsIcon";
 import SearchIcon from "@/Icons/SearchIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
@@ -101,7 +101,7 @@ const NavBar: React.FC<NavBarProps> = () => {
               className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
             >
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
-                <ProfileIcon />
+                <Image  src="/junsu park.jpeg" alt="profile picture" width={30} height={30} className="rounded-full"/>
               </div>
               <span className="hidden lg:inline">Profile</span>
             </Link>

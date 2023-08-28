@@ -29,6 +29,8 @@ export type Post = {
   description: string;
   content: Media[];
   pinned?: boolean;
+  location?: string;
+  edited?: boolean;
 };
 
 function getRandomInt(min: number = 0, max: number = 2000000) {
@@ -55,6 +57,7 @@ export const DUMMY_DATA: Post[] = [
     id: postId++,
     date: new Date(2023, 4, day++),
     likes: 10,
+    location: "San Francisco, CA",
     replies: [
       {
         account: "bobsmith",

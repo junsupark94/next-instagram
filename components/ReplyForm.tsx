@@ -1,20 +1,19 @@
 import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 import { cn } from "@/utils/cn";
-import React, { KeyboardEventHandler } from "react";
+import React, { KeyboardEventHandler, useCallback } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
+import { Post, Reply, ThreadItem, getReplyId } from "@/utils/dummy-data-posts";
+import useReplySubmitHandler from "@/utils/useReplySubmitHandler";
 
 type ReplyFormProps = {
-  submitHandler: (
-    e: React.FormEvent<HTMLFormElement>,
-    value: string,
-    setValue: React.Dispatch<React.SetStateAction<string>>,
-    textAreaRef: React.RefObject<HTMLTextAreaElement>
-  ) => void;
+  setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
+  account: string;
 };
 
-const ReplyForm: React.FC<ReplyFormProps> = ({ submitHandler }) => {
+const ReplyForm: React.FC<ReplyFormProps> = ({ setReplies, account }) => {
   console.log("ReplyForm render");
   const { value, setValue, textAreaRef } = useAutoSizeTextArea();
+  const submitHandler = useReplySubmitHandler();
 
   const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
     console.log(e.key, e.shiftKey);
@@ -22,17 +21,14 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ submitHandler }) => {
     if (e.shiftKey) {
       return;
     } else {
-      submitHandler(e, value, setValue, textAreaRef);
+      submitHandler(e, value, setReplies, setValue, textAreaRef);
     }
-
   };
 
   return (
     <form
-      className="flex grow"
-      onSubmit={(e) => {
-        submitHandler(e, value, setValue, textAreaRef);
-      }}
+      className="flex p-4 py-2 gap-4 items-center"
+      onSubmit={(e) => submitHandler(e, value, setReplies, setValue, textAreaRef)}
       onKeyDown={enterKeyDown}
     >
       <ProfileIcon className="mr-2" />

@@ -1,0 +1,48 @@
+"use client";
+import useClickOutside from "@/utils/useClickOutside";
+import { useRouter } from "next/navigation";
+import ExitIcon from "@/Icons/ExitIcon";
+import PostHeader from "@/components/PostHeader";
+import {
+  DUMMY_DATA,
+  Reply,
+} from "@/utils/dummy-data-posts";
+import { USERS } from "@/utils/dummy-data-users";
+import PostDescription from "@/components/PostDescription";
+import ReplyItems from "@/components/ReplyItems";
+import PostIcons from "@/components/PostIcons";
+import ReplyForm from "@/components/ReplyForm";
+import { getRelativeTimeString } from "@/utils/relative-time";
+import { useState } from "react";
+
+export default function Page({ params }: { params: { id: string } }) {
+  const router = useRouter();
+  const modalRef = useClickOutside(() => router.back());
+  const [liked, setLiked] = useState(false);
+  const post = DUMMY_DATA.find((item) => item.id === Number(params.id));
+  const [replies, setReplies] = useState<Reply[]>(post!.replies);
+
+
+  if (!post) return <div>404 Unable to find post</div>;
+  const user = USERS.find((item) => item.account === post.account);
+  if (!user) return <div>404 Unable to find user</div>;
+
+  return (
+    <div className="flex w-[80%] h-[80%] dark:bg-black text-sm" ref={modalRef}>
+      <section className="grow max-w-[55vw] bg-green-500">Modal Page</section>
+      <section className="flex flex-col max-w-[500px] grow">
+        <PostHeader user={user} location={post.location} />
+        <PostDescription user={user} post={post} />
+        <ReplyItems replies={replies} />
+        <div className="px-4 py-2 border-t dark:border-gray-800 border-[#dbdbdb]">
+          <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
+          <span>{getRelativeTimeString(post.date)}</span>
+        </div>
+        <ReplyForm setReplies={setReplies} account={post.account} />
+      </section>
+      <button onClick={() => router.back()} className="absolute top-4 right-4">
+        <ExitIcon />
+      </button>
+    </div>
+  );
+}

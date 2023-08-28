@@ -1,7 +1,7 @@
 import React from "react";
 import HomeIcon from "@/Icons/HomeIcon";
 import MessengerIcon from "@/Icons/MessengerIcon";
-import ProfileIcon from "@/Icons/ProfileIcon";
+import Image from "next/image";
 import ExploreIcon from "@/Icons/ExploreIcon";
 import ReelsIcon from "@/Icons/ReelsIcon";
 import PostIcon from "@/Icons/CreateIcon";
@@ -17,7 +17,13 @@ export default function BottomNavBar({}: Props) {
         <ReelsIcon />
         <PostIcon />
         <MessengerIcon />
-        <ProfileIcon />
+        <Image
+          src="/junsu park.jpeg"
+          alt="profile picture"
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
       </div>
     </nav>
   );
