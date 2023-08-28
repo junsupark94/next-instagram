@@ -16,13 +16,11 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 type FollowDialogProps = {
   user: User;
   setFollowing: Dispatch<SetStateAction<boolean>>;
-  setShowFollowDialog: Dispatch<SetStateAction<boolean>>;
 };
 
 const FollowDialog: React.FC<FollowDialogProps> = ({
   user,
   setFollowing,
-  setShowFollowDialog,
 }) => {
   const [isCloseFriend, setIsCloseFriend] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -160,15 +158,14 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
                 <path d="M21 17.502a.997.997 0 0 1-.707-.293L12 8.913l-8.293 8.296a1 1 0 1 1-1.414-1.414l9-9.004a1.03 1.03 0 0 1 1.414 0l9 9.004A1 1 0 0 1 21 17.502Z"></path>
               </svg>
             </button>
-            <button
+            <Close
               className="hover:bg-[#ffffff19] transition p-4 flex w-full"
               onClick={() => {
                 setFollowing(false);
-                setShowFollowDialog(false);
               }}
             >
               Unfollow
-            </button>
+            </Close>
           </DialogDescription>
         </DialogHeader>
         <Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">

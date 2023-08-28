@@ -22,15 +22,14 @@ import UserDialog from "@/components/UserDialog";
 
 export default function ProfilePage({ params }: { params: { user: string } }) {
   const [startIndex, setStartIndex] = useState(0);
-  const [endIndex, setEndIndex] = useState(27);
+  const [endIndex, setEndIndex] = useState(36);
   const [following, setFollowing] = useState(false);
-  const [showFollowDialog, setShowFollowDialog] = useState(false);
 
   const user = USERS.find((user) => user.account === params.user);
   if (!user) return <div>Error could not find user: {params.user}</div>;
 
   return (
-    <div className="mx-auto max-w-[935px] grow border border-red-500 px-5 pt-8">
+    <div className="mx-auto max-w-[935px] grow px-5 pt-8">
       <header className="flex items-center justify-between pb-11">
         <div className="grow flex justify-center">
           <Image
@@ -63,7 +62,7 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
                 Follow
               </button>
             )}
-            {following && <FollowDialog user={user} setFollowing={setFollowing} setShowFollowDialog={setShowFollowDialog} />}
+            {following && <FollowDialog user={user} setFollowing={setFollowing}/>}
             <button className="px-4 py-1.5 font-semibold bg-[#363636] rounded-lg text-sm">
               Message
             </button>
@@ -111,7 +110,7 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
           <span className="line-through">TAGGED</span>
         </button>
       </section>
-      <MorePosts user={user} startIndex={startIndex} endIndex={endIndex} />
+      <MorePosts user={user} startIndex={startIndex} endIndex={endIndex} setStartIndex={setStartIndex} setEndIndex={setEndIndex}/>
     </div>
   );
 }
