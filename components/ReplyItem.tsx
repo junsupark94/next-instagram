@@ -42,24 +42,24 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
         <div>
           <div className="pb-2">
             <div className="flex gap-2">
-              <h1 className="font-semibold ">
+              <h1 className="font-semibold text-[#262626]">
                 <Link href={`/${reply.account}`}>{reply.account}</Link>
               </h1>{" "}
               <span className="text-gray-400 font-normal">
                 {getShortenedRelative(reply.date)}
               </span>
             </div>
-            <p className="font-normal whitespace-pre-wrap">
+            <p className="font-normal whitespace-pre-wrap ">
               {convertText(reply.text)}
             </p>
           </div>
           <div className="flex gap-2 text-xs text-gray-400 pb-3">
             {reply.likes > 0 && (
-              <span>
+              <span className="font-semibold text-[#737373]">
                 {reply.likes} like{reply.likes > 1 && "s"}
               </span>
             )}
-            <button className="text-blue-300" onClick={replyHandler}>
+            <button className="dark:text-blue-300 text-[#737373] font-semibold" onClick={replyHandler}>
               Reply
             </button>
           </div>
