@@ -1,8 +1,9 @@
 import { cn } from "@/utils/cn";
-import React, { KeyboardEventHandler, RefObject, useState } from "react";
+import React, { KeyboardEventHandler, RefObject, useCallback, useEffect, useState } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
 import { Reply} from "@/utils/dummy-data-posts";
 import useReplySubmitHandler from "@/utils/useReplySubmitHandler";
+import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 
 type ReplyFormProps = {
   setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
@@ -13,16 +14,16 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ setReplies, textAreaRef }) => {
   console.log("ReplyForm render");
   const [value, setValue] = useState("");
   const submitHandler = useReplySubmitHandler();
+  useAutoSizeTextArea(textAreaRef);
 
-  const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
-    console.log(e.key, e.shiftKey);
+  const enterKeyDown = useCallback((e: React.KeyboardEvent<HTMLFormElement>, value: string) => {
     if (e.key !== "Enter") return;
     if (e.shiftKey) {
       return;
     } else {
       submitHandler(e, value, setReplies, setValue, textAreaRef);
     }
-  };
+  }, [setReplies, submitHandler, textAreaRef]);
 
   return (
     <form
@@ -30,7 +31,7 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ setReplies, textAreaRef }) => {
       onSubmit={(e) =>
         submitHandler(e, value, setReplies, setValue, textAreaRef)
       }
-      onKeyDown={enterKeyDown}
+      onKeyDown={e => enterKeyDown(e, value)}
     >
       <ProfileIcon className="mr-2" />
       <textarea

@@ -10,9 +10,8 @@ import ReplyItems from "@/components/ReplyItems";
 import PostIcons from "@/components/PostIcons";
 import ReplyForm from "@/components/ReplyForm";
 import { getRelativeTimeString } from "@/utils/relative-time";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Carousel from "@/components/Carousel";
-import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -20,7 +19,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const [liked, setLiked] = useState(false);
   const post = DUMMY_DATA.find((item) => item.id === Number(params.id));
   const [replies, setReplies] = useState<Reply[]>(post!.replies);
-  const textAreaRef = useAutoSizeTextArea();
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   if (!post) return <div>404 Unable to find post</div>;
   const user = USERS.find((item) => item.account === post.account);

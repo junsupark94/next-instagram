@@ -24,6 +24,7 @@ export default function Page({ params }: { params: { id: string } }) {
   }, [params.id]);
   const [replies, setReplies] = useState<Reply[]>(post!.replies);
   const [liked, setLiked] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   if (!post) return <div>404 Post Not Found</div>;
   const user = USERS.find((user) => user.account === post.account);
@@ -52,12 +53,12 @@ export default function Page({ params }: { params: { id: string } }) {
         <section className="w-[355px] flex flex-col border dark:border-gray-800 border-[#dbdbdb] shrink-0">
           <PostHeader user={user} location={post.location} />
           <PostDescription user={user} post={post} />
-          <ReplyItems replies={replies} />
+          <ReplyItems replies={replies} textAreaRef={textAreaRef}/>
           <div className="px-4 py-2 border-t dark:border-gray-800 border-[#dbdbdb]">
             <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
             <span>{getRelativeTimeString(post.date)}</span>
           </div>
-          <ReplyForm setReplies={setReplies} account={post.account}/>
+          <ReplyForm setReplies={setReplies} textAreaRef={textAreaRef}/>
         </section>
       </main>
       <section className="border-t dark:border-gray-800 border-[#dbdbdb] w-[900px] pt-16">

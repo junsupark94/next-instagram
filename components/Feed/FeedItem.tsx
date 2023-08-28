@@ -1,5 +1,5 @@
 "use client";
-import React, { KeyboardEventHandler, useState } from "react";
+import React, { KeyboardEventHandler, useRef, useState } from "react";
 import { Post, Reply, getReplyId } from "@/utils/dummy-data-posts";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
@@ -17,8 +17,10 @@ type FeedItemProps = {
 
 
 const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
+  // console.log("FeedItem render", item.id)
   const [liked, setLiked] = useState(false);
-  const textAreaRef = useAutoSizeTextArea();
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  useAutoSizeTextArea(textAreaRef);
   const [value, setValue] = useState("");
   const [newReplies, setNewReplies] = useState<Reply[]>([]);
 
@@ -38,7 +40,6 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
     setValue('');
   }
   const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
-    console.log(e.key, e.shiftKey);
     if (e.key !== "Enter") return;
     if (e.shiftKey) {
       return;

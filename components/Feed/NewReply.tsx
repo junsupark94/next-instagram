@@ -14,8 +14,8 @@ const NewReply: React.FC<NewReplyProps> = ({ reply }) => {
   );
 
   return (
-    <div className="flex gap-1">
-      <span className="font-bold">{reply.account}</span>
+    <div className="">
+      <span className="font-bold mr-1">{reply.account}</span>
       {!showMore && (
         <>
           <span className="whitespace-pre-wrap">{shortText}</span>
