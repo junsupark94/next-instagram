@@ -38,7 +38,6 @@ function getRandomInt(min: number = 0, max: number = 2000000) {
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-
 let postId = 1;
 let replyId = 1;
 
@@ -59,9 +58,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 123,
     replies: [],
     description: `Welcome to my Instagram clone project! I challenged my front end skills by trying to replicate Instagram's UI as much as possible.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -69,10 +66,8 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 2),
     likes: 345,
     replies: [],
-    description: `Not all the features are completed yet. Some buttons are crossed out and anything with a pointer cursor is not interactive. Please do revisit in the future when I turn this frontend project into a full stack one. You can follow my updates on my LinkedIn or my DEV blog.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    description: `Not all the features are completed yet. Some buttons are crossed out and anything with a pointer cursor is not interactive. Please do revisit in the future when I turn this frontend project into a full stack one with user authentication, stories, reels, and much more. You can follow my updates on my LinkedIn or my DEV blog.`,
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -81,9 +76,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 99,
     replies: [],
     description: `For this project, I focused on modal routing, virtual list, dark mode, carousel, custom video player, autoplay behavior, post description truncation, text parsing, and optimizations.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -91,10 +84,8 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 4),
     likes: 1032,
     replies: [],
-    description: `For the modal routing, try clicking on “View all comments”. A modal will pop up and the url will change. When you refresh or copy paste the url, it’ll take you to the photo page. This was implemented with NextJS parallel routing and route interception. You can close the modal by clicking outside of it, clicking the X in the top right corner, or going back in browser history. This is identical Instagram’s modal behavior.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    description: `For the modal routing, try clicking on “View all comments”. A modal will pop up and the url will change. When you refresh or copy paste the url, it’ll take you to the photo page. This was implemented with NextJS parallel routing and route interception. You can close the modal by clicking outside of it, clicking the X in the top right corner, or going back in browser history. However, a known issue with NextJS is that navigating from this modal does not unmount the modal. Clicking on a user will navigate to the user's page. I realized this late in development since I implemented the modal route last. I'll fix this in Part 2.`,
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -103,9 +94,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 1032,
     replies: [],
     description: `The virtual list was implemented with a simple useStates on the feed indexes. When you scroll past a certain point, it will update the indexes. Instagram and Twitter uses absolute positioning with transform and padding for their virtual list, which I could not really understand but managed to replicate identically. My virtual list works for the home page and user page. Click on my profile name or icon to check out the user page.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -114,9 +103,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 12,
     replies: [],
     description: `Dark mode can be toggled in the menu options in the lower left. Try it out for yourself. Dark mode was implemented with Tailwind. Also, animating the menu transitions and the toggle switch took a lot of work. I had to use the Animation tab in Google Chrome to observe how Instagram implemented theirs.`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -126,13 +113,13 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: `The carousel was a challenge to figure out. Images and videos layout behaviors are hard to tame. The index indicator and scroll buttons required lot of trial-and-error and reading MDN documentations about scrolling.`,
     content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-    ]
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+    ],
   },
   {
     account: "junsupark",
@@ -142,22 +129,39 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: `Creating a custom video player was really fun. Shoutout to Web Dev Simplified for his tutorial. What was really difficult was trying to understand how Instagram’s autoplay behavior worked for videos. I replicated their behavior closely as possible while also making sure videos hidden in carousel don’t autoplay and do autoplay when it comes out into view.`,
     content: [
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+    ],
   },
   {
     account: "junsupark",
     id: postId++,
     date: new Date(2022, 1, 9),
     likes: 84232,
-    replies: [],
-    description: `Post description preserves whitespace and gets truncated at the first newline or 100 characters, whichever comes first.\n Descriptions and comments converts hashtags and @ to proper links. Test this out by adding a comment to any of the posts! #webdev #fullstack #softwareengineer`,
+    replies: [
+      {
+        account: "bobsmith",
+        id: replyId++,
+        date: new Date(2022, 1, 9),
+        likes: 1,
+        text: "I'm bob smith, please check out my profile. #photography #socialmedia @champagnepapi",
+        thread: [
+          {
+            account: "notjunsupark",
+            date: new Date(2022, 1, 10),
+            id: replyId++,
+            likes: 2,
+            text: "Reply threads only go one level deep. Replying to Bob or me will put the reply at the bottom of this thread.",
+          },
+        ],
+      },
+    ],
+    description: `Post description preserves whitespace      and gets truncated at the first newline or 100 characters, whichever comes first.\n\n\nDescriptions and comments converts hashtags and @ to proper links. Test this out by adding a comment to any of the posts! #webdev #fullstack #softwareengineer`,
     content: [
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-    ]
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+    ],
   },
   {
     account: "junsupark",
@@ -165,12 +169,12 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 10),
     likes: 1300230,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Pinned posts are always shown at the top at the user's profile or the More Posts section in a photo page.`,
     content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-    ]
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+    ],
   },
   {
     account: "junsupark",
@@ -178,12 +182,12 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 11),
     likes: 1300230,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Shoutout to Radix UI for their amazing library of headless UI components with accessibility built in, and shout out to ShadCN for building on top of Radix UI by providing a minimally styled components with Radix and a very simple installation process!`,
     content: [
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/video${videoNumber++}.mp4`, type: "video" },
+      { src: `/posts/post${postNumber++}.jpg`, type: "image" },
+    ],
   },
   {
     account: "junsupark",
@@ -191,10 +195,8 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 12),
     likes: 57,
     replies: [],
-    description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    description: ``,
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -203,9 +205,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 57,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -214,9 +214,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 537,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -225,9 +223,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 198,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -236,9 +232,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 198,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -247,9 +241,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 32,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -258,9 +250,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 1,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -269,9 +259,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 38,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -280,9 +268,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 38,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -291,9 +277,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 55,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -302,9 +286,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 988,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -313,9 +295,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 230,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -324,9 +304,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 441,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -335,9 +313,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 33,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -346,9 +322,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 7421,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -357,9 +331,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 7421,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -368,9 +340,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 23,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -379,9 +349,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 500,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -390,9 +358,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 321,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -401,9 +367,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 3,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -412,9 +376,7 @@ export const DUMMY_DATA: Post[] = [
     likes: 2,
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -423,9 +385,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -434,9 +394,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -445,9 +403,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -456,9 +412,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -467,9 +421,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -478,9 +430,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -489,9 +439,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -500,9 +448,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -511,9 +457,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -522,9 +466,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -533,9 +475,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -544,9 +484,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -555,9 +493,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -566,9 +502,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -577,9 +511,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -588,9 +520,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -599,9 +529,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -610,9 +538,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -621,9 +547,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -632,9 +556,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -643,9 +565,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -654,9 +574,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -665,9 +583,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -676,9 +592,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -687,9 +601,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -698,9 +610,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -709,9 +619,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -720,9 +628,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -731,9 +637,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -742,9 +646,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -753,9 +655,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -764,9 +664,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -775,9 +673,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -786,9 +682,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -797,9 +691,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -808,9 +700,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -819,9 +709,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -830,9 +718,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -841,9 +727,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -852,9 +736,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -863,9 +745,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -874,9 +754,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -885,9 +763,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -896,9 +772,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -907,9 +781,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -918,9 +790,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -929,9 +799,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -940,9 +808,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -951,9 +817,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -962,9 +826,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -973,9 +835,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -984,9 +844,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -995,9 +853,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1006,9 +862,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1017,9 +871,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1028,9 +880,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1039,9 +889,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1050,9 +898,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1061,9 +907,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1072,9 +916,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1083,9 +925,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1094,9 +934,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1105,9 +943,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1116,9 +952,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1127,9 +961,7 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
     account: "junsupark",
@@ -1138,31 +970,24 @@ export const DUMMY_DATA: Post[] = [
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
-    account: "junsupark",
+    account: "bobsmith",
     id: postId++,
     date: new Date(2022, 4, 10),
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
-    account: "junsupark",
+    account: "notjunsupark",
     id: postId++,
     date: new Date(2022, 4, 11),
     likes: getRandomInt(),
     replies: [],
     description: `post${postNumber}.jpg`,
-    content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
-    ]
+    content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
-
 ];

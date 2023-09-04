@@ -5,12 +5,14 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MessengerIcon from "@/Icons/MessengerIcon";
+import { User } from "@/utils/dummy-data-users";
 
 type HoverDialogProps = {
   children: JSX.Element;
+  user: User;
 };
 
-const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
+const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
   let timer: NodeJS.Timeout;
   const dialogRef = useRef<HTMLDivElement>(null);
   const mouseEnterHandler: React.MouseEventHandler<HTMLDivElement> = () => {
@@ -40,7 +42,7 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
       className="relative"
     >
       {children}
-      <div className="absolute bottom-0 left-0">
+      <div className="absolute bottom-0 left-0 z-10">
         <div
           ref={dialogRef}
           className={cn(
@@ -56,44 +58,44 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
           </div>
           <article className="p-3 flex justify-around">
             <div className="text-center">
-              <div>603</div>
+              <div>{user.postCount}</div>
               <div>posts</div>
             </div>
             <div className="flex flex-col items-center">
-              <div>251M</div>
+              <div>{user.followerCount}</div>
               <div>followers</div>
             </div>
             <div className="flex flex-col items-center">
-              <div>0</div>
+              <div>{user.followingCount}</div>
               <div>following</div>
             </div>
           </article>
           <div className="grid grid-cols-3 gap-1">
             <Link href={`/p/1`}>
               <Image
-                src="/test1.jpg"
+                src="/posts/post1.jpg"
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px]"
+                className="w-[120px] h-[120px] object-cover"
               />
             </Link>
             <Link href={`/p/2`}>
               <Image
-                src="/test2.jpg"
+                src="/posts/post2.jpg"
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px]"
+                className="w-[120px] h-[120px] object-cover"
               />
             </Link>
             <Link href={`/p/3`}>
               <Image
-                src="/test3.jpg"
+                src="/posts/post3.jpg"
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px]"
+                className="w-[120px] h-[120px] object-cover"
               />
             </Link>
           </div>

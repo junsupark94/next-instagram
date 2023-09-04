@@ -48,40 +48,40 @@ const NavBar: React.FC<NavBarProps> = () => {
               </div>
               <span className="font-bold hidden lg:inline">Home</span>
             </Link>
-            <Link
-              href="/"
+            <button
+              // href="/"
               className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
             >
               <SearchIcon className="group-hover:scale-110 transition-transform group-active:scale-100" />
               <span className="hidden lg:inline line-through">Search</span>
-            </Link>
-            <Link
-              href="/"
+            </button>
+            <button
+              // href="/"
               className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
             >
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
                 <ExploreIcon />
               </div>
               <span className="hidden lg:inline line-through">Explore</span>
-            </Link>
-            <Link
-              href="/"
+            </button>
+            <button
+              // href="/"
               className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
             >
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
                 <ReelsIcon />
               </div>
               <span className="hidden lg:inline line-through">Reels</span>
-            </Link>
-            <Link
-              href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
+            </button>
+            <button
+              // href="/"
+              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
             >
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
                 <MessengerIcon />
               </div>
-              <span className="hidden lg:inline">Messages</span>
-            </Link>
+              <span className="hidden lg:inline line-through">Messages</span>
+            </button>
             <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default">
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
                 <HeartIcon />
@@ -90,11 +90,11 @@ const NavBar: React.FC<NavBarProps> = () => {
                 Notifications
               </span>
             </button>
-            <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50">
+            <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default">
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">
                 <PostIcon />
               </div>
-              <span className="hidden lg:inline">Create</span>
+              <span className="hidden lg:inline line-through">Create</span>
             </button>
             <Link
               href="/junsupark"

@@ -9,11 +9,11 @@ type ReplyItemsProps = {
 
 const ReplyItems: React.FC<ReplyItemsProps> = ({ replies, textAreaRef }) => {
   return (
-    <article className="overflow-auto p-4 flex flex-col gap-2 grow">
+    <>
       {replies.map((reply) => (
-        <ReplyItem key={reply.id} reply={reply} textAreaRef={textAreaRef}/>
+        <ReplyItem key={reply.id} reply={reply} textAreaRef={textAreaRef} />
       ))}
-    </article>
+    </>
   );
 };
 export default React.memo(ReplyItems);

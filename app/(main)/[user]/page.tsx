@@ -38,13 +38,13 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
         </div>
       </div>
       <header className="flex items-center justify-between pb-11">
-        <div className="grow flex justify-center">
+        <div className="grow shrink-0 flex justify-center mr-10">
           <Image
             src={user.profilePicture}
             alt="profile picture"
             width={200}
             height={200}
-            className="w-[150px] h-[150px] rounded-full"
+            className="w-[150px] h-[150px] rounded-full object-cover"
           />
         </div>
         <section className="grow-[2] flex flex-col">
@@ -72,13 +72,13 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
             {following && (
               <FollowDialog user={user} setFollowing={setFollowing} />
             )}
-            <button className="px-4 py-1.5 font-semibold bg-[#efefef] dark:bg-[#363636] rounded-lg text-sm">
+            <button className="px-4 py-1.5 font-semibold bg-[#efefef] dark:bg-[#363636] rounded-lg text-sm cursor-default line-through">
               Message
             </button>
-            <button className="p-2 bg-[#efefef] dark:bg-[#363636] rounded-lg">
+            <button className="p-2 bg-[#efefef] dark:bg-[#363636] rounded-lg cursor-default">
               <SuggestedProfileIcon />
             </button>
-            <button>
+            <button className="cursor-default">
               <OptionsIcon className="w-8 h-8" />
             </button>
           </div>
@@ -87,12 +87,12 @@ export default function ProfilePage({ params }: { params: { user: string } }) {
             <li>{user.followerCount} followers</li>
             <li>{user.followingCount} following</li>
           </ul>
-          <div>Bio</div>
-          <div>Followed by</div>
+          <div className="whitespace-pre-wrap">{user.bio}</div>
+          {/* <div>Followed by</div> */}
         </section>
       </header>
       <section className="pb-11">
-        <button className="p-3">
+        <button className="p-3 cursor-default">
           <div className="border-2 dark:border-[#121212] border-gray-300 rounded-full p-0.5">
             <div className="dark:bg-[#121212] bg-[#fafafa] h-[77px] w-[77px] flex justify-center items-center rounded-full">
               <PlusIcon />

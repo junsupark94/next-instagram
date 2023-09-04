@@ -24,7 +24,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ user, location, className }) =>
   return (
     <header className={cn("flex justify-between items-center xs:py-2 px-4 border-b dark:border-gray-800 border-[#dbdbdb]", className)}>
       <div className="flex gap-2 items-center">
-        <HoverDialog>
+        <HoverDialog user={user}>
           <Link href={`/${user.account}`}>
             <Image
               src={user.profilePicture}
@@ -37,7 +37,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ user, location, className }) =>
         </HoverDialog>
         <div className="flex flex-col">
           <div className="flex gap-2 items-center">
-            <HoverDialog>
+            <HoverDialog user={user}>
               <Link
                 href={`/${user.account}`}
                 className="hover:opacity-50 font-semibold"

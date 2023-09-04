@@ -2,10 +2,7 @@
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
 import { useMemo, useRef, useState } from "react";
-import {
-  DUMMY_DATA,
-  Reply,
-} from "@/utils/dummy-data-posts";
+import { DUMMY_DATA, Reply } from "@/utils/dummy-data-posts";
 import { getRelativeTimeString } from "@/utils/relative-time";
 import Carousel from "@/components/Carousel";
 import React from "react";
@@ -50,15 +47,18 @@ export default function Page({ params }: { params: { id: string } }) {
           height={600}
           className="h-full"
         />
-        <section className="w-[355px] flex flex-col border dark:border-gray-800 border-[#dbdbdb] shrink-0">
+        <section className="w-[355px] flex flex-col border dark:border-gray-800 border-[#dbdbdb]">
           <PostHeader user={user} location={post.location} />
-          <PostDescription user={user} post={post} />
-          <ReplyItems replies={replies} textAreaRef={textAreaRef}/>
+          <article className="overflow-auto p-4 flex flex-col gap-2">
+            <PostDescription user={user} post={post} />
+            <ReplyItems replies={replies} textAreaRef={textAreaRef} />
+          </article>
+
           <div className="px-4 py-2 border-t dark:border-gray-800 border-[#dbdbdb]">
             <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
             <span>{getRelativeTimeString(post.date)}</span>
           </div>
-          <ReplyForm setReplies={setReplies} textAreaRef={textAreaRef}/>
+          <ReplyForm setReplies={setReplies} textAreaRef={textAreaRef} />
         </section>
       </main>
       <section className="border-t dark:border-gray-800 border-[#dbdbdb] w-[900px] pt-16">

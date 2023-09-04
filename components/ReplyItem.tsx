@@ -5,6 +5,8 @@ import { Reply } from "@/utils/dummy-data-posts";
 import { getShortenedRelative } from "@/utils/relative-time";
 import Link from "next/link";
 import { convertText } from "@/utils/truncateText";
+import { USERS } from "@/utils/dummy-data-users";
+import Image from "next/image";
 
 type ReplyItemProps = {
   reply: Reply;
@@ -14,6 +16,7 @@ type ReplyItemProps = {
 const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
   // console.log("ReplyItem render");
   const [showReplies, setShowReplies] = useState(false);
+  const user = USERS.find((user) => user.account === reply.account);
 
   const replyHandler = () => {
     textAreaRef.current!.setAttribute("data-reply", String(reply.id));
@@ -38,7 +41,13 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
   return (
     <article>
       <div className="flex gap-2 text-sm">
-        <ProfileIcon />
+        <Image
+          src={user!.profilePicture}
+          width={30}
+          height={30}
+          alt="image"
+          className="shrink-0 object-cover w-4 h-4 rounded-full"
+        />
         <div>
           <div className="pb-2">
             <div className="flex gap-2">
@@ -59,7 +68,10 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
                 {reply.likes} like{reply.likes > 1 && "s"}
               </span>
             )}
-            <button className="dark:text-blue-300 text-[#737373] font-semibold" onClick={replyHandler}>
+            <button
+              className="dark:text-blue-300 text-[#737373] font-semibold"
+              onClick={replyHandler}
+            >
               Reply
             </button>
           </div>
@@ -93,7 +105,7 @@ function ThreadItem({
   account: string;
   textAreaRef: RefObject<HTMLTextAreaElement>;
 }) {
-  // console.log("ThreadItem render");
+  const user = USERS.find(user => user.account === threadItem.account);
 
   const replyHandler = () => {
     textAreaRef.current!.setAttribute("data-reply", String(id));
@@ -104,7 +116,13 @@ function ThreadItem({
   return (
     <article>
       <div className="flex gap-2">
-        <ProfileIcon />
+      <Image
+          src={user!.profilePicture}
+          width={30}
+          height={30}
+          alt="image"
+          className="shrink-0 object-cover w-4 h-4 rounded-full"
+        />
         <div>
           <div className="pb-2">
             <div className="flex gap-2">

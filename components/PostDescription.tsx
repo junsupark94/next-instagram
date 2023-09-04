@@ -6,6 +6,7 @@ import { User } from "@/utils/dummy-data-users";
 import { Post } from "@/utils/dummy-data-posts";
 import { cn } from "@/utils/cn";
 import Link from "next/link";
+import { convertText } from "@/utils/truncateText";
 
 type PostDescriptionProps = {
   user: User;
@@ -15,13 +16,13 @@ type PostDescriptionProps = {
 
 const PostDescription: React.FC<PostDescriptionProps> = ({ user, post, className }) => {
   return (
-    <div className={cn("flex gap-2 p-4 pb-1", className)}>
+    <div className={cn("flex gap-2 pb-1", className)}>
       <Image
         src={user.profilePicture}
         alt="profile picture"
         width={50}
         height={50}
-        className="w-6 h-6 rounded-full"
+        className="w-6 h-6 rounded-full object-cover"
       />
       <article>
         <div className="flex gap-1 items-center">
@@ -31,7 +32,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ user, post, className
             {getShortenedRelative(post.date)}
           </span>
         </div>
-        <p>{post.description}</p>
+        <p className="whitespace-pre-wrap">{convertText(post.description)}</p>
       </article>
     </div>
   );

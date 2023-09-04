@@ -11,8 +11,10 @@ import ReplyForm from "@/components/ReplyForm";
 import { getRelativeTimeString } from "@/utils/relative-time";
 import { useRef, useState } from "react";
 import Carousel from "@/components/Carousel";
+import { useGlobalStore } from "@/utils/zustand";
 
 export default function Page({ params }: { params: { id: string } }) {
+  // const [isModalOpen] = useGlobalStore(state => [state.isModalOpen])
   const router = useRouter();
   const [liked, setLiked] = useState(false);
   const post = DUMMY_DATA.find((item) => item.id === Number(params.id));
@@ -23,11 +25,16 @@ export default function Page({ params }: { params: { id: string } }) {
   const user = USERS.find((item) => item.account === post.account);
   if (!user) return <div>404 Unable to find user</div>;
 
+  // if (!isModalOpen) return null;
+
   return (
-    <div className="fixed backdrop-brightness-50 top-0 left-0 w-screen h-screen flex justify-center items-center z-10" onClick={() => router.back()}>
+    <div
+      className="fixed backdrop-brightness-50 top-0 left-0 w-screen h-screen flex justify-center items-center z-10"
+      onClick={() => router.back()}
+    >
       <div
         className="flex justify-center max-w-[80%] max-h-[80%] w-fit h-full dark:bg-black bg-white text-sm"
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <Carousel
           content={post.content}
@@ -38,8 +45,10 @@ export default function Page({ params }: { params: { id: string } }) {
         />
         <section className="flex flex-col max-w-[500px] w-full">
           <PostHeader user={user} location={post.location} />
-          <PostDescription user={user} post={post} />
-          <ReplyItems replies={replies} textAreaRef={textAreaRef} />
+          <article className="overflow-auto p-4 flex flex-col gap-2 grow">
+            <PostDescription user={user} post={post} />
+            <ReplyItems replies={replies} textAreaRef={textAreaRef} />
+          </article>
           <div className="px-4 py-2 border-t dark:border-gray-800 border-[#dbdbdb]">
             <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
             <span>{getRelativeTimeString(post.date)}</span>
