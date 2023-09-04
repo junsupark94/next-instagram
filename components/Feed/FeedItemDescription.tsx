@@ -71,7 +71,7 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
 
   return (
     <div className="mt-2">
-      <span className="font-bold">{account}</span>{" "}
+      <Link href={`/${account}`} className="font-bold dark:hover:brightness-50 hover:text-gray-700">{account}</Link>{" "}
       {!showMore && (
         <>
           <h1 className="inline whitespace-pre-wrap">{shortDescription}</h1>

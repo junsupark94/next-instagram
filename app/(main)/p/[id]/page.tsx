@@ -1,7 +1,7 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   DUMMY_DATA,
   Reply,
@@ -18,7 +18,7 @@ import PostDescription from "@/components/PostDescription";
 import ReplyItems from "@/components/ReplyItems";
 
 export default function Page({ params }: { params: { id: string } }) {
-  console.log("Page render");
+  // console.log("Page render");
   const post = useMemo(() => {
     return DUMMY_DATA.find((item) => item.id === Number(params.id));
   }, [params.id]);

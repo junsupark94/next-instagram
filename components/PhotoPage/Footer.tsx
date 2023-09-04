@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 function Footer() {
-  console.log("PhotoPageFooter render")
+  // console.log("PhotoPageFooter render")
   return (
     <footer className="hidden sm:flex  my-10 text-xs dark:text-[#737373] text-[#c7c7c7] flex-col gap-4 items-center">
       <ul className="flex gap-4">

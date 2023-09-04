@@ -97,7 +97,7 @@ const NavBar: React.FC<NavBarProps> = () => {
               <span className="hidden lg:inline">Create</span>
             </button>
             <Link
-              href="/"
+              href="/junsupark"
               className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
             >
               <div className="group-hover:scale-110 transition-transform group-active:scale-100">

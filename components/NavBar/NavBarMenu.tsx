@@ -82,7 +82,6 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           "translate-x-[100%] invisible opacity-0 w-full top-0 left-0 absolute rounded-2xl transition",
           `${showDarkMode && "translate-x-0 visible opacity-100"}`
         )}
-        onClick={() => console.log("hi")}
       >
         <div className="flex items-center justify-between border-b p-4 border-[#555555]">
           <div className="flex gap-2">

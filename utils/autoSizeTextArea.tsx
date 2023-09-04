@@ -7,6 +7,7 @@ type Props = {
 
 export default function useAutoSizeTextArea(
   textAreaRef: RefObject<HTMLTextAreaElement>,
+  value: string,
   props?: Props
 ) {
   const heights = useMemo(() => {
@@ -28,5 +29,5 @@ export default function useAutoSizeTextArea(
     textAreaRef.current.style.height = `${minHeight}px`;
     const scrollHeight = Math.min(textAreaRef.current.scrollHeight, maxHeight);
     textAreaRef.current.style.height = scrollHeight + "px";
-  }, [textAreaRef, textAreaRef.current?.value, minHeight, maxHeight]);
+  }, [textAreaRef, value, minHeight, maxHeight]);
 }

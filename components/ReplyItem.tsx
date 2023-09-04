@@ -12,7 +12,7 @@ type ReplyItemProps = {
 };
 
 const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
-  console.log("ReplyItem render");
+  // console.log("ReplyItem render");
   const [showReplies, setShowReplies] = useState(false);
 
   const replyHandler = () => {
@@ -93,7 +93,7 @@ function ThreadItem({
   account: string;
   textAreaRef: RefObject<HTMLTextAreaElement>;
 }) {
-  console.log("ThreadItem render");
+  // console.log("ThreadItem render");
 
   const replyHandler = () => {
     textAreaRef.current!.setAttribute("data-reply", String(id));

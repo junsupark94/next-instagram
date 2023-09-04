@@ -28,7 +28,6 @@ export type Post = {
   replies: Reply[];
   description: string;
   content: Media[];
-  pinned?: boolean;
   location?: string;
   edited?: boolean;
 };
@@ -44,6 +43,7 @@ let postId = 1;
 let replyId = 1;
 
 let postNumber = 1;
+let videoNumber = 1;
 
 export function getReplyId() {
   return replyId++;
@@ -55,240 +55,10 @@ export const DUMMY_DATA: Post[] = [
   {
     account: "junsupark",
     id: postId++,
-    date: new Date(2023, 4, day++),
-    likes: 10,
-    location: "San Francisco, CA",
-    replies: [
-      {
-        account: "bobsmith",
-        id: replyId++,
-        text: "Welcome to Instagram!",
-        likes: 0,
-        date: new Date(2023, 6, 23, 6, 0, 20),
-        thread: [
-          {
-            account: "junsupark",
-            id: replyId++,
-            text: "Thanks Bob!",
-            likes: 3,
-            date: new Date(2023, 7, 23, 6, 15),
-          },
-        ],
-      },
-      {
-        account: "champagepapi",
-        id: replyId++,
-        text: "Dope @badgalriri #sexybitch",
-        likes: 882341,
-        date: new Date(2023, 7, 15),
-        thread: [],
-      },
-    ],
-    description: "First post!",
-    content: [
-      { src: "/test1.jpg", type: "image" },
-      { src: "/test2.jpg", type: "image" },
-      { src: "/test3.jpg", type: "image" },
-      { src: "/video1.mp4", type: "video" },
-    ],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 4, day++),
-    likes: 55,
-    replies: [
-      {
-        account: "bobsmith",
-        id: replyId++,
-        text: "Great post",
-        likes: 2,
-        date: new Date(),
-        thread: [
-          {
-            account: "notjunsupark",
-            id: replyId++,
-            text: "Love it!",
-            likes: 3,
-            date: new Date(),
-          },
-        ],
-      },
-    ],
-    description: "Second post!",
-    content: [
-      { src: "/test4.jpg", type: "image" },
-      { src: "/test5.jpg", type: "image" },
-      { src: "/video2.mp4", type: "video" },
-      { src: "/test6.jpg", type: "image" },
-    ],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 4, day++),
-    likes: 10,
-    replies: [],
-    description: "Third post!",
-    content: [{ src: "/test7.jpg", type: "image" }],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 4, day++),
-    likes: 10,
-    replies: [],
-    description: "Fourth post!",
-    content: [{ src: "/video5.mp4", type: "video" }],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 4, day++),
-    likes: 10,
-    replies: [],
-    description: "Fifth post!",
-    content: [{ src: "/video7.mp4", type: "video" }],
-  },
-  {
-    account: "bobsmith",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 129,
-    replies: [
-      {
-        account: "notjunsupark",
-        id: replyId++,
-        text: "Cool picture!",
-        likes: 3,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "junsupark",
-        id: replyId++,
-        text: "Where did you take this picture? We need to hang out again soon!",
-        likes: 10,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "rihanna",
-        id: replyId++,
-        text: "Sick",
-        likes: 45679,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "drake",
-        id: replyId++,
-        text: "CLB",
-        likes: 3,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "notjunsupark",
-        id: replyId++,
-        text: "Cool picture!",
-        likes: 3,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "notjunsupark",
-        id: replyId++,
-        text: "Cool picture!",
-        likes: 3,
-        date: new Date(),
-        thread: [],
-      },
-      {
-        account: "notjunsupark",
-        id: replyId++,
-        text: "Cool picture!",
-        likes: 3,
-        date: new Date(),
-        thread: [],
-      },
-    ],
-    description: "I'm Bob Smith!",
-    content: [
-      { src: "/test7.jpg", type: "image" },
-      { src: "/video3.mp4", type: "video" },
-    ],
-  },
-  {
-    account: "bobsmith",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 129,
-    replies: [],
-    description: "I'm Bob Smith!",
-    content: [
-      { src: "/video6.mp4", type: "video" },
-      { src: "/test8.jpg", type: "image" },
-    ],
-  },
-  {
-    account: "notjunsupark",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 3456,
-    replies: [],
-    description:
-      "Third post!  I just came back from Lisbon, Portugal working on a cool project!\nWe were filming the #NewJeans music video for Super Shy! I had such a great time and the girls and the dancers were fantastic! They learned my choreography really well and executed my vision. I hope to do this again soon!\nPlease stream Super Shy Bunnies! #kpop",
-    content: [
-      { src: "/video4.mp4", type: "video" },
-      { src: "/test8.jpg", type: "image" },
-    ],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 129,
-    replies: [],
-    description: "it's Charli baby",
-    content: [
-      { src: "/video6.mp4", type: "video" },
-      { src: "/test8.jpg", type: "image" },
-    ],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 129,
-    replies: [],
-    description: "more dummy posts",
-    content: [
-      { src: "/test9.jpg", type: "image" },
-      { src: "/video5.mp4", type: "video" },
-    ],
-  },
-  {
-    account: "junsupark",
-    id: postId++,
-    date: new Date(2023, 7, day++),
-    likes: 129,
-    replies: [],
-    description: "it's ethel cain baby",
-    content: [
-      { src: "/test10.jpg", type: "image" },
-      { src: "/video7.mp4", type: "video" },
-    ],
-  },
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  {
-    account: "junsupark",
-    id: postId++,
     date: new Date(2022, 1, 1),
     likes: 123,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Welcome to my Instagram clone project! I challenged my front end skills by trying to replicate Instagram's UI as much as possible.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -299,7 +69,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 2),
     likes: 345,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Not all the features are completed yet. Some buttons are crossed out and anything with a pointer cursor is not interactive. Please do revisit in the future when I turn this frontend project into a full stack one. You can follow my updates on my LinkedIn or my DEV blog.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -310,7 +80,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 3),
     likes: 99,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `For this project, I focused on modal routing, virtual list, dark mode, carousel, custom video player, autoplay behavior, post description truncation, text parsing, and optimizations.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -321,7 +91,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 4),
     likes: 1032,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `For the modal routing, try clicking on “View all comments”. A modal will pop up and the url will change. When you refresh or copy paste the url, it’ll take you to the photo page. This was implemented with NextJS parallel routing and route interception. You can close the modal by clicking outside of it, clicking the X in the top right corner, or going back in browser history. This is identical Instagram’s modal behavior.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -332,7 +102,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 5),
     likes: 1032,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `The virtual list was implemented with a simple useStates on the feed indexes. When you scroll past a certain point, it will update the indexes. Instagram and Twitter uses absolute positioning with transform and padding for their virtual list, which I could not really understand but managed to replicate identically. My virtual list works for the home page and user page. Click on my profile name or icon to check out the user page.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -343,7 +113,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 6),
     likes: 12,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Dark mode can be toggled in the menu options in the lower left. Try it out for yourself. Dark mode was implemented with Tailwind. Also, animating the menu transitions and the toggle switch took a lot of work. I had to use the Animation tab in Google Chrome to observe how Instagram implemented theirs.`,
     content: [
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
@@ -354,9 +124,14 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 7),
     likes: 12,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `The carousel was a challenge to figure out. Images and videos layout behaviors are hard to tame. The index indicator and scroll buttons required lot of trial-and-error and reading MDN documentations about scrolling.`,
     content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
     ]
   },
   {
@@ -365,8 +140,9 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 8),
     likes: 9123,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Creating a custom video player was really fun. Shoutout to Web Dev Simplified for his tutorial. What was really difficult was trying to understand how Instagram’s autoplay behavior worked for videos. I replicated their behavior closely as possible while also making sure videos hidden in carousel don’t autoplay and do autoplay when it comes out into view.`,
     content: [
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
   },
@@ -376,9 +152,11 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 9),
     likes: 84232,
     replies: [],
-    description: `post${postNumber}.jpg`,
+    description: `Post description preserves whitespace and gets truncated at the first newline or 100 characters, whichever comes first.\n Descriptions and comments converts hashtags and @ to proper links. Test this out by adding a comment to any of the posts! #webdev #fullstack #softwareengineer`,
     content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
     ]
   },
   {
@@ -389,7 +167,9 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: `post${postNumber}.jpg`,
     content: [
-      {src: `/posts/post${postNumber++}.jpg`, type: "image"}
+      {src: `/posts/post${postNumber++}.jpg`, type: "image"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
     ]
   },
   {
@@ -400,6 +180,8 @@ export const DUMMY_DATA: Post[] = [
     replies: [],
     description: `post${postNumber}.jpg`,
     content: [
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
+      {src: `/posts/video${videoNumber++}.mp4`, type: "video"},
       {src: `/posts/post${postNumber++}.jpg`, type: "image"}
     ]
   },

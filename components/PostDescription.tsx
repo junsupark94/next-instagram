@@ -5,6 +5,7 @@ import { getShortenedRelative } from "@/utils/relative-time";
 import { User } from "@/utils/dummy-data-users";
 import { Post } from "@/utils/dummy-data-posts";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 type PostDescriptionProps = {
   user: User;
@@ -24,7 +25,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ user, post, className
       />
       <article>
         <div className="flex gap-1 items-center">
-          <span className="font-semibold">{user.account}</span>
+          <Link href={`/${user.account}`} className="font-semibold">{user.account}</Link>
           {user.verified && <VerifiedIcon className="w-3 h-3" />}
           <span className="text-[#a8a8a8]">
             {getShortenedRelative(post.date)}

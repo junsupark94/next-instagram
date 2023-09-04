@@ -30,7 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({
   width = 500,
   height = 500,
 }) => {
-  console.log('Carousel render')
+  // console.log('Carousel render')
   const [opacity, setOpacity] = useState("opacity-0");
   const containerRef = useRef<HTMLElement>(null);
   const leftButtonRef = useRef<HTMLButtonElement>(null);
@@ -55,7 +55,6 @@ const Carousel: React.FC<CarouselProps> = ({
     const containerWidth = e.currentTarget.getBoundingClientRect().width! - 2;
     const scrollLeft = e.currentTarget.scrollLeft;
     const newIndex = scrollLeft / containerWidth;
-    console.log('containerWidth', containerWidth, 'scrollLeft', scrollLeft, 'newIndex', newIndex)
 
     if (newIndex % 1 !== 0) return;
     setIndex(newIndex);

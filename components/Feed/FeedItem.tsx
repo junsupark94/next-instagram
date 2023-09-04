@@ -20,9 +20,9 @@ const FeedItem: React.FC<FeedItemProps> = ({ item }) => {
   // console.log("FeedItem render", item.id)
   const [liked, setLiked] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  useAutoSizeTextArea(textAreaRef);
   const [value, setValue] = useState("");
   const [newReplies, setNewReplies] = useState<Reply[]>([]);
+  useAutoSizeTextArea(textAreaRef, value);
 
   const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

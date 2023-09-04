@@ -11,10 +11,10 @@ type ReplyFormProps = {
 };
 
 const ReplyForm: React.FC<ReplyFormProps> = ({ setReplies, textAreaRef }) => {
-  console.log("ReplyForm render");
+  // console.log("ReplyForm render");
   const [value, setValue] = useState("");
   const submitHandler = useReplySubmitHandler();
-  useAutoSizeTextArea(textAreaRef);
+  useAutoSizeTextArea(textAreaRef, value);
 
   const enterKeyDown = useCallback((e: React.KeyboardEvent<HTMLFormElement>, value: string) => {
     if (e.key !== "Enter") return;

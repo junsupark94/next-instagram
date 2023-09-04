@@ -17,7 +17,7 @@ type PostHeaderProps = {
 };
 
 const PostHeader: React.FC<PostHeaderProps> = ({ user, location, className }) => {
-  console.log("PostHeader render");
+  // console.log("PostHeader render");
   const [following, setFollowing] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 

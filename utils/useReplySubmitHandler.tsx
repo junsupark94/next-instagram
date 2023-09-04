@@ -29,7 +29,7 @@ export default function useReplySubmitHandler() {
             );
             return replies;
           }
-          console.log("targetReply", targetReply);
+          // console.log("targetReply", targetReply);
           const newThreadItem: ThreadItem = {
             // todo: account should be logged in user
             account: "junsupark",
