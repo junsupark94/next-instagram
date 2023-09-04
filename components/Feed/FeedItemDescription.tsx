@@ -34,7 +34,7 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
     }
     truncateDescription = truncateDescription.replace(regex, replacer);
     const shortDescription = parse(truncateDescription, {
-      replace: (node) => {
+      replace: (node : any) => {
         if (node.name === "a") {
           const tag = node.children[0].data;
           return (
@@ -51,7 +51,7 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
     });
 
     const fullDescription = parse(description.replace(regex, replacer), {
-      replace: (node) => {
+      replace: (node : any) => {
         if (node.name === "a") {
           const tag = node.children[0].data;
           return (

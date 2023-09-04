@@ -76,6 +76,7 @@ const MorePosts: React.FC<MorePostsProps> = ({
     return () => {
       document.removeEventListener("scroll", scrollHandler);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const displayPosts = sortedUserPosts.slice(startIndex, endIndex);

@@ -37,7 +37,7 @@ export function convertText(text: string) {
   const textWithBoth = textWithAtLinks.replace(hashtagRegex, hashtagReplacer);
 
   const convertedText = parse(textWithBoth, {
-    replace: (node) => {
+    replace: (node : any) => {
       if (node.name === "tag") {
         const tag = node.children[0].data;
         return (

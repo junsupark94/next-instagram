@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ProfileIcon from "@/Icons/ProfileIcon";
 import { cn } from "@/utils/cn";
 import React, { useEffect, useRef, useState } from "react";
@@ -10,7 +11,7 @@ type HoverDialogProps = {
 };
 
 const HoverDialog: React.FC<HoverDialogProps> = ({ children }) => {
-  let timer: NodeJS.Timer;
+  let timer: NodeJS.Timeout;
   const dialogRef = useRef<HTMLDivElement>(null);
   const mouseEnterHandler: React.MouseEventHandler<HTMLDivElement> = () => {
     clearTimeout(timer);

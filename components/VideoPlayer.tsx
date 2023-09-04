@@ -30,6 +30,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
       if (path.startsWith('/p/')) videoRef.current?.play();
       videoRef.current!.setAttribute("data-play", "autoplay");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
