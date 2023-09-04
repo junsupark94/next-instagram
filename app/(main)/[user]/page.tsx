@@ -11,16 +11,10 @@ import MorePosts from "@/components/MorePosts";
 import { USERS } from "@/utils/dummy-data-users";
 import Image from "next/image";
 import { useState } from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import FollowDialog from "@/components/FollowDialog";
 import UserDialog from "@/components/UserDialog";
-import Link from "next/link";
 import CogIcon from "@/Icons/CogIcon";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function ProfilePage({ params }: { params: { user: string } }) {
   const [startIndex, setStartIndex] = useState(0);

@@ -1,17 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Close } from "@radix-ui/react-dialog";
+import { Close, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
 import { User } from "@/utils/dummy-data-users";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { Dialog, DialogHeader } from "./ui/dialog";
 
 type FollowDialogProps = {
   user: User;
