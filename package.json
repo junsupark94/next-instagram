@@ -25,7 +25,6 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
     "html-react-parser": "^4.2.1",
-    "jotai": "^2.3.1",
     "next": "13.4.13",
     "postcss": "8.4.27",
     "react": "18.2.0",
@@ -35,8 +34,5 @@
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.1.6",
     "zustand": "^4.4.1"
-  },
-  "devDependencies": {
-    "@swc-jotai/react-refresh": "^0.1.0"
   }
 }
