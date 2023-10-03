@@ -75,7 +75,7 @@ export const DUMMY_DATA: Post[] = [
     date: new Date(2022, 1, 3),
     likes: 99,
     replies: [],
-    description: `For this project, I focused on modal routing, virtual list, dark mode, carousel, custom video player, autoplay behavior, post description truncation, text parsing, and optimizations.`,
+    description: `For this project, I focused on modal routing, virtual list, dark mode, carousel, custom video player, autoplay behavior, text parsing for hashtags and @ links.`,
     content: [{ src: `/posts/post${postNumber++}.jpg`, type: "image" }],
   },
   {
