@@ -16,25 +16,29 @@ model User {
   bio                 String?
   gender              String?
 
+  email           String @unique
+  hashed_password String @unique
+  salt            String @unique
+
   hide_like_count    Boolean @default(false)
   is_private_account Boolean @default(false)
 
   who_can_comment PeopleType @default(EVERYONE)
   who_can_tag     PeopleType @default(EVERYONE)
 
-  post              Post[]             @relation("creator")
-  story             Story[]
-  sound             Sound[]
-  reel              Reel[]
-  message Message[]
-  media             Media[]
-  agent             Relationship[]     @relation("agent")
-  target            Relationship[]     @relation("target")
-  comment           Comment[]
-  post_tag          PostTag[]
-  post_interaction  PostInteraction[]
-  story_interaction StoryInteraction[]
-  reel_interaction  ReelInteraction[]
+  post                Post[]               @relation("creator")
+  story               Story[]
+  sound               Sound[]
+  reel                Reel[]
+  message             Message[]
+  media               Media[]
+  agent               Relationship[]       @relation("agent")
+  target              Relationship[]       @relation("target")
+  comment             Comment[]
+  post_tag            PostTag[]
+  post_interaction    PostInteraction[]
+  story_interaction   StoryInteraction[]
+  reel_interaction    ReelInteraction[]
   conversation_member ConversationMember[]
 
   created_at DateTime @default(now())
@@ -304,45 +308,45 @@ enum PeopleType {
   NO_ONE
 }
 
-
 model Message {
-  id String @id @default(uuid())
-  text String
+  id      String @id @default(uuid())
+  text    String
   user_id String
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  @@index([user_id, created_at, conversation_id])
-  @@index([user_id, conversation_id, created_at])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   conversation_id String
-  conversation Conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
-  @@index([conversation_id, created_at, user_id])
-  @@index([conversation_id, user_id, created_at])
+  conversation    Conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
 
   message_content_id String?
-  message_content MessageContent[]
+  message_content    MessageContent[]
 
   is_deleted Boolean @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@index([user_id, created_at, conversation_id])
+  @@index([user_id, conversation_id, created_at])
+  @@index([conversation_id, created_at, user_id])
+  @@index([conversation_id, user_id, created_at])
 }
 
 model MessageContent {
   message_id String
-  message Message @relation(fields: [message_id], references: [id], onDelete: Cascade)
-  @@index([message_id])
+  message    Message @relation(fields: [message_id], references: [id], onDelete: Cascade)
 
   content_id String
-  content Content @relation(fields: [content_id], references: [src], onDelete: Cascade)
-  @@index([content_id])
+  content    Content @relation(fields: [content_id], references: [src], onDelete: Cascade)
 
   @@id([message_id, content_id])
+  @@index([message_id])
+  @@index([content_id])
 }
 
 // things you can message people: posts, stories, reels, uploaded picture or video, profiles
 
 model Content {
-  src String @id
+  src          String             @id
   content_type MessageContentType
 
   message_content MessageContent[]
@@ -360,7 +364,7 @@ enum MessageContentType {
 model Conversation {
   id String @id @default(uuid())
 
-  message Message[]
+  message             Message[]
   conversation_member ConversationMember[]
 
   is_group_conversation Boolean @default(false)
@@ -372,12 +376,12 @@ model Conversation {
 
 model ConversationMember {
   conversation_id String
-  conversation Conversation @relation(fields: [conversation_id], references: [id])
-  @@index([conversation_id])
+  conversation    Conversation @relation(fields: [conversation_id], references: [id])
 
   member_id String
-  member User @relation(fields: [member_id], references: [id])
-  @@index([member_id])
+  member    User   @relation(fields: [member_id], references: [id])
 
   @@id([conversation_id, member_id])
+  @@index([conversation_id])
+  @@index([member_id])
 }

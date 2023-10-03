@@ -3,10 +3,18 @@ import Feed from "@/components/Feed/Feed";
 import HeartIcon from "@/Icons/HeartIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
-import BottomNavBar from "@/components/NavBar/BottomNavBar";
 import RightSideBar from "@/components/RightSideBar/RightSideBar";
+import { cookies } from "next/headers";
 
-export default function Home() {
+
+export default async function Home() {
+  const isAuth = cookies().get("JUNSU-AUTH");
+
+  if (!isAuth) {
+    return <div>You need to sign up</div>
+  }
+
+
   return (
     <>
       <header className="fixed top-0 flex items-center justify-between p-3 px-4 gap-4 border-b border-gray-500 w-full bg-white dark:bg-black dark:text-white z-10 sm:hidden border">
