@@ -8,7 +8,17 @@ const config: Config = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      xs: "468px",
+      sm: "768px",
+      auth: '877px',
+      md: "1160px",
+      lg: "1264px",
+    },
     extend: {
+      transitionDuration: {
+        '1500': '1500ms'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -85,12 +95,6 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-      },
-      screens: {
-        xs: "468px",
-        sm: "768px",
-        md: "1160px",
-        lg: "1264px",
       },
       transitionProperty: {
         height: "height",

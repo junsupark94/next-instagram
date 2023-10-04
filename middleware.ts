@@ -1,11 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const regex = /\.(jpg|jpeg|png|gif|bmp|tiff|webp|svg|mp4|avi|mkv|mov|wmv|flv|3gp|mpg|mpeg|webm|ogg|ogv|mp3|wav|flac|aac|wma|wmv|mkv)$/i;
+
+
 export function middleware(req: NextRequest) {
+
   if (req.nextUrl.href === `${req.nextUrl.origin}/`) {
     return NextResponse.next();
   }
 
   if (req.nextUrl.pathname.startsWith('/_next')) {
+    return NextResponse.next();
+  }
+
+  const isMediaRequest = req.nextUrl.pathname.match(regex);
+
+  if (isMediaRequest) {
     return NextResponse.next();
   }
 

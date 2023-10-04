@@ -16,9 +16,10 @@ model User {
   bio                 String?
   gender              String?
 
-  email           String @unique
-  hashed_password String @unique
-  salt            String @unique
+  email           String?  @unique
+  phone_number    String? @unique
+  hashed_password String  @unique
+  salt            String  @unique
 
   hide_like_count    Boolean @default(false)
   is_private_account Boolean @default(false)

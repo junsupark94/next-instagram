@@ -5,13 +5,14 @@ import InstagramLogo from "@/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
 import RightSideBar from "@/components/RightSideBar/RightSideBar";
 import { cookies } from "next/headers";
+import AuthPage from "./_components/auth-page";
 
 
 export default async function Home() {
   const isAuth = cookies().get("JUNSU-AUTH");
 
   if (!isAuth) {
-    return <div>You need to sign up</div>
+    return <AuthPage />
   }
 
 
