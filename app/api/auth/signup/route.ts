@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     const isPhone = data.login.match(phoneRegex);
     const isEmail = data.login.match(emailRegex);
 
-    const hashedPassword = await bcyrpt.hash(data.password, 10);
+    const hashedPassword = bcyrpt.hashSync(data.password, 10);
 
     if (isPhone) {
       const existingPhone = await db.user.findUnique({

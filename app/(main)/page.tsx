@@ -4,17 +4,8 @@ import HeartIcon from "@/Icons/HeartIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
 import RightSideBar from "@/components/RightSideBar/RightSideBar";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-let count = 1;
 export default async function Home() {
-  console.log("Home Page", count++);
-  const isAuth = cookies().get("JUNSU-AUTH")?.value === "some_secret";
-
-  if (!isAuth) {
-    redirect("/signin");
-  }
 
   return (
     <>

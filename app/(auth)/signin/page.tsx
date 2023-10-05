@@ -4,6 +4,12 @@ import AuthPhones from "./_components/auth-phones";
 import SignInForm from "./_components/sign-in-form";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Junsu Park's Instagram Clone - Sign In",
+  description: "Created by Junsu Park",
+};
 
 const SignInPage = () => {
   const isAuth = cookies().get("JUNSU-AUTH")?.value === "some_secret";

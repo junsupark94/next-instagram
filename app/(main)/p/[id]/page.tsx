@@ -13,15 +13,8 @@ import { USERS } from "@/utils/dummy-data-users";
 import Link from "next/link";
 import PostDescription from "@/components/PostDescription";
 import ReplyItems from "@/components/ReplyItems";
-import { useRouter } from "next/navigation";
-import cookies from "js-cookie"
 
 export default function Page({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  const isAuth = cookies.get("JUNSU-AUTH") === "some_secret"
-  if (!isAuth) {
-    router.replace("/");
-  }
 
   const post = useMemo(() => {
     return DUMMY_DATA.find((item) => item.id === Number(params.id));

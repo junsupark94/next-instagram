@@ -82,7 +82,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           <span>Switch accounts</span>
         </Button>
         <div className="border border-[#5555554c] -mx-2 my-2" />
-        <Button className="cursor-default line-through" onClick={logout}>
+        <Button onClick={logout}>
           <span>Log out</span>
         </Button>
       </section>

@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 import { SignUpType, signUpSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const [serverError, setServerError] = useState("");
   const {
     register,
@@ -42,7 +43,6 @@ const SignUpForm = () => {
         router.push("/");
       }
     } catch (error) {
-      console.log("WTF");
       console.error(error);
       setServerError("Something wen't wrong, please try again!");
     }

@@ -15,6 +15,7 @@ model User {
   profile_picture_url String?
   bio                 String?
   gender              String?
+  dark_mode           Boolean @default(true)
 
   email           String? @unique
   phone_number    String? @unique

@@ -8,8 +8,10 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
+  const router = useRouter();
   const [error, setError] = useState(false);
   const {
     register,
@@ -32,12 +34,14 @@ const SignInForm = () => {
     });
     if (!response.ok) {
       setError(true);
+    } else {
+      router.push("/");
     }
   };
   return (
     <>
       <form
-        className="flex flex-col items-center gap-y-[6px]"
+        className="flex flex-col items-center gap-y-[6px] w-full px-10"
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormInput

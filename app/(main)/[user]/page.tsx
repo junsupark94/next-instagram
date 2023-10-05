@@ -20,16 +20,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import cookies from 'js-cookie'
-import { useRouter } from "next/navigation";
 
 export default function ProfilePage({ params }: { params: { user: string } }) {
-  const router = useRouter();
-  const isAuth = cookies.get("JUNSU-AUTH") === "some_secret"
-  if (!isAuth) {
-    router.replace("/");
-  }
-
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(36);
   const [following, setFollowing] = useState(false);

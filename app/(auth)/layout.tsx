@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Junsu Park's Instagram Clone",
-  description: "Created by Junsu Park",
+  description: "Instagram Clone created by Junsu Park",
 };
 
 export default function RootLayout({

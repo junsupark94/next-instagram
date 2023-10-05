@@ -32,7 +32,8 @@ const PasswordInput = ({ watch, register }: FormInputProps) => {
       {watch("password") !== "" && (
         <button
           className="bg-neutral-100 pr-1 text-sm font-semibold"
-          onClick={() => setShowPassword((prev) => !prev)}
+          onClick={(e) => setShowPassword((prev) => !prev)}
+          type="button"
         >
           {showPassword ? "Hide" : "Show"}
         </button>
