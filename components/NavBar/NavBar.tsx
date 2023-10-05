@@ -11,20 +11,14 @@ import ReelsIcon from "@/Icons/ReelsIcon";
 import SearchIcon from "@/Icons/SearchIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
 import NavBarMenuButton from "./NavBarMenuButton";
-import { useGlobalStore } from "@/utils/zustand";
-import { useEffect } from "react";
+import { useContext } from "react";
 import BottomNavBar from "./BottomNavBar";
+import { AuthContext } from "@/providers/auth-provider";
 
 type NavBarProps = {};
 
 const NavBar: React.FC<NavBarProps> = () => {
-  const [darkMode] = useGlobalStore((state) => [state.darkMode]);
-
-  useEffect(() => {
-    const html = document.querySelector("html");
-    if (darkMode) html!.classList.add("dark");
-    else html!.classList.remove("dark");
-  }, [darkMode]);
+  const user = useContext(AuthContext);
 
   return (
     <nav className="w-[72px] lg:w-[244px] shrink-0 z-10">

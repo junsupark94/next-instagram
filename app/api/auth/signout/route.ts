@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+
+  console.log('SIGNOUT-GET')
   try {
-    const response = new NextResponse();
+    const response = NextResponse.redirect(`${req.nextUrl.origin}/signin`);
     response.cookies.delete("JUNSU-AUTH");
     response.cookies.delete("INSTAGRAM-CLONE-TOKEN")
     return response;

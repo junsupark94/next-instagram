@@ -7,7 +7,7 @@ import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/utils/cn";
 import { useGlobalStore } from "@/utils/zustand";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 
 type NavBarMenuProps = {
