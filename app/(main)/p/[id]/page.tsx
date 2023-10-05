@@ -13,9 +13,16 @@ import { USERS } from "@/utils/dummy-data-users";
 import Link from "next/link";
 import PostDescription from "@/components/PostDescription";
 import ReplyItems from "@/components/ReplyItems";
+import { useRouter } from "next/navigation";
+import cookies from "js-cookie"
 
 export default function Page({ params }: { params: { id: string } }) {
-  // console.log("Page render");
+  const router = useRouter();
+  const isAuth = cookies.get("JUNSU-AUTH") === "some_secret"
+  if (!isAuth) {
+    router.replace("/");
+  }
+
   const post = useMemo(() => {
     return DUMMY_DATA.find((item) => item.id === Number(params.id));
   }, [params.id]);
@@ -28,18 +35,18 @@ export default function Page({ params }: { params: { id: string } }) {
   if (!user) return <div>404 User Not Found</div>;
 
   return (
-    <div className="grow flex flex-col items-center mt-10 text-sm">
+    <div className="mt-10 flex grow flex-col items-center text-sm">
       <div className="h-[44px] sm:hidden">
-        <div className="h-[44px] fixed top-0 left-0 w-screen border z-10 bg-white dark:bg-black flex">
-          <Link href="/" className="py-3 px-4 text-xl font-semibold">
+        <div className="fixed left-0 top-0 z-10 flex h-[44px] w-screen border bg-white dark:bg-black">
+          <Link href="/" className="px-4 py-3 text-xl font-semibold">
             <LeftChevron />
           </Link>
-          <span className="grow flex items-center justify-center font-bold text-base">
+          <span className="flex grow items-center justify-center text-base font-bold">
             Post
           </span>
         </div>
       </div>
-      <main className="flex max-w-[850px] h-[600px] pb-10">
+      <main className="flex h-[600px] max-w-[850px] pb-10">
         <Carousel
           content={post.content}
           setLiked={setLiked}
@@ -47,21 +54,21 @@ export default function Page({ params }: { params: { id: string } }) {
           height={600}
           className="h-full"
         />
-        <section className="w-[355px] flex flex-col border dark:border-gray-800 border-[#dbdbdb]">
+        <section className="flex w-[355px] flex-col border border-[#dbdbdb] dark:border-gray-800">
           <PostHeader user={user} location={post.location} />
-          <article className="overflow-auto p-4 flex flex-col gap-2">
+          <article className="flex flex-col gap-2 overflow-auto p-4">
             <PostDescription user={user} post={post} />
             <ReplyItems replies={replies} textAreaRef={textAreaRef} />
           </article>
 
-          <div className="px-4 py-2 border-t dark:border-gray-800 border-[#dbdbdb]">
+          <div className="border-t border-[#dbdbdb] px-4 py-2 dark:border-gray-800">
             <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
             <span>{getRelativeTimeString(post.date)}</span>
           </div>
           <ReplyForm setReplies={setReplies} textAreaRef={textAreaRef} />
         </section>
       </main>
-      <section className="border-t dark:border-gray-800 border-[#dbdbdb] w-[900px] pt-16">
+      <section className="w-[900px] border-t border-[#dbdbdb] pt-16 dark:border-gray-800">
         <h1 className="font-gray-500 mb-5">
           More posts from
           <Link href={`/${post.account}`} className="font-white font-bold">

@@ -7,12 +7,15 @@ import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/utils/cn";
 import { useGlobalStore } from "@/utils/zustand";
+import { useRouter } from "next/navigation";
+
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
+  const router = useRouter();
   const [showDarkMode, setShowDarkMode] = useState(false);
   const [darkMode, toggleDarkMode] = useGlobalStore((state) => [
     state.darkMode,
@@ -31,6 +34,12 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
       document.removeEventListener("mousedown", clickOutside);
     };
   }, [menuRef, setShowMenu]);
+
+
+  const logout = async () => {
+    await fetch('/api/auth/signout')
+    router.refresh();
+  }
 
   return (
     <div
@@ -73,7 +82,7 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           <span>Switch accounts</span>
         </Button>
         <div className="border border-[#5555554c] -mx-2 my-2" />
-        <Button className="cursor-default line-through">
+        <Button className="cursor-default line-through" onClick={logout}>
           <span>Log out</span>
         </Button>
       </section>
