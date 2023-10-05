@@ -5,12 +5,11 @@ const inter = Inter({ subsets: ["latin"] });
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { AuthProvider } from "@/providers/auth-provider";
+import { AuthProvider } from "@/hooks/use-auth-hook";
 import NavBar from "@/components/NavBar/NavBar";
 
 import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
-import { NextResponse } from "next/server";
 
 export const metadata: Metadata = {
   title: "Junsu Park's Instagram Clone",
@@ -44,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={cn(user.dark_mode && "dark")}>
       <body className={`${inter.className} dark:bg-black dark:text-white`}>
-        <AuthProvider userId={userCookie.value}>
+        <AuthProvider user={user}>
           <div className="flex flex-col items-center sm:flex-row">
             <NavBar />
             {children}

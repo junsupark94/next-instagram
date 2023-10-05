@@ -16,6 +16,8 @@ model User {
   bio                 String?
   gender              String?
   dark_mode           Boolean @default(true)
+  verified            Boolean @default(false)
+  location            String?
 
   email           String? @unique
   phone_number    String? @unique

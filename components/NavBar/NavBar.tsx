@@ -11,91 +11,100 @@ import ReelsIcon from "@/Icons/ReelsIcon";
 import SearchIcon from "@/Icons/SearchIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
 import NavBarMenuButton from "./NavBarMenuButton";
-import { useContext } from "react";
 import BottomNavBar from "./BottomNavBar";
-import { AuthContext } from "@/providers/auth-provider";
+import { useAuth } from "@/hooks/use-auth-hook";
+import ProfileIcon from "@/Icons/ProfileIcon";
 
 type NavBarProps = {};
 
 const NavBar: React.FC<NavBarProps> = () => {
-  const user = useContext(AuthContext);
+  const user = useAuth();
 
   return (
-    <nav className="w-[72px] lg:w-[244px] shrink-0 z-10">
-      <div className="w-[72px] lg:w-[244px] hidden h-screen fixed top-0 left-0 dark:text-white pt-2 px-3 pb-3 sm:flex flex-col items-center lg:items-start border-r border-[#dbdbdb] dark:border-[#262626] justify-between">
+    <nav className="z-10 w-[72px] shrink-0 lg:w-[244px]">
+      <div className="fixed left-0 top-0 hidden h-screen w-[72px] flex-col items-center justify-between border-r border-[#dbdbdb] px-3 pb-3 pt-2 dark:border-[#262626] dark:text-white sm:flex lg:w-[244px] lg:items-start">
         <section className="w-full">
           <Link href="/">
-            <div className="mt-4 p-3 lg:hidden dark:hover:bg-hover hover:bg-gray-100 transition rounded-lg group">
-              <InstagramIcon className="w-6 h-6 group-hover:scale-110 transition-transform group-active:scale-100" />
+            <div className="group mt-4 rounded-lg p-3 transition hover:bg-gray-100 dark:hover:bg-hover lg:hidden">
+              <InstagramIcon className="h-6 w-6 transition-transform group-hover:scale-110 group-active:scale-100" />
             </div>
-            <div className="hidden lg:block pt-8 px-3">
+            <div className="hidden px-3 pt-8 lg:block">
               <InstagramLogo />
             </div>
           </Link>
-          <article className="flex flex-col gap-2 mt-8">
+          <article className="mt-8 flex flex-col gap-2">
             <Link
               href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
+              className="group flex items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <HomeIcon />
               </div>
-              <span className="font-bold hidden lg:inline">Home</span>
+              <span className="hidden font-bold lg:inline">Home</span>
             </Link>
             <button
               // href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
+              className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <SearchIcon className="group-hover:scale-110 transition-transform group-active:scale-100" />
-              <span className="hidden lg:inline line-through">Search</span>
+              <SearchIcon className="transition-transform group-hover:scale-110 group-active:scale-100" />
+              <span className="hidden line-through lg:inline">Search</span>
             </button>
             <button
               // href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
+              className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <ExploreIcon />
               </div>
-              <span className="hidden lg:inline line-through">Explore</span>
+              <span className="hidden line-through lg:inline">Explore</span>
             </button>
             <button
               // href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
+              className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <ReelsIcon />
               </div>
-              <span className="hidden lg:inline line-through">Reels</span>
+              <span className="hidden line-through lg:inline">Reels</span>
             </button>
             <button
               // href="/"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default"
+              className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <MessengerIcon />
               </div>
-              <span className="hidden lg:inline line-through">Messages</span>
+              <span className="hidden line-through lg:inline">Messages</span>
             </button>
-            <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default">
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+            <button className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <HeartIcon />
               </div>
-              <span className="hidden lg:inline line-through">
+              <span className="hidden line-through lg:inline">
                 Notifications
               </span>
             </button>
-            <button className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50 cursor-default">
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
+            <button className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover">
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <PostIcon />
               </div>
-              <span className="hidden lg:inline line-through">Create</span>
+              <span className="hidden line-through lg:inline">Create</span>
             </button>
             <Link
-              href="/junsupark"
-              className="flex items-center gap-4 dark:hover:bg-hover hover:bg-gray-100 transition p-3 rounded-lg group active:brightness-50"
+              href={user.username}
+              className="group flex items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
-              <div className="group-hover:scale-110 transition-transform group-active:scale-100">
-                <Image  src="/junsu park.jpeg" alt="profile picture" width={30} height={30} className="rounded-full"/>
+              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
+                {!user.profile_picture_url && <ProfileIcon />}
+                {user.profile_picture_url && (
+                  <Image
+                    src={user.profile_picture_url}
+                    alt="profile picture"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                )}
               </div>
               <span className="hidden lg:inline">Profile</span>
             </Link>
@@ -103,7 +112,7 @@ const NavBar: React.FC<NavBarProps> = () => {
         </section>
         <NavBarMenuButton />
       </div>
-      <div className="sm:hidden fixed bottom-0 left-0 w-screen">
+      <div className="fixed bottom-0 left-0 w-screen sm:hidden">
         <BottomNavBar />
       </div>
     </nav>
