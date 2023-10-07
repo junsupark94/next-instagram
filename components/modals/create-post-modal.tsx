@@ -1,41 +1,44 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
-import {
-  Overlay,
-  useDialog,
-  useModalOverlay,
-  useOverlayTrigger,
-} from "react-aria";
-import { useOverlayTriggerState } from "react-stately";
-import Button from "@/components/aria-ui/button";
-import { useCreateModal } from "@/hooks/use-create-modal";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Overlay } from "react-aria";
+import DragAndDropZone from "./drag-and-drop-zone";
+import { useModalDialog } from "./use-modal-dialog";
+import { useDragAndDrop } from "./use-drag-and-drop";
 
 const CreatePostModal = () => {
-  const [setTriggerProps] = useCreateModal((state) => [state.setTriggerProps]);
-
-  const state = useOverlayTriggerState({});
-
-  const { triggerProps, overlayProps } = useOverlayTrigger(
-    { type: "dialog" },
+  const {
     state,
-  );
-
-  const modalRef = useRef(null);
-  const { modalProps, underlayProps } = useModalOverlay(
-    { isDismissable: true },
-    state,
+    underlayProps,
+    modalProps,
     modalRef,
-  );
+    dialogRef,
+    dialogProps,
+    titleProps,
+  } = useModalDialog();
 
-  const dialogRef = useRef(null);
-  const { dialogProps, titleProps } = useDialog(overlayProps, dialogRef);
+  const { showDropZone, DnDZone } = useDragAndDrop();
 
-  useEffect(() => {
-    setTriggerProps(triggerProps);
-  }, []);
+  const [files, setFiles] = useState<string[]>([]);
 
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    const fileList = Array.from(e.target.files);
+    const files: string[] = [];
+
+    fileList.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        files.push(e.target!.result as string);
+        if (files.length === fileList.length) {
+          setFiles(files);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   if (!state.isOpen) return null;
 
@@ -53,40 +56,62 @@ const CreatePostModal = () => {
           <div
             {...dialogProps}
             ref={dialogRef}
-            className="grow rounded-xl bg-[#262626]"
+            className="flex grow flex-col rounded-xl bg-[#262626]"
           >
-            <h1 className="border-b border-[#363636] py-2 text-center font-semibold">
+            <h1
+              {...titleProps}
+              className="border-b border-[#363636] py-2 text-center font-semibold"
+            >
               Create new post
             </h1>
-            <article className="flex h-full w-full flex-col items-center justify-center">
-              <PhotoVideoIcon />
+            <article
+              className={cn(
+                "flex w-full grow flex-col items-center justify-center rounded-xl",
+                showDropZone && "bg-neutral-900",
+              )}
+            >
+              <PhotoVideoIcon className={cn(showDropZone && "text-sky-500")} />
               <p className="mt-4 text-xl">Drag photos and videos here</p>
-              <form className="mt-4 rounded-lg bg-sky-500 px-4 py-1.5" onChange={e => console.log(e)}>
+
+              <form
+                className="mt-4 rounded-lg bg-sky-500 px-4 py-1.5"
+                onChange={(e) => {}}
+              >
                 <label>
-                  <span className="text-sm cursor-pointer">Select from computer</span>
-                  <input type="file" className="hidden"/>
+                  <span className="cursor-pointer text-sm">
+                    Select from computer
+                  </span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    multiple
+                    accept="image/jpeg,image/png,image/heic,image/heif,video/mp4,video/quicktime"
+                    onChange={onChange}
+                  />
                 </label>
               </form>
             </article>
           </div>
         </div>
       </div>
+      {DnDZone}
     </Overlay>
   );
 };
 
 export default CreatePostModal;
 
-function PhotoVideoIcon() {
+function PhotoVideoIcon({ className }: { className: string }) {
   return (
     <svg
       aria-label="Icon to represent media such as images or videos"
-      color="rgb(245, 245, 245)"
-      fill="rgb(245, 245, 245)"
+      color="currentColor"
+      fill="currentColor"
       height="77"
       role="img"
       viewBox="0 0 97.6 77.3"
       width="96"
+      className={className}
     >
       <title>Icon to represent media such as images or videos</title>
       <path
