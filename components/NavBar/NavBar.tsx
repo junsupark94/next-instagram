@@ -5,7 +5,6 @@ import HeartIcon from "@/Icons/HeartIcon";
 import HomeIcon from "@/Icons/HomeIcon";
 import InstagramIcon from "@/Icons/InstagramIcon";
 import MessengerIcon from "@/Icons/MessengerIcon";
-import PostIcon from "@/Icons/CreateIcon";
 import Image from "next/image";
 import ReelsIcon from "@/Icons/ReelsIcon";
 import SearchIcon from "@/Icons/SearchIcon";
@@ -14,6 +13,9 @@ import NavBarMenuButton from "./NavBarMenuButton";
 import BottomNavBar from "./BottomNavBar";
 import { useAuth } from "@/hooks/use-auth-hook";
 import ProfileIcon from "@/Icons/ProfileIcon";
+import Button from "@/components/aria-ui/button";
+import PostButton from "./post-button";
+
 
 type NavBarProps = {};
 
@@ -67,7 +69,7 @@ const NavBar: React.FC<NavBarProps> = () => {
               </div>
               <span className="hidden line-through lg:inline">Reels</span>
             </button>
-            <button
+            <Button
               // href="/"
               className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
@@ -75,7 +77,7 @@ const NavBar: React.FC<NavBarProps> = () => {
                 <MessengerIcon />
               </div>
               <span className="hidden line-through lg:inline">Messages</span>
-            </button>
+            </Button>
             <button className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover">
               <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <HeartIcon />
@@ -84,12 +86,8 @@ const NavBar: React.FC<NavBarProps> = () => {
                 Notifications
               </span>
             </button>
-            <button className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover">
-              <div className="transition-transform group-hover:scale-110 group-active:scale-100">
-                <PostIcon />
-              </div>
-              <span className="hidden line-through lg:inline">Create</span>
-            </button>
+            {/* OVER HERE JUNSU */}
+            <PostButton />
             <Link
               href={user.username}
               className="group flex items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"

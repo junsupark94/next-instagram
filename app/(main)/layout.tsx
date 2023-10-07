@@ -10,6 +10,7 @@ import NavBar from "@/components/NavBar/NavBar";
 
 import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
+import { ModalProvider } from "@/components/providers/modal-providers";
 
 export const metadata: Metadata = {
   title: "Junsu Park's Instagram Clone",
@@ -46,6 +47,7 @@ export default async function RootLayout({
         <AuthProvider user={user}>
           <div className="flex flex-col items-center sm:flex-row">
             <NavBar />
+            <ModalProvider />
             {children}
           </div>
           {modal}
