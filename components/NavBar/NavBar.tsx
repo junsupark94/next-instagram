@@ -13,7 +13,7 @@ import NavBarMenuButton from "./NavBarMenuButton";
 import BottomNavBar from "./BottomNavBar";
 import { useAuth } from "@/hooks/use-auth-hook";
 import ProfileIcon from "@/Icons/ProfileIcon";
-import Button from "@/components/aria-ui/button";
+import {Button} from "react-aria-components";
 import PostButton from "./post-button";
 
 
