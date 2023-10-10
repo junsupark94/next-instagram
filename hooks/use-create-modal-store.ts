@@ -6,7 +6,7 @@ interface CreateModalStore {
   setTriggerProps: (newTriggerProps: any) => void;
 }
 
-export const useCreateModal = create<CreateModalStore>(set => ({
+export const useCreateModalStore = create<CreateModalStore>(set => ({
   setTriggerProps: (newTriggerProps) => set({triggerProps: newTriggerProps}),
   triggerProps: {},
 }))

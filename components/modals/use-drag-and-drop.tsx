@@ -2,16 +2,16 @@
 
 import { cn } from "@/lib/utils";
 import {
-  ChangeEvent,
   Dispatch,
   DragEventHandler,
   SetStateAction,
   useEffect,
   useState,
 } from "react";
+import { PicsAndVids } from "./create-post-modal";
 
 export function useDragAndDrop(
-  setFiles: Dispatch<SetStateAction<string[]>>,
+  setFiles: Dispatch<SetStateAction<PicsAndVids[]>>,
   setInvalidFile: Dispatch<SetStateAction<File | undefined>>,
 ) {
   const [showDropZone, setShowDropZone] = useState(false);
@@ -66,11 +66,15 @@ export function useDragAndDrop(
       setInvalidFile(undefined);
     }
 
-    const newFiles: string[] = [];
+    const newFiles: PicsAndVids[] = [];
     fileList.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        newFiles.push(e.target!.result as string);
+        const src = e.target!.result as string;
+        const type = file.type.split('/')[0];
+        const name = file.name;
+
+        newFiles.push({src, type, name});
         if (newFiles.length === fileList.length) {
           setFiles(newFiles);
         }

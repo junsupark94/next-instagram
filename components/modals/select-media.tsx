@@ -3,6 +3,7 @@ import { useDragAndDrop } from "./use-drag-and-drop";
 import { FileTrigger, Button } from "react-aria-components";
 import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
+import { PicsAndVids } from "./create-post-modal";
 
 const SelectMedia = ({
   setFiles,
@@ -11,18 +12,23 @@ const SelectMedia = ({
 }: {
   setInvalidFile: Dispatch<SetStateAction<File | undefined>>;
   invalidFile: File | undefined;
-  setFiles: Dispatch<SetStateAction<string[]>>;
+  setFiles: Dispatch<SetStateAction<PicsAndVids[]>>;
 }) => {
   const { showDropZone, DnDZone } = useDragAndDrop(setFiles, setInvalidFile);
 
   const onSelect = (files: FileList | null) => {
     if (!files) return;
+
     const fileList = Array.from(files);
-    const newFiles: string[] = [];
+    const newFiles: PicsAndVids[] = [];
     fileList.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        newFiles.push(e.target!.result as string);
+        const src = e.target!.result as string;
+        const type = file.type.split('/')[0];
+        const name = file.name;
+
+        newFiles.push({ src, type, name });
         if (newFiles.length === fileList.length) {
           setFiles(newFiles);
         }

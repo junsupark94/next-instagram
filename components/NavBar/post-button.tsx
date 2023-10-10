@@ -1,9 +1,9 @@
 "use client";
 import PostIcon from "@/Icons/CreateIcon";
-import { useCreateModal } from "@/hooks/use-create-modal";
+import { useCreateModalStore } from "@/hooks/use-create-modal-store";
 import { Button } from "react-aria-components";
 const PostButton = () => {
-  const triggerProps = useCreateModal((state) => state.triggerProps);
+  const triggerProps = useCreateModalStore((state) => state.triggerProps);
   return (
     <Button
       {...triggerProps}

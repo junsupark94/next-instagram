@@ -1,12 +1,11 @@
-import { useCreateModal } from "@/hooks/use-create-modal";
+import { useCreateModalStore } from "@/hooks/use-create-modal-store";
 import { useEffect, useRef } from "react";
 import { useOverlayTrigger, useModalOverlay, useDialog } from "react-aria";
 import { useOverlayTriggerState } from "react-stately";
 
-export function useModalDialog() {
-  const [setTriggerProps] = useCreateModal((state) => [state.setTriggerProps]);
+export function useCreateModal() {
   const state = useOverlayTriggerState({});
-
+  const setTriggerProps = useCreateModalStore((state) => state.setTriggerProps);
   const { triggerProps, overlayProps } = useOverlayTrigger(
     { type: "dialog" },
     state,
@@ -25,5 +24,13 @@ export function useModalDialog() {
   const dialogRef = useRef(null);
   const { dialogProps, titleProps } = useDialog(overlayProps, dialogRef);
 
-  return { state, underlayProps, modalProps, modalRef, dialogRef, dialogProps, titleProps };
+  return {
+    state,
+    underlayProps,
+    modalProps,
+    modalRef,
+    dialogRef,
+    dialogProps,
+    titleProps,
+  };
 }

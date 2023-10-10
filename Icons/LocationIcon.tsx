@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 type LocationIconProps = {
   className?: string
 };
 
-const LocationIcon: React.FC<LocationIconProps> = ({className = "w-6 h-6"}) => {
+const LocationIcon: React.FC<LocationIconProps> = ({className}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +13,7 @@ const LocationIcon: React.FC<LocationIconProps> = ({className = "w-6 h-6"}) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={className}
+      className={cn("w-6 h-6", className)}
     >
       <path
         strokeLinecap="round"
