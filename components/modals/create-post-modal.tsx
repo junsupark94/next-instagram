@@ -87,7 +87,7 @@ const CreatePostModal = () => {
                 {invalidFile ? "File couldn't be uploaded" : "Create new post"}
               </h1>
               {!!files.length && (
-                <Button className="text-sm font-semibold text-sky-500">
+                <Button className="text-sm font-semibold text-sky-500" form="postForm" type="submit">
                   Share
                 </Button>
               )}

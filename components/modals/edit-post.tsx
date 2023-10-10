@@ -22,7 +22,7 @@ import { PicsAndVids } from "./create-post-modal";
 import PlayIcon from "@/Icons/PlayIcon";
 import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PostType, postSchema } from "@/lib/zod";
 
@@ -34,6 +34,33 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
   const { src, type, name } = files[index];
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+
+  const { control, register, handleSubmit, formState } = useForm<PostType>({
+    resolver: zodResolver(postSchema),
+    defaultValues: {
+      media: files.map((file) => ({
+        name: file.name,
+      })),
+      creator_id: user.id,
+    },
+  });
+  const {field : statField} = useController({
+    control,
+    name: "hide_stats"
+  })
+  const {field: commentField} = useController({
+    control,
+    name: "disable_comments",
+  })
+  const {field: descriptionField} = useController({
+    control,
+    name: 'description'
+  })
+
+  const onSubmit = (formData: PostType) => {
+    console.log("formData", formData);
+  };
+
 
   return (
     <div className="flex h-[100vmin] max-h-[736px] min-h-[348px] grow rounded-xl">
@@ -86,7 +113,11 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
         )}
       </div>
       <ScrollArea className="border-l border-neutral-500">
-        <form className="flex w-[340px] flex-col gap-y-3 p-3">
+        <form
+          className="flex w-[340px] flex-col gap-y-3 p-3"
+          onSubmit={handleSubmit(onSubmit)}
+          id="postForm"
+        >
           <div className="flex items-center gap-2">
             {!user.profile_picture_url && <ProfileIcon />}
             {user.profile_picture_url && (
@@ -103,8 +134,10 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
           <div className="relative">
             <textarea
               className="h-[168px] w-full resize-none bg-transparent outline-none"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                descriptionField.onChange(e.target.value)
+              }}
             />
             <div
               className={cn(
@@ -123,6 +156,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
             <input
               type="text"
               placeholder="Add location"
+              {...register("location")}
               className="grow bg-transparent placeholder:text-neutral-500 focus:outline-none"
             />
             <LocationIcon className="h-4 w-4" />
@@ -140,7 +174,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
                 photos or you can choose to write your own.
               </div>
               <div className="flex flex-col gap-2">
-                {files.map((file) => (
+                {files.map((file, index) => (
                   <div key={file.name} className="flex items-center gap-3">
                     {file.type === "image" && (
                       <Image
@@ -148,6 +182,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
                         alt={file.name}
                         width={44}
                         height={44}
+                        className="aspect-square bg-black object-contain"
                       />
                     )}
                     {file.type === "video" && (
@@ -159,6 +194,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
                       />
                     )}
                     <input
+                      {...register(`media.${index}.alt_text`)}
                       type="text"
                       placeholder="Write alt text"
                       className="w-full rounded-md bg-transparent p-3 text-sm placeholder:text-neutral-500 focus:outline focus:outline-1 focus:outline-[#555555]"
@@ -178,7 +214,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
               <section className="mt-3">
                 <div className="mb-2 flex">
                   <div>Hide like and view counts on this post</div>
-                  <Switch />
+                  <Switch onCheckedChange={checked => statField.onChange(checked)}/>
                 </div>
                 <div className="text-xs text-neutral-500">
                   Only you will see the total number of likes and views on this
@@ -190,7 +226,7 @@ const EditPost = ({ files }: { files: PicsAndVids[] }) => {
               <section className="mt-3">
                 <div className="mb-2 flex justify-between">
                   <div>Turn off commenting</div>
-                  <Switch />
+                  <Switch onCheckedChange={checked => commentField.onChange(checked)}/>
                 </div>
                 <div className="text-xs text-neutral-500">
                   You can change this later by going to the ··· menu at the top

@@ -38,11 +38,11 @@ export const signInSchema = z.object({
 export type SignInType = z.infer<typeof signInSchema>;
 
 export const postSchema = z.object({
-  description : z.string(),
+  description : z.string().default(""),
   location: z.string().optional(),
   creator_id: z.string(),
-  hide_stats: z.boolean(),
-  disable_comments: z.boolean(),
+  hide_stats: z.boolean().default(false),
+  disable_comments: z.boolean().default(false),
   media: z.array(z.object({
     name: z.string(),
     alt_text: z.string().optional()
