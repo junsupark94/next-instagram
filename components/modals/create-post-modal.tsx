@@ -8,7 +8,7 @@ import {
   useOverlayTrigger,
 } from "react-aria";
 import SelectMedia from "./select-media";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Button } from "react-aria-components";
 import EditPost from "./edit-post";
@@ -16,9 +16,10 @@ import { useCreateModalStore } from "@/hooks/use-create-modal-store";
 import { useOverlayTriggerState } from "react-stately";
 
 export type PicsAndVids = {
+  uploadFile: File;
   src: string;
-  type: string;
-  name: string;
+  type: 'IMAGE' | 'VIDEO';
+  uuid: string;
 };
 
 const CreatePostModal = () => {
@@ -30,6 +31,7 @@ const CreatePostModal = () => {
     onOpenChange: (isOpen: boolean) => {
       if (!isOpen) {
         setFiles([]);
+        setShowWarning(false);
       }
     },
   });
@@ -74,32 +76,21 @@ const CreatePostModal = () => {
             ref={dialogRef}
             className="flex grow flex-col rounded-xl bg-[#262626]"
           >
-            <article className="flex items-center justify-between border-b border-[#363636] px-3">
-              {!!files.length && (
-                <Button onPress={() => setShowWarning(true)}>
-                  <ArrowLeftIcon className="h-6 w-6" />
-                </Button>
-              )}
-              <h1
-                {...titleProps}
-                className=" grow py-2 text-center font-semibold"
-              >
-                {invalidFile ? "File couldn't be uploaded" : "Create new post"}
-              </h1>
-              {!!files.length && (
-                <Button className="text-sm font-semibold text-sky-500" form="postForm" type="submit">
-                  Share
-                </Button>
-              )}
-            </article>
             {!files.length && (
               <SelectMedia
                 invalidFile={invalidFile}
                 setFiles={setFiles}
                 setInvalidFile={setInvalidFile}
+                titleProps={titleProps}
               />
             )}
-            {!!files.length && <EditPost files={files} />}
+            {!!files.length && (
+              <EditPost
+                files={files}
+                titleProps={titleProps}
+                setShowWarning={setShowWarning}
+              />
+            )}
             {showWarning && (
               <div
                 className="fixed inset-0 flex items-center justify-center bg-black/40"

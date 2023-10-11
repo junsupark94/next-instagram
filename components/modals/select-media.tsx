@@ -4,15 +4,18 @@ import { FileTrigger, Button } from "react-aria-components";
 import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction } from "react";
 import { PicsAndVids } from "./create-post-modal";
+import { v4 as uuid } from "uuid";
 
 const SelectMedia = ({
   setFiles,
   invalidFile,
   setInvalidFile,
+  titleProps,
 }: {
   setInvalidFile: Dispatch<SetStateAction<File | undefined>>;
   invalidFile: File | undefined;
   setFiles: Dispatch<SetStateAction<PicsAndVids[]>>;
+  titleProps: any;
 }) => {
   const { showDropZone, DnDZone } = useDragAndDrop(setFiles, setInvalidFile);
 
@@ -20,17 +23,18 @@ const SelectMedia = ({
     if (!files) return;
 
     const fileList = Array.from(files);
-    const newFiles: PicsAndVids[] = [];
+
+    const collection: PicsAndVids[] = [];
+
     fileList.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const src = e.target!.result as string;
-        const type = file.type.split('/')[0];
-        const name = file.name;
+        const type = file.type.split("/")[0].toUpperCase() as 'IMAGE' | 'VIDEO';
 
-        newFiles.push({ src, type, name });
-        if (newFiles.length === fileList.length) {
-          setFiles(newFiles);
+        collection.push({ src, type, uuid: uuid(), uploadFile: file });
+        if (collection.length === fileList.length) {
+          setFiles(collection)
         }
       };
       reader.readAsDataURL(file);
@@ -39,6 +43,11 @@ const SelectMedia = ({
 
   return (
     <>
+      <article className="flex items-center justify-between border-b border-[#363636] px-3">
+        <h1 {...titleProps} className=" grow py-2 text-center font-semibold">
+          {invalidFile ? "File couldn't be uploaded" : "Create new post"}
+        </h1>
+      </article>
       <div
         className={cn(
           "flex w-full grow flex-col items-center justify-center rounded-xl",

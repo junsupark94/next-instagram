@@ -2,7 +2,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Close, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils"
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Dialog, DialogHeader } from "./ui/dialog";
 import { User } from "@prisma/client";

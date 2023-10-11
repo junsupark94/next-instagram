@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { PicsAndVids } from "./create-post-modal";
+import { v4 as uuid } from "uuid";
 
 export function useDragAndDrop(
   setFiles: Dispatch<SetStateAction<PicsAndVids[]>>,
@@ -65,18 +66,19 @@ export function useDragAndDrop(
     } else {
       setInvalidFile(undefined);
     }
-
-    const newFiles: PicsAndVids[] = [];
+    const collection: PicsAndVids[] = [];
     fileList.forEach((file) => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const src = e.target!.result as string;
-        const type = file.type.split('/')[0];
-        const name = file.name;
+        let type : "IMAGE" | "VIDEO";
+        if (file.type.split("/")[0] === 'image') {
+          type = "IMAGE"
+        } else type = "VIDEO"
 
-        newFiles.push({src, type, name});
-        if (newFiles.length === fileList.length) {
-          setFiles(newFiles);
+        collection.push({ src, type, uuid: uuid(), uploadFile: file });
+        if (collection.length === fileList.length) {
+          setFiles(collection);
         }
       };
       reader.readAsDataURL(file);

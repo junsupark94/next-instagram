@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import HeartIcon from "@/Icons/HeartIcon";
 import VideoPlayer from "./VideoPlayer";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import createDoubleClick from "@/utils/double-click";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

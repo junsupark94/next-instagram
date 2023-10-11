@@ -4,7 +4,7 @@ import { Post, Reply, getReplyId } from "@/utils/dummy-data-posts";
 import FeedItemDescription from "./FeedItemDescription";
 import Carousel from "../Carousel";
 import Link from "next/link";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
 import PostIcons from "../PostIcons";
 import PostHeader from "../PostHeader";

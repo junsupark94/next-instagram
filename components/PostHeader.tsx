@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import UnfollowDialog from "./UnfollowDialog";
 import { Post } from "@/utils/dummy-data-posts";
 import VerifiedIcon from "@/Icons/VerifiedIcon";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 
 type PostHeaderProps = {
   user: User;

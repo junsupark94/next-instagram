@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState } from "react";
 import PlayIcon from "@/Icons/PlayIcon";
 import MutedIcon from "@/Icons/MutedIcon";

@@ -39,13 +39,16 @@ export type SignInType = z.infer<typeof signInSchema>;
 
 export const postSchema = z.object({
   description : z.string().default(""),
-  location: z.string().optional(),
+  location_name: z.string().optional(),
   creator_id: z.string(),
   hide_stats: z.boolean().default(false),
-  disable_comments: z.boolean().default(false),
+  hide_comments: z.boolean().default(false),
   media: z.array(z.object({
-    name: z.string(),
-    alt_text: z.string().optional()
+    uuid: z.string(),
+    alt_text: z.string().optional(),
+    src: z.string().default(""),
+    type: z.enum(['IMAGE', 'VIDEO']),
+    position: z.number(),
   }))
 })
 

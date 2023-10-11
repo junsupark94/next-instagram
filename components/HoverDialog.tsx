@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import ProfileIcon from "@/Icons/ProfileIcon";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

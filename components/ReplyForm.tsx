@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import React, { KeyboardEventHandler, RefObject, useCallback, useEffect, useState } from "react";
 import ProfileIcon from "@/Icons/ProfileIcon";
 import { Reply} from "@/utils/dummy-data-posts";

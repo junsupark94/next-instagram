@@ -4,7 +4,7 @@ import VerifiedIcon from "@/Icons/VerifiedIcon";
 import { getShortenedRelative } from "@/utils/relative-time";
 import { User } from "@/utils/dummy-data-users";
 import { Post } from "@/utils/dummy-data-posts";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { convertText } from "@/utils/truncateText";
 

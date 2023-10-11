@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import resetPassword from "@/public/resetpassword.png";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { useState } from "react";
 import Link from "next/link";
 const ResetPasswordPage = () => {
