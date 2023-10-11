@@ -7,7 +7,8 @@ const Feed = async () => {
     take: 100,
     include: {
       media: true,
-      creator: true
+      creator: true,
+      comment: true
     },
   })
 

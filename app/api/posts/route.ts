@@ -10,13 +10,13 @@ export async function POST(req: NextRequest) {
       return new NextResponse("Invalid data", { status: 400 });
     }
 
-    const existingUser = await db.user.findUnique({
+    const user = await db.user.findUnique({
       where: {
         id: data.creator_id,
       },
     });
 
-    if (!existingUser) {
+    if (!user) {
       return new NextResponse("Internal error", { status: 500 });
     }
 
@@ -42,7 +42,15 @@ export async function POST(req: NextRequest) {
               src,
               type,
               id: uuid,
-              alt_text,
+              alt_text:
+                alt_text ||
+                `${type === "IMAGE" ? "Photo" : "Video"} by ${
+                  user.profile_name
+                } on ${new Date().toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                })}`,
               position,
               user_id: creator_id,
             })),
@@ -51,7 +59,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.redirect(`${req.nextUrl.origin}/p/${response.id}`)
+    return NextResponse.redirect(`${req.nextUrl.origin}/p/${response.id}`);
   } catch (error) {
     console.log("[POSTS_POST]", error);
     return new NextResponse("Internal error", { status: 500 });
