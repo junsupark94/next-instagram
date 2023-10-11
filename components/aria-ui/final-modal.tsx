@@ -6,8 +6,8 @@ import {
   useModalOverlay,
   useOverlayTrigger,
 } from "react-aria";
+import { Button } from "react-aria-components";
 import { useOverlayTriggerState } from "react-stately";
-import Button from "./button";
 
 const FinalModal = () => {
   const state = useOverlayTriggerState({});

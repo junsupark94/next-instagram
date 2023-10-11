@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { Reply, ThreadItem, getReplyId } from './dummy-data-posts';
 
 
 export default function useReplySubmitHandler() {

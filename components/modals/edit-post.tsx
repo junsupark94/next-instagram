@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import ProfileIcon from "@/Icons/ProfileIcon";
 import LocationIcon from "@/Icons/LocationIcon";
 import {
   Collapsible,
@@ -9,7 +8,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useRef, useState } from "react";
 import EmojiIcon from "@/Icons/EmojiIcon";
-import { cn } from "@/lib/utils";
+import { cn, default_profile_picture } from "@/lib/utils";
 import {
   ArrowLeftIcon,
   ChevronDownIcon,
@@ -56,7 +55,7 @@ const EditPost = ({
       media: files.map((file, index) => ({
         uuid: file.uuid,
         type: file.type,
-        position: index
+        position: index,
       })),
       creator_id: user.id,
     },
@@ -105,8 +104,7 @@ const EditPost = ({
 
       const responseData = await response.json();
 
-      console.log('responseData', responseData);
-
+      console.log("responseData", responseData);
     } catch (error) {
       console.log(error);
       setUploadError(true);
@@ -187,16 +185,13 @@ const EditPost = ({
             id="postForm"
           >
             <div className="flex items-center gap-2">
-              {!user.profile_picture_url && <ProfileIcon />}
-              {user.profile_picture_url && (
-                <Image
-                  src={user.profile_picture_url}
-                  alt="Your profile picture"
-                  className="rounded-full"
-                  height={28}
-                  width={28}
-                />
-              )}
+              <Image
+                src={user.profile_picture_url || default_profile_picture}
+                alt="Your profile picture"
+                className="rounded-full"
+                height={28}
+                width={28}
+              />
               <span className="text-sm font-semibold">{user.username}</span>
             </div>
             <div className="relative">

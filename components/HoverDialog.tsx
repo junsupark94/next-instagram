@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import ProfileIcon from "@/Icons/ProfileIcon";
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import { cn, default_profile_picture } from "@/lib/utils";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MessengerIcon from "@/Icons/MessengerIcon";
-import { User } from "@/utils/dummy-data-users";
+import { User } from "@prisma/client";
 
 type HoverDialogProps = {
   children: JSX.Element;
@@ -19,7 +18,7 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
     clearTimeout(timer);
     timer = setTimeout(async () => {
       dialogRef.current!.style.display = "block";
-      await new Promise(res => setTimeout(res, 1))
+      await new Promise((res) => setTimeout(res, 1));
       dialogRef.current!.style.opacity = "100";
     }, 1000);
   };
@@ -27,13 +26,13 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
     clearTimeout(timer);
     timer = setTimeout(async () => {
       dialogRef.current!.style.opacity = "0";
-      await new Promise(res => setTimeout(res, 150))
+      await new Promise((res) => setTimeout(res, 150));
       dialogRef.current!.style.display = "none";
     }, 600);
   };
   useEffect(() => {
     return () => clearTimeout(timer);
-  }, [])
+  }, []);
 
   return (
     <div
@@ -46,17 +45,22 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
         <div
           ref={dialogRef}
           className={cn(
-            "absolute hidden opacity-0 transition bg-black w-[340px] text-[#f5f5f5] rounded-lg text-sm"
+            "absolute hidden w-[340px] rounded-lg bg-black text-sm text-[#f5f5f5] opacity-0 transition",
           )}
         >
-          <div className="flex p-3 pb-1 items-center gap-3">
-            <ProfileIcon className="w-12 h-12" />
+          <div className="flex items-center gap-3 p-3 pb-1">
+            <Image
+              src={default_profile_picture}
+              width={44}
+              height={44}
+              alt="image"
+            />
             <div>
               <div className="text-base">account</div>
               <div className="text-[#a8a8a8]">display name</div>
             </div>
           </div>
-          <article className="p-3 flex justify-around">
+          <article className="flex justify-around p-3">
             <div className="text-center">
               <div>{user.postCount}</div>
               <div>posts</div>
@@ -77,7 +81,7 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px] object-cover"
+                className="h-[120px] w-[120px] object-cover"
               />
             </Link>
             <Link href={`/p/2`}>
@@ -86,7 +90,7 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px] object-cover"
+                className="h-[120px] w-[120px] object-cover"
               />
             </Link>
             <Link href={`/p/3`}>
@@ -95,12 +99,12 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
                 alt="image"
                 width={120}
                 height={120}
-                className="w-[120px] h-[120px] object-cover"
+                className="h-[120px] w-[120px] object-cover"
               />
             </Link>
           </div>
           <div className="flex gap-2 p-3 font-semibold">
-            <button className="grow rounded-lg bg-[#0095f6] py-1.5 flex justify-center items-center gap-2">
+            <button className="flex grow items-center justify-center gap-2 rounded-lg bg-[#0095f6] py-1.5">
               <MessengerIcon /> Message
             </button>
             <button className="grow rounded-lg bg-[#363636] py-2">

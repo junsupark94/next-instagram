@@ -7,8 +7,8 @@ import {
   useModalOverlay,
   useOverlayTrigger,
 } from "react-aria";
+import { Button } from "react-aria-components";
 import { OverlayTriggerState, useOverlayTriggerState } from "react-stately";
-import Button from "./button";
 
 const Modal = ({
   state,

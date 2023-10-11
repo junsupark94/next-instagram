@@ -1,12 +1,11 @@
-import { cn } from "@/lib/utils";
-import React, { KeyboardEventHandler, RefObject, useCallback, useEffect, useState } from "react";
-import ProfileIcon from "@/Icons/ProfileIcon";
-import { Reply} from "@/utils/dummy-data-posts";
+import { cn, default_profile_picture } from "@/lib/utils";
+import React, {  RefObject, useCallback, useState } from "react";
 import useReplySubmitHandler from "@/utils/useReplySubmitHandler";
 import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
+import Image from "next/image";
 
 type ReplyFormProps = {
-  setReplies: React.Dispatch<React.SetStateAction<Reply[]>>;
+  setReplies: any;
   textAreaRef: RefObject<HTMLTextAreaElement>;
 };
 
@@ -33,7 +32,7 @@ const ReplyForm: React.FC<ReplyFormProps> = ({ setReplies, textAreaRef }) => {
       }
       onKeyDown={e => enterKeyDown(e, value)}
     >
-      <ProfileIcon className="mr-2" />
+      <Image src={default_profile_picture} alt="profile picture" className="mr-2" width={40} height={40}/>
       <textarea
         className="dark:bg-black dark:text-white resize-none outline-none grow"
         placeholder="Add a comment..."

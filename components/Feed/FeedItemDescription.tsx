@@ -4,12 +4,12 @@ import parse from "html-react-parser";
 import Link from "next/link";
 
 type FeedItemDescriptionProps = {
-  account: string;
+  username: string;
   description: string;
 };
 
 const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
-  account,
+  username,
   description,
 }) => {
   const [showMore, setShowMore] = useState(false);
@@ -71,7 +71,7 @@ const FeedItemDescription: React.FC<FeedItemDescriptionProps> = ({
 
   return (
     <div className="mt-2">
-      <Link href={`/${account}`} className="font-bold dark:hover:brightness-50 hover:text-gray-700">{account}</Link>{" "}
+      <Link href={`/${username}`} className="font-bold dark:hover:brightness-50 hover:text-gray-700">{username}</Link>{" "}
       {!showMore && (
         <>
           <h1 className="inline whitespace-pre-wrap">{shortDescription}</h1>

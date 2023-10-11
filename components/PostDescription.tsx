@@ -2,11 +2,10 @@ import React from "react";
 import Image from "next/image";
 import VerifiedIcon from "@/Icons/VerifiedIcon";
 import { getShortenedRelative } from "@/utils/relative-time";
-import { User } from "@/utils/dummy-data-users";
-import { Post } from "@/utils/dummy-data-posts";
-import { cn } from "@/lib/utils";
+import { cn, default_profile_picture } from "@/lib/utils";
 import Link from "next/link";
 import { convertText } from "@/utils/truncateText";
+import { Post, User } from "@prisma/client";
 
 type PostDescriptionProps = {
   user: User;
@@ -18,7 +17,7 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ user, post, className
   return (
     <div className={cn("flex gap-2 pb-1", className)}>
       <Image
-        src={user.profilePicture}
+        src={user.profile_picture_url || default_profile_picture}
         alt="profile picture"
         width={50}
         height={50}
@@ -26,10 +25,10 @@ const PostDescription: React.FC<PostDescriptionProps> = ({ user, post, className
       />
       <article>
         <div className="flex gap-1 items-center">
-          <Link href={`/${user.account}`} className="font-semibold">{user.account}</Link>
+          <Link href={`/${user.username}`} className="font-semibold">{user.username}</Link>
           {user.verified && <VerifiedIcon className="w-3 h-3" />}
           <span className="text-[#a8a8a8]">
-            {getShortenedRelative(post.date)}
+            {getShortenedRelative(post.created_at)}
           </span>
         </div>
         <p className="whitespace-pre-wrap">{convertText(post.description)}</p>

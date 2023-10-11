@@ -1,22 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { RefObject, useState } from "react";
-import ProfileIcon from "@/Icons/ProfileIcon";
-import { Reply } from "@/utils/dummy-data-posts";
 import { getShortenedRelative } from "@/utils/relative-time";
 import Link from "next/link";
 import { convertText } from "@/utils/truncateText";
-import { USERS } from "@/utils/dummy-data-users";
 import Image from "next/image";
+import { Comment } from "@prisma/client";
 
 type ReplyItemProps = {
-  reply: Reply;
+  comment: Comment;
   textAreaRef: RefObject<HTMLTextAreaElement>;
 };
 
-const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
+const ReplyItem: React.FC<ReplyItemProps> = ({ comment, textAreaRef }) => {
   // console.log("ReplyItem render");
   const [showReplies, setShowReplies] = useState(false);
-  const user = USERS.find((user) => user.account === reply.account);
+
 
   const replyHandler = () => {
     textAreaRef.current!.setAttribute("data-reply", String(reply.id));
@@ -25,7 +23,7 @@ const ReplyItem: React.FC<ReplyItemProps> = ({ reply, textAreaRef }) => {
   };
 
   const showMoreButton =
-    reply.thread && reply.thread.length > 0 ? (
+    comment.thread && reply.thread.length > 0 ? (
       <button
         className="flex items-center gap-2 mb-2"
         onClick={() => setShowReplies((prev) => !prev)}

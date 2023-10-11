@@ -1,31 +1,47 @@
 "use client";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
-import { useMemo, useRef, useState } from "react";
-import { DUMMY_DATA, Reply } from "@/utils/dummy-data-posts";
+import { useRef, useState } from "react";
 import { getRelativeTimeString } from "@/utils/relative-time";
 import Carousel from "@/components/Carousel";
 import React from "react";
 import Footer from "@/components/PhotoPage/Footer";
 import ReplyForm from "@/components/ReplyForm";
 import MorePosts from "@/components/MorePosts";
-import { USERS } from "@/utils/dummy-data-users";
 import Link from "next/link";
 import PostDescription from "@/components/PostDescription";
 import ReplyItems from "@/components/ReplyItems";
+import { db } from "@/lib/db";
+import { Comment } from "@prisma/client";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
+  const post = await db.post.findUnique({
+    where: {
+      id: params.id,
+    },
+    include: {
+      media: true,
+      comment: true,
+      post_interaction: {
+        where: {
+          is_liked: true,
+        },
+      },
+    },
+  });
+  if (!post) return <div>404 Post Not Found</div>;
 
-  const post = useMemo(() => {
-    return DUMMY_DATA.find((item) => item.id === Number(params.id));
-  }, [params.id]);
-  const [replies, setReplies] = useState<Reply[]>(post!.replies);
+  const user = await db.user.findUnique({
+    where: {
+      id: post.creator_id,
+    },
+  });
+
+  if (!user) return <div>404 User Not Found</div>;
+
+  const [replies, setReplies] = useState<Comment[]>(post.comment);
   const [liked, setLiked] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-
-  if (!post) return <div>404 Post Not Found</div>;
-  const user = USERS.find((user) => user.account === post.account);
-  if (!user) return <div>404 User Not Found</div>;
 
   return (
     <div className="mt-10 flex grow flex-col items-center text-sm">
@@ -41,22 +57,26 @@ export default function Page({ params }: { params: { id: string } }) {
       </div>
       <main className="flex h-[600px] max-w-[850px] pb-10">
         <Carousel
-          content={post.content}
+          media={post.media}
           setLiked={setLiked}
           width={600}
           height={600}
           className="h-full"
         />
         <section className="flex w-[355px] flex-col border border-[#dbdbdb] dark:border-gray-800">
-          <PostHeader user={user} location={post.location} />
+          <PostHeader user={user} location={post.location_name} />
           <article className="flex flex-col gap-2 overflow-auto p-4">
             <PostDescription user={user} post={post} />
             <ReplyItems replies={replies} textAreaRef={textAreaRef} />
           </article>
 
           <div className="border-t border-[#dbdbdb] px-4 py-2 dark:border-gray-800">
-            <PostIcons liked={liked} setLiked={setLiked} likes={post.likes} />
-            <span>{getRelativeTimeString(post.date)}</span>
+            <PostIcons
+              liked={liked}
+              setLiked={setLiked}
+              likes={post.post_interaction.length}
+            />
+            <span>{getRelativeTimeString(post.created_at)}</span>
           </div>
           <ReplyForm setReplies={setReplies} textAreaRef={textAreaRef} />
         </section>
@@ -64,9 +84,9 @@ export default function Page({ params }: { params: { id: string } }) {
       <section className="w-[900px] border-t border-[#dbdbdb] pt-16 dark:border-gray-800">
         <h1 className="font-gray-500 mb-5">
           More posts from
-          <Link href={`/${post.account}`} className="font-white font-bold">
+          <Link href={`/${user.username}`} className="font-white font-bold">
             {" "}
-            {post.account}
+            {user.username}
           </Link>
         </h1>
         <MorePosts user={user!} exclude={params.id} />

@@ -12,10 +12,9 @@ import InstagramLogo from "@/Icons/InstagramLogo";
 import NavBarMenuButton from "./NavBarMenuButton";
 import BottomNavBar from "./BottomNavBar";
 import { useAuth } from "@/hooks/use-auth-hook";
-import ProfileIcon from "@/Icons/ProfileIcon";
-import {Button} from "react-aria-components";
+import { Button } from "react-aria-components";
 import PostButton from "./post-button";
-
+import { default_profile_picture } from "@/lib/utils";
 
 type NavBarProps = {};
 
@@ -93,16 +92,13 @@ const NavBar: React.FC<NavBarProps> = () => {
               className="group flex items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
               <div className="transition-transform group-hover:scale-110 group-active:scale-100">
-                {!user.profile_picture_url && <ProfileIcon />}
-                {user.profile_picture_url && (
-                  <Image
-                    src={user.profile_picture_url}
-                    alt="profile picture"
-                    width={30}
-                    height={30}
-                    className="rounded-full"
-                  />
-                )}
+                <Image
+                  src={user.profile_picture_url || default_profile_picture}
+                  alt="profile picture"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                />
               </div>
               <span className="hidden lg:inline">Profile</span>
             </Link>

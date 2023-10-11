@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { Media } from "@/utils/dummy-data-posts";
 import Image from "next/image";
 import React, {
   useCallback,
@@ -14,9 +13,10 @@ import VideoPlayer from "./VideoPlayer";
 import { cn } from "@/lib/utils";
 import createDoubleClick from "@/utils/double-click";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Media } from "@prisma/client";
 
 type CarouselProps = {
-  content: Media[];
+  media: Media[];
   setLiked: React.Dispatch<React.SetStateAction<boolean>>;
   className?: string;
   width?: number;
@@ -24,7 +24,7 @@ type CarouselProps = {
 };
 
 const Carousel: React.FC<CarouselProps> = ({
-  content,
+  media,
   setLiked,
   className = "h-carousel",
   width = 500,
@@ -61,7 +61,7 @@ const Carousel: React.FC<CarouselProps> = ({
     if (newIndex === 0) {
       leftButtonRef.current!.style.display = "none";
       rightButtonRef.current!.style.display = "flex";
-    } else if (newIndex === content.length - 1) {
+    } else if (newIndex === media.length - 1) {
       rightButtonRef.current!.style.display = "none";
       leftButtonRef.current!.style.display = "flex";
     } else {
@@ -94,13 +94,13 @@ const Carousel: React.FC<CarouselProps> = ({
           ref={containerRef}
           onScroll={scrollHandler}
         >
-          {content.map((media, i) => {
-            if (media.type === "image") {
+          {media.map((item, i) => {
+            if (item.type === "IMAGE") {
               return (
                 <Image
-                  key={media.src}
-                  src={media.src}
-                  alt={media.type}
+                  key={item.id}
+                  src={item.src}
+                  alt={item.alt_text}
                   width={width}
                   height={height}
                   // priority={i < 3}
@@ -111,8 +111,8 @@ const Carousel: React.FC<CarouselProps> = ({
             return (
               <VideoPlayer
                 containerRef={containerRef}
-                key={media.src}
-                src={media.src}
+                key={item.src}
+                src={item.src}
                 className="snap-start shrink-0"
               />
             );
@@ -124,7 +124,7 @@ const Carousel: React.FC<CarouselProps> = ({
               className={`${opacity} transition-opacity w-20 h-20`}
               fill="currentColor"
             />
-            {content.length > 1 && (
+            {media.length > 1 && (
               <>
                 <button
                   ref={leftButtonRef}
@@ -155,10 +155,10 @@ const Carousel: React.FC<CarouselProps> = ({
                   {">"}
                 </button>
                 <div className="absolute flex bottom-4 gap-1">
-                  {content.map((media, i) => {
+                  {media.map((item, i) => {
                     return (
                       <div
-                        key={media.src}
+                        key={item.src}
                         className={cn(
                           "rounded-full p-[3px] bg-white/30",
                           i === index && "bg-white"

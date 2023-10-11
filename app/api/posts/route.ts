@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.redirect(`/${response.id}`)
+    return NextResponse.redirect(`${req.nextUrl.origin}/p/${response.id}`)
   } catch (error) {
     console.log("[POSTS_POST]", error);
     return new NextResponse("Internal error", { status: 500 });

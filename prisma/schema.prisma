@@ -113,14 +113,14 @@ model Post {
   id          String @id @default(uuid())
   description String @default("")
 
-  location_name String?
+  location_name String? @default("")
   location_id   String?
   location      Location? @relation(fields: [location_id], references: [id])
 
   creator_id String
   creator    User   @relation(fields: [creator_id], references: [id], onDelete: Restrict, name: "creator")
 
-  hide_stats       Boolean @default(false)
+  hide_stats    Boolean @default(false)
   hide_comments Boolean @default(false)
 
   tagged_people    PostTag[]
@@ -264,7 +264,7 @@ model Media {
   id       String    @id @default(uuid())
   type     MediaType
   src      String    @unique
-  alt_text String?
+  alt_text String    @default("")
 
   user_id String
   user    User   @relation(fields: [user_id], references: [id], onDelete: Restrict)
