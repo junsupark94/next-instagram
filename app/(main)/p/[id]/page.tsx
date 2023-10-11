@@ -14,34 +14,38 @@ import ReplyItems from "@/components/ReplyItems";
 import { db } from "@/lib/db";
 import { Comment } from "@prisma/client";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const post = await db.post.findUnique({
-    where: {
-      id: params.id,
-    },
-    include: {
-      media: true,
-      comment: true,
-      post_interaction: {
-        where: {
-          is_liked: true,
-        },
-      },
-    },
-  });
-  if (!post) return <div>404 Post Not Found</div>;
 
-  const user = await db.user.findUnique({
-    where: {
-      id: post.creator_id,
-    },
-  });
+export default function Page({ params }: { params: { id: string } }) {
+  // const post = await db.post.findUnique({
+  //   where: {
+  //     id: params.id,
+  //   },
+  //   include: {
+  //     media: true,
+  //     comment: true,
+  //     post_interaction: {
+  //       where: {
+  //         is_liked: true,
+  //       },
+  //     },
+  //   },
+  // });
+  // if (!post) return <div>404 Post Not Found</div>;
 
-  if (!user) return <div>404 User Not Found</div>;
+  // const user = await db.user.findUnique({
+  //   where: {
+  //     id: post.creator_id,
+  //   },
+  // });
+
+  // if (!user) return <div>404 User Not Found</div>;
+  return null;
 
   const [replies, setReplies] = useState<Comment[]>(post.comment);
   const [liked, setLiked] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+
 
   return (
     <div className="mt-10 flex grow flex-col items-center text-sm">

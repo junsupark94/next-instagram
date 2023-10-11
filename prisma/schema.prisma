@@ -242,14 +242,14 @@ model Comment {
   reel_id String?
   reel    Reel?   @relation(fields: [reel_id], references: [id])
 
-  comment_id String?
-  comment    Comment?  @relation(fields: [comment_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
+  replying_to_id String?
+  comment    Comment?  @relation(fields: [replying_to_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
   replies    Comment[] @relation("reply")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@index([comment_id])
+  @@index([replying_to_id])
   @@index([user_id])
   @@index([post_id, user_id])
   @@index([reel_id, user_id])

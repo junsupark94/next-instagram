@@ -1,16 +1,16 @@
-import { Reply } from "@/utils/dummy-data-posts";
-import truncateText from "@/utils/truncateText";
+import truncateText from "@/utils/text";
+import { Comment } from "@prisma/client";
 import React, { useMemo, useState } from "react";
 
-type NewReplyProps = {
-  reply: Reply;
+type NewCommentProps = {
+  comment: Comment;
 };
 
-const NewReply: React.FC<NewReplyProps> = ({ reply }) => {
+const NewComment: React.FC<NewCommentProps> = ({ comment }) => {
   const [showMore, setShowMore] = useState(false);
   const [shortText, fullText, isTruncated] = useMemo(
-    () => truncateText(reply.text, 40),
-    [reply.text]
+    () => truncateText(comment.text, 40),
+    [comment.text]
   );
 
   return (
@@ -36,5 +36,5 @@ const NewReply: React.FC<NewReplyProps> = ({ reply }) => {
   );
 };
 
-const MemoizedNewReply = React.memo(NewReply)
-export default MemoizedNewReply;
+const MemoizedNewComment = React.memo(NewComment)
+export default MemoizedNewComment;

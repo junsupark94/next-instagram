@@ -1,86 +1,124 @@
 "use client";
-import React, { KeyboardEventHandler, useRef, useState } from "react";
+import { KeyboardEventHandler, useLayoutEffect, useRef, useState } from "react";
 import FeedItemDescription from "./feed-item-description";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
-import NewReply from "./new-reply";
-import { Comment, Media, Post, User } from "@prisma/client";
+import { Media, Post, User, Comment } from "@prisma/client";
 import Carousel from "@/components/Carousel";
 import PostHeader from "@/components/PostHeader";
 import PostIcons from "@/components/PostIcons";
+import { useController, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CommentType, commentSchema } from "@/lib/zod";
+import { cn } from "@/lib/utils";
+import { Button } from "react-aria-components";
+import { useAuth } from "@/hooks/use-auth-hook";
+import { convertText } from "@/utils/text";
 
 type FeedItemProps = {
   postWithUserWithMedia: {
     media: Media[];
     creator: User;
-  } & Post
+  } & Post;
 };
 
 const FeedItem: React.FC<FeedItemProps> = ({ postWithUserWithMedia }) => {
-  // console.log("FeedItem render", item.id)
-
-  const {creator : user, media, ...post} = postWithUserWithMedia
-
+  const { creator, media, ...post } = postWithUserWithMedia;
   const [liked, setLiked] = useState(false);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [value, setValue] = useState("");
-  const [newReplies, setNewReplies] = useState<Comment[]>([]);
-  useAutoSizeTextArea(textAreaRef, value);
 
-  const submitHandler : React.FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+  const user = useAuth();
 
-  }
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting },
+  } = useForm<CommentType>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      user_id: user.id,
+      content_type: "POST",
+      post_id: post.id,
+    },
+  });
+  const { field } = useController({
+    control,
+    name: "text",
+  });
+  const [commentText, setCommentText] = useState("");
+  const [newComments, setNewComments] = useState<Comment[]>([]);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const enterKeyDown: KeyboardEventHandler<HTMLFormElement> = (e) => {
-    if (e.key !== "Enter") return;
-    if (e.shiftKey) {
-      return;
-    } else {
-      submitHandler(e);
+  useLayoutEffect(() => {
+    if (!textareaRef.current) return;
+    textareaRef.current.style.height = "0";
+    const height = Math.min(textareaRef.current.scrollHeight, 80);
+    textareaRef.current.style.height = `${height}px`;
+  }, [commentText]);
+
+  const onSubmit = async (formData: CommentType) => {
+    console.log('formData', formData)
+    try {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const data = await response.json();
+      setNewComments(state => [...state, data])
+      setCommentText("");
+    } catch (error) {
+      console.error(error);
     }
   };
 
-
   return (
-    <div className="pb-4 xs:border-b dark:border-gray-800 border-gray-200">
-      <PostHeader user={user} location={post.location_name}/>
-      <Carousel
-        media={media}
-        setLiked={setLiked}
-      />
+    <div className="border-gray-200 pb-4 dark:border-gray-800 xs:border-b">
+      <PostHeader user={creator} location={post.location_name} />
+      <Carousel media={media} setLiked={setLiked} />
 
-      <section className="px-4 mt-3">
+      <section className="mt-3 px-4">
         <PostIcons liked={liked} setLiked={setLiked} likes={100} />
         <FeedItemDescription
-          username={user.username}
+          username={creator.username}
           description={post.description}
         />
-        <Link href={`/p/${post.id}`} className="text-gray-500 my-1">
+        {/* <Link href={`/p/${post.id}`} className="my-1 text-gray-500">
           View all {`insert number here`} comments
-        </Link>
-        {newReplies.map((reply, i) => <NewReply key={i} reply={reply}/>)}
-        <form className="relative" onSubmit={submitHandler} onKeyDown={enterKeyDown}>
-          <article className="flex grow gap-1">
-            <textarea
-              className="dark:bg-black dark:text-white resize-none outline-none grow"
-              placeholder="Add a comment..."
-              ref={textAreaRef}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-            />
-            <div className="flex gap-2">
-              <button
-                className={cn(
-                  "font-bold text-[#0095f6]",
-                  value === "" ? "hidden" : "hover:text-white"
-                )}
-              >
-                Post
-              </button>
-            </div>
-          </article>
+        </Link> */}
+        {newComments.map((comment) => (
+          <div className="flex gap-1" key={comment.id}>
+            <span className="font-semibold">{user.username}</span>
+            <span className="whitespace-pre-wrap">{convertText(comment.text)}</span>
+          </div>
+        ))}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          ref={formRef}
+          className="mt-2 flex w-full items-center justify-between"
+        >
+          <textarea
+            className="grow resize-none focus:outline-none dark:bg-black"
+            placeholder="Add a comment..."
+            rows={1}
+            value={commentText}
+            onChange={(e) => {
+              setCommentText(e.target.value);
+              field.onChange(e.target.value);
+            }}
+            ref={textareaRef}
+          />
+          <Button
+            className={cn(
+              "hidden font-semibold text-sky-500",
+              commentText.length && "block",
+            )}
+            type="submit"
+            isDisabled={isSubmitting}
+          >
+            Post
+          </Button>
         </form>
       </section>
     </div>

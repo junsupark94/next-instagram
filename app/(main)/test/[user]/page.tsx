@@ -16,9 +16,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { db } from "@/lib/db";
-import ProfileIcon from "@/Icons/ProfileIcon";
 import Following from "./_components/following";
 import MorePosts from "./_components/more-posts";
+import { default_profile_picture } from "@/lib/utils";
 
 export default async function ProfilePage({
   params,
@@ -59,16 +59,14 @@ export default async function ProfilePage({
       </div>
       <header className="flex items-center justify-between pb-11">
         <div className="mr-10 flex shrink-0 grow justify-center">
-          {!user.profile_picture_url && <ProfileIcon />}
-          {user.profile_picture_url && (
+
             <Image
-              src={user.profile_picture_url}
+              src={user.profile_picture_url || default_profile_picture}
               alt="profile picture"
               width={200}
               height={200}
               className="h-[150px] w-[150px] rounded-full object-cover"
             />
-          )}
         </div>
         <section className="flex grow-[2] flex-col">
           <div className="flex items-center gap-2">

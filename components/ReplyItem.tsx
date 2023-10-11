@@ -2,7 +2,7 @@
 import React, { RefObject, useState } from "react";
 import { getShortenedRelative } from "@/utils/relative-time";
 import Link from "next/link";
-import { convertText } from "@/utils/truncateText";
+import { convertText } from "@/utils/text";
 import Image from "next/image";
 import { Comment } from "@prisma/client";
 

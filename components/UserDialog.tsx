@@ -13,7 +13,7 @@ import VerifiedIcon from "@/Icons/VerifiedIcon";
 import Link from "next/link";
 import LocationIcon from "@/Icons/LocationIcon";
 import { User } from "@prisma/client";
-import ProfileIcon from "@/Icons/ProfileIcon";
+import { default_profile_picture } from "@/lib/utils";
 
 type UserDialogProps = {
   user: User;
@@ -29,16 +29,14 @@ const UserDialog: React.FC<UserDialogProps> = ({ user }) => {
         <DialogTitle className="w-full border-b border-[#363636] py-3  text-center text-base font-semibold">
           About this account
         </DialogTitle>
-        {!user.profile_picture_url && <ProfileIcon />}
-        {user.profile_picture_url && (
-          <Image
-            src={user.profile_picture_url}
-            alt="profile picture"
-            width={200}
-            height={200}
-            className="h-[80px] w-[80px] rounded-full"
-          />
-        )}
+
+        <Image
+          src={user.profile_picture_url || default_profile_picture}
+          alt="profile picture"
+          width={200}
+          height={200}
+          className="h-[80px] w-[80px] rounded-full"
+        />
         <div className="flex items-center gap-2">
           <div>{user.username}</div>
           {user.verified && <VerifiedIcon className="mt-0.5 h-3 w-3" />}

@@ -53,3 +53,14 @@ export const postSchema = z.object({
 })
 
 export type PostType = z.infer<typeof postSchema>;
+
+export const commentSchema = z.object({
+  text: z.string(),
+  user_id: z.string(),
+  content_type: z.enum(['POST', 'REEL']),
+  post_id: z.string().optional(),
+  reel_id: z.string().optional(),
+  replying_to_id: z.string().optional(),
+})
+
+export type CommentType = z.infer<typeof commentSchema>

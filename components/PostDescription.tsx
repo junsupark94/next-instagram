@@ -4,7 +4,7 @@ import VerifiedIcon from "@/Icons/VerifiedIcon";
 import { getShortenedRelative } from "@/utils/relative-time";
 import { cn, default_profile_picture } from "@/lib/utils";
 import Link from "next/link";
-import { convertText } from "@/utils/truncateText";
+import { convertText } from "@/utils/text";
 import { Post, User } from "@prisma/client";
 
 type PostDescriptionProps = {

@@ -2,8 +2,6 @@
 import { useRouter } from "next/navigation";
 import ExitIcon from "@/Icons/ExitIcon";
 import PostHeader from "@/components/PostHeader";
-import { DUMMY_DATA, Reply } from "@/utils/dummy-data-posts";
-import { USERS } from "@/utils/dummy-data-users";
 import PostDescription from "@/components/PostDescription";
 import ReplyItems from "@/components/ReplyItems";
 import PostIcons from "@/components/PostIcons";
@@ -17,13 +15,9 @@ export default function Page({ params }: { params: { id: string } }) {
   // const [isModalOpen] = useGlobalStore(state => [state.isModalOpen])
   const router = useRouter();
   const [liked, setLiked] = useState(false);
-  const post = DUMMY_DATA.find((item) => item.id === Number(params.id));
   const [replies, setReplies] = useState<Reply[]>(post!.replies);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  if (!post) return <div>404 Unable to find post</div>;
-  const user = USERS.find((item) => item.account === post.account);
-  if (!user) return <div>404 Unable to find user</div>;
 
   // if (!isModalOpen) return null;
 
