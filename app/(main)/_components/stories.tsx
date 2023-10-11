@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import StoryButton from "./StoryButton";
+import StoryButton from "./story-button";
 
 type Props = {};
 

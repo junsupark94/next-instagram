@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Media, User, Post } from "@prisma/client";
-import FeedItem from "./FeedItem";
+import FeedItem from "./feed-item";
 
 const elementIsVisibleInViewport = (
   el: HTMLElement,

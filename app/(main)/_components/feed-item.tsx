@@ -1,14 +1,14 @@
 "use client";
 import React, { KeyboardEventHandler, useRef, useState } from "react";
-import FeedItemDescription from "./FeedItemDescription";
-import Carousel from "../Carousel";
+import FeedItemDescription from "./feed-item-description";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import useAutoSizeTextArea from "@/utils/autoSizeTextArea";
-import PostIcons from "../PostIcons";
-import PostHeader from "../PostHeader";
-import NewReply from "./NewReply";
+import NewReply from "./new-reply";
 import { Comment, Media, Post, User } from "@prisma/client";
+import Carousel from "@/components/Carousel";
+import PostHeader from "@/components/PostHeader";
+import PostIcons from "@/components/PostIcons";
 
 type FeedItemProps = {
   postWithUserWithMedia: {

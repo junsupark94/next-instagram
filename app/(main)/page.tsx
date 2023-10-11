@@ -1,9 +1,9 @@
-import Stories from "@/components/Feed/Stories";
-import Feed from "@/components/Feed/Feed";
 import HeartIcon from "@/Icons/HeartIcon";
 import InstagramLogo from "@/Icons/InstagramLogo";
 import SearchBar from "@/components/SearchBar";
 import RightSideBar from "@/components/RightSideBar/RightSideBar";
+import Stories from "./_components/stories";
+import Feed from "./_components/feed";
 
 export default async function Home() {
 
