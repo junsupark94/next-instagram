@@ -1,17 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { cn, default_profile_picture } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MessengerIcon from "@/Icons/MessengerIcon";
-import { User } from "@prisma/client";
 
 type HoverDialogProps = {
   children: JSX.Element;
-  user: User;
+  post_count: number;
+  follower_count: number;
+  following_count: number;
 };
 
-const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
+const HoverDialog: React.FC<HoverDialogProps> = ({
+  children,
+  post_count,
+  follower_count,
+  following_count,
+}) => {
   let timer: NodeJS.Timeout;
   const dialogRef = useRef<HTMLDivElement>(null);
   const mouseEnterHandler: React.MouseEventHandler<HTMLDivElement> = () => {
@@ -50,7 +56,7 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
         >
           <div className="flex items-center gap-3 p-3 pb-1">
             <Image
-              src={default_profile_picture}
+              src="/default_profile.jpeg"
               width={44}
               height={44}
               alt="image"
@@ -62,15 +68,15 @@ const HoverDialog: React.FC<HoverDialogProps> = ({ children, user }) => {
           </div>
           <article className="flex justify-around p-3">
             <div className="text-center">
-              <div>{user.postCount}</div>
+              <div>{post_count}</div>
               <div>posts</div>
             </div>
             <div className="flex flex-col items-center">
-              <div>{user.followerCount}</div>
+              <div>{follower_count}</div>
               <div>followers</div>
             </div>
             <div className="flex flex-col items-center">
-              <div>{user.followingCount}</div>
+              <div>{following_count}</div>
               <div>following</div>
             </div>
           </article>

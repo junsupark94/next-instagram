@@ -6,7 +6,10 @@ import ReelsIcon from "@/Icons/ReelsIcon";
 import SuggestedProfileIcon from "@/Icons/SuggestedProfileIcon";
 import TaggedIcon from "@/Icons/TaggedIcon";
 import VerifiedIcon from "@/Icons/VerifiedIcon";
+import MorePosts from "@/components/more-posts";
 import Image from "next/image";
+import { useState } from "react";
+import FollowDialog from "@/components/FollowDialog";
 import UserDialog from "@/components/UserDialog";
 import CogIcon from "@/Icons/CogIcon";
 import {
@@ -15,32 +18,22 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { db } from "@/lib/db";
-import Following from "./_components/following";
-import MorePosts from "./_components/more-posts";
-import { default_profile_picture } from "@/lib/utils";
+import { User } from "@prisma/client";
 
-export default async function ProfilePage({
-  params,
+export function Profile({
+  user,
+  followerCount,
+  followingCount,
+  postCount,
 }: {
-  params: { user: string };
+  user: User;
+  postCount: number;
+  followingCount: number;
+  followerCount: number;
 }) {
-  const user = await db.user.findUnique({
-    where: {
-      username: params.user,
-    },
-    include: {
-      post: true,
-      agent: true,
-      target: true,
-    },
-  });
-
-  if (!user) return <div>Error could not find user: {params.user}</div>;
-
-  console.log("user.post", user.post);
-  console.log("user.agent", user.agent);
-  console.log("user.target", user.target);
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(36);
+  const [following, setFollowing] = useState(false);
 
   return (
     <div className="mx-auto max-w-[935px] grow px-5 pt-8">
@@ -59,14 +52,13 @@ export default async function ProfilePage({
       </div>
       <header className="flex items-center justify-between pb-11">
         <div className="mr-10 flex shrink-0 grow justify-center">
-
-            <Image
-              src={user.profile_picture_url || default_profile_picture}
-              alt="profile picture"
-              width={200}
-              height={200}
-              className="h-[150px] w-[150px] rounded-full object-cover"
-            />
+          <Image
+            src={user.profile_picture_url || "/default_profile.jpeg"}
+            alt="profile picture"
+            width={200}
+            height={200}
+            className="h-[150px] w-[150px] rounded-full object-cover"
+          />
         </div>
         <section className="flex grow-[2] flex-col">
           <div className="flex items-center gap-2">
@@ -82,7 +74,17 @@ export default async function ProfilePage({
               </TooltipProvider>
             )}
 
-            <Following user={user} />
+            {!following && (
+              <button
+                onClick={() => setFollowing(true)}
+                className="ml-5 rounded-lg bg-[#0095f6] px-5 py-1.5 text-sm font-semibold text-white"
+              >
+                Follow
+              </button>
+            )}
+            {following && (
+              <FollowDialog user={user} setFollowing={setFollowing} />
+            )}
             <button className="cursor-default rounded-lg bg-[#efefef] px-4 py-1.5 text-sm font-semibold line-through dark:bg-[#363636]">
               Message
             </button>
@@ -94,9 +96,9 @@ export default async function ProfilePage({
             </button>
           </div>
           <ul className="my-5 flex gap-8">
-            <li>{user.post.length} posts</li>
-            <li>{user.target.length} followers</li>
-            <li>{user.agent.length} following</li>
+            <li>{postCount} posts</li>
+            <li>{followerCount} followers</li>
+            <li>{followingCount} following</li>
           </ul>
           <div className="whitespace-pre-wrap">{user.bio}</div>
           {/* <div>Followed by</div> */}
@@ -130,7 +132,13 @@ export default async function ProfilePage({
           <span className="line-through">TAGGED</span>
         </button>
       </section>
-      {/* <MorePosts posts={user.post} /> */}
+      <MorePosts
+        creator={user}
+        startIndex={startIndex}
+        endIndex={endIndex}
+        setStartIndex={setStartIndex}
+        setEndIndex={setEndIndex}
+      />
     </div>
   );
 }

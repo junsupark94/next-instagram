@@ -11,7 +11,21 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await db.comment.create({
-      data: formData
+      data: formData,
+      select: {
+        user: {
+          select: {
+            username: true,
+            profile_name: true,
+            profile_picture_url: true,
+          },
+        },
+        text: true,
+        replies: true,
+        id: true,
+        created_at: true,
+        replying_to_id: true,
+      },
     });
 
     return NextResponse.json(response);

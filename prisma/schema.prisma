@@ -113,7 +113,7 @@ model Post {
   id          String @id @default(uuid())
   description String @default("")
 
-  location_name String? @default("")
+  location_name String?   @default("")
   location_id   String?
   location      Location? @relation(fields: [location_id], references: [id])
 
@@ -242,14 +242,18 @@ model Comment {
   reel_id String?
   reel    Reel?   @relation(fields: [reel_id], references: [id])
 
-  replying_to_id String?
-  comment    Comment?  @relation(fields: [replying_to_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
-  replies    Comment[] @relation("reply")
+  parent_comment_id String?
+  parent_comment    Comment?  @relation(fields: [parent_comment_id], references: [id], name: "parent", onDelete: Restrict, onUpdate: Restrict)
+  children          Comment[] @relation("parent")
+  replying_to_id    String?
+  comment           Comment?  @relation(fields: [replying_to_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
+  replies           Comment[] @relation("reply")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([replying_to_id])
+  @@index([parent_comment_id])
   @@index([user_id])
   @@index([post_id, user_id])
   @@index([reel_id, user_id])

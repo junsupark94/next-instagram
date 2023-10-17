@@ -13,7 +13,6 @@ import VerifiedIcon from "@/Icons/VerifiedIcon";
 import Link from "next/link";
 import LocationIcon from "@/Icons/LocationIcon";
 import { User } from "@prisma/client";
-import { default_profile_picture } from "@/lib/utils";
 
 type UserDialogProps = {
   user: User;
@@ -31,7 +30,7 @@ const UserDialog: React.FC<UserDialogProps> = ({ user }) => {
         </DialogTitle>
 
         <Image
-          src={user.profile_picture_url || default_profile_picture}
+          src={user.profile_picture_url || "/default_profile.jpeg"}
           alt="profile picture"
           width={200}
           height={200}

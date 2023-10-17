@@ -1,11 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import ExitIcon from "@/Icons/ExitIcon";
-import PostHeader from "@/components/PostHeader";
-import PostDescription from "@/components/PostDescription";
-import ReplyItems from "@/components/ReplyItems";
+import PostHeader from "@/components/post-header";
+import PostDescription from "@/components/post-description";
+import ReplyItems from "@/components/comment-items";
 import PostIcons from "@/components/PostIcons";
-import ReplyForm from "@/components/ReplyForm";
+import ReplyForm from "@/components/comment-form";
 import { getRelativeTimeString } from "@/utils/relative-time";
 import { useRef, useState } from "react";
 import Carousel from "@/components/Carousel";

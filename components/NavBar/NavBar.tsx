@@ -14,7 +14,6 @@ import BottomNavBar from "./BottomNavBar";
 import { useAuth } from "@/hooks/use-auth-hook";
 import { Button } from "react-aria-components";
 import PostButton from "./post-button";
-import { default_profile_picture } from "@/lib/utils";
 
 type NavBarProps = {};
 
@@ -93,7 +92,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             >
               <div className="transition-transform group-hover:scale-110 group-active:scale-100">
                 <Image
-                  src={user.profile_picture_url || default_profile_picture}
+                  src={user.profile_picture_url || "/default_profile.jpeg"}
                   alt="profile picture"
                   width={30}
                   height={30}

@@ -103,7 +103,7 @@ const Carousel: React.FC<CarouselProps> = ({
                   alt={item.alt_text}
                   width={width}
                   height={height}
-                  // priority={i < 3}
+                  priority={i < 3}
                   className="snap-start shrink-0 object-contain w-full h-full"
                 />
               );
@@ -175,4 +175,4 @@ const Carousel: React.FC<CarouselProps> = ({
     </>
   );
 };
-export default React.memo(Carousel);
+export default Carousel;

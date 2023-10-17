@@ -61,6 +61,7 @@ export const commentSchema = z.object({
   post_id: z.string().optional(),
   reel_id: z.string().optional(),
   replying_to_id: z.string().optional(),
+  parent_comment_id: z.string().optional(),
 })
 
 export type CommentType = z.infer<typeof commentSchema>

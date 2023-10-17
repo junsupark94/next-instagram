@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import FeedItemDescription from "./feed-item-description";
 import Link from "next/link";
 import { Media, Post, User, Comment } from "@prisma/client";
 import Carousel from "@/components/Carousel";
-import PostHeader from "@/components/PostHeader";
+import PostHeader from "@/components/post-header";
 import PostIcons from "@/components/PostIcons";
 import { useAuth } from "@/hooks/use-auth-hook";
 import { convertText } from "@/utils/text";
@@ -23,10 +23,19 @@ const FeedItem: React.FC<FeedItemProps> = ({ postWithUserWithMedia }) => {
   const [liked, setLiked] = useState(false);
   const [newComments, setNewComments] = useState<Comment[]>([]);
   const user = useAuth();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   return (
     <div className="border-gray-200 pb-4 dark:border-gray-800 xs:border-b">
-      <PostHeader user={creator} location={post.location_name} />
+      <PostHeader
+        follower_count={100}
+        following_count={100}
+        post_count={100}
+        profile_picture_url={creator.profile_picture_url}
+        username={creator.username}
+        verified={creator.verified}
+        location={post.location_name}
+      />
       <Carousel media={media} setLiked={setLiked} />
 
       <section className="mt-3 px-4">
@@ -48,7 +57,11 @@ const FeedItem: React.FC<FeedItemProps> = ({ postWithUserWithMedia }) => {
             </span>
           </div>
         ))}
-        <CommentForm setNewComments={setNewComments} post={post} />
+        <CommentForm
+          textareaRef={textareaRef}
+          setNewComments={setNewComments}
+          post={post}
+        />
       </section>
     </div>
   );

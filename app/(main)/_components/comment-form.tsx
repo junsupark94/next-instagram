@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Comment, Post } from "@prisma/client";
 import {
   Dispatch,
+  RefObject,
   SetStateAction,
   useLayoutEffect,
   useRef,
@@ -17,9 +18,11 @@ import { useController, useForm } from "react-hook-form";
 const CommentForm = ({
   setNewComments,
   post,
+  textareaRef,
 }: {
   post: Post;
   setNewComments: Dispatch<SetStateAction<Comment[]>>;
+  textareaRef: RefObject<HTMLTextAreaElement>
 }) => {
   const [commentText, setCommentText] = useState("");
   const user = useAuth();
@@ -40,14 +43,12 @@ const CommentForm = ({
     name: "text",
   });
 
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
   useLayoutEffect(() => {
     if (!textareaRef.current) return;
     textareaRef.current.style.height = "0";
     const height = Math.min(textareaRef.current.scrollHeight, 80);
     textareaRef.current.style.height = `${height}px`;
-  }, [commentText]);
+  }, [commentText, textareaRef]);
 
   const onSubmit = async (formData: CommentType) => {
     console.log("formData", formData);

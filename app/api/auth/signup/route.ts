@@ -7,9 +7,9 @@ export async function POST(req: NextRequest) {
 
   try {
     const data: SignUpType = await req.json();
-    const result = signUpSchema.safeParse(data);
+    const isValidData = signUpSchema.safeParse(data).success;
 
-    if (!result.success) {
+    if (!isValidData) {
       console.log("[SIGNUP_POST] Invalid data received", data);
       return NextResponse.json("Invalid data received", {
         status: 400,

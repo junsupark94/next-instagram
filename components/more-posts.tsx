@@ -2,20 +2,16 @@
 import React, {
   Dispatch,
   SetStateAction,
-  useEffect,
-  useMemo,
-  useRef,
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import VideoIcon from "@/Icons/VideoIcon";
 import CarouselIcon from "@/Icons/CarouselIcon";
-import PinnedIcon from "@/Icons/PinnedIcon";
 import { User } from "@prisma/client";
 import { db } from "@/lib/db";
 
 type MorePostsProps = {
-  user: User;
+  creator: User;
   startIndex?: number;
   endIndex?: number;
   exclude?: string;
@@ -24,56 +20,49 @@ type MorePostsProps = {
 };
 
 const MorePosts: React.FC<MorePostsProps> = async ({
-  user,
+  creator,
   startIndex = 0,
   endIndex = 6,
   exclude,
   setStartIndex,
   setEndIndex,
 }) => {
-  const posts = await db.post.findMany({
-    where: {
-      creator_id: user.id,
-    },
-    include: {
-      media: true,
-    },
-    take: 6,
-  });
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!setStartIndex || !setEndIndex) return;
-    const scrollHandler = () => {
-      const foo = containerRef.current!.getBoundingClientRect();
-      if (foo.y <= -1515) {
-        setStartIndex((prev) => {
-          if (prev === posts.length - 36) return prev;
-          return prev + 3;
-        });
-        setEndIndex((prev) => {
-          if (prev === posts.length) return prev;
-          return prev + 3;
-        });
-      } else if (foo.y >= -910) {
-        setStartIndex((prev) => {
-          if (prev === 0) return prev;
-          return prev - 3;
-        });
-        setEndIndex((prev) => {
-          if (prev === 36) return prev;
-          return prev - 3;
-        });
-      }
-    };
-    document.addEventListener("scroll", scrollHandler);
-    return () => {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // const containerRef = useRef<HTMLDivElement>(null);
 
-  const displayPosts = posts.slice(startIndex, endIndex);
+  // useEffect(() => {
+  //   if (!setStartIndex || !setEndIndex) return;
+  //   const scrollHandler = () => {
+  //     const foo = containerRef.current!.getBoundingClientRect();
+  //     if (foo.y <= -1515) {
+  //       setStartIndex((prev) => {
+  //         if (prev === posts.length - 36) return prev;
+  //         return prev + 3;
+  //       });
+  //       setEndIndex((prev) => {
+  //         if (prev === posts.length) return prev;
+  //         return prev + 3;
+  //       });
+  //     } else if (foo.y >= -910) {
+  //       setStartIndex((prev) => {
+  //         if (prev === 0) return prev;
+  //         return prev - 3;
+  //       });
+  //       setEndIndex((prev) => {
+  //         if (prev === 36) return prev;
+  //         return prev - 3;
+  //       });
+  //     }
+  //   };
+  //   document.addEventListener("scroll", scrollHandler);
+  //   return () => {
+  //     document.removeEventListener("scroll", scrollHandler);
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  // const displayPosts = posts.slice(startIndex, endIndex);
+  return null;
 
   if (exclude)
     return (

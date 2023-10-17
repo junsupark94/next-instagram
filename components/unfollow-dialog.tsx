@@ -1,18 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { User } from "@/utils/dummy-data-users";
 
 type UnfollowDialogProps = {
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
   setFollowing: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User;
+  username: string;
+  profile_picture_url: string | null;
 };
 
 const UnfollowDialog: React.FC<UnfollowDialogProps> = ({
   setShowDialog,
   setFollowing,
-  user,
+  username,
+  profile_picture_url,
 }) => {
   useEffect(() => {
     function escHandler(e: KeyboardEvent) {
@@ -26,25 +27,25 @@ const UnfollowDialog: React.FC<UnfollowDialogProps> = ({
 
   return (
     <div
-      className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center backdrop-brightness-50"
+      className="fixed left-0 top-0 flex h-screen w-screen items-center justify-center backdrop-brightness-50"
       onClick={() => setShowDialog(false)}
     >
       <div
-        className="bg-[#262626] rounded-xl flex flex-col items-center w-[400px] text-sm"
+        className="flex w-[400px] flex-col items-center rounded-xl bg-[#262626] text-sm"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6 flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 p-6">
           <Image
-            src={user.profilePicture}
+            src={profile_picture_url || "/default_profile.jpeg"}
             alt="profile picture"
             width={90}
             height={90}
-            className="w-[90px] h-[90px] rounded-full"
+            className="h-[90px] w-[90px] rounded-full"
           />
-          <div>Unfollow @{user.account}?</div>
+          <div>Unfollow @{username}?</div>
         </div>
         <button
-          className="text-[#ed4956] font-bold border-[#363636] border-t w-full py-4"
+          className="w-full border-t border-[#363636] py-4 font-bold text-[#ed4956]"
           onClick={() => {
             setFollowing(false);
             setShowDialog(false);
@@ -53,7 +54,7 @@ const UnfollowDialog: React.FC<UnfollowDialogProps> = ({
           Unfollow
         </button>
         <button
-          className="border-t border-[#363636] w-full py-4"
+          className="w-full border-t border-[#363636] py-4"
           onClick={() => setShowDialog(false)}
         >
           Cancel

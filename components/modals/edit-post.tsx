@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useRef, useState } from "react";
 import EmojiIcon from "@/Icons/EmojiIcon";
-import { cn, default_profile_picture } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   ArrowLeftIcon,
   ChevronDownIcon,
@@ -186,7 +186,7 @@ const EditPost = ({
           >
             <div className="flex items-center gap-2">
               <Image
-                src={user.profile_picture_url || default_profile_picture}
+                src={user.profile_picture_url || "/default_profile.jpeg"}
                 alt="Your profile picture"
                 className="rounded-full"
                 height={28}
