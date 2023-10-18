@@ -7,7 +7,7 @@ const PostButton = () => {
   return (
     <Button
       {...triggerProps}
-      className="group flex cursor-default items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
+      className="group flex cursor-pointer items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
     >
       <div className="transition-transform group-hover:scale-110 group-active:scale-100">
         <PostIcon />

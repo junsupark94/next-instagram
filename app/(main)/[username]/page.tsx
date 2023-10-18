@@ -4,11 +4,12 @@ import { Profile } from "./_components/profile";
 export default async function UserPage({
   params,
 }: {
-  params: { userId: string };
+  params: { username: string };
 }) {
+  const { username } = params;
   const user = await db.user.findUnique({
     where: {
-      id: params.userId,
+      username,
     },
   });
 

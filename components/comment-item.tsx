@@ -4,87 +4,114 @@ import Link from "next/link";
 import { getShortenedRelative } from "@/utils/relative-time";
 import { convertText } from "@/utils/text";
 import { Button } from "react-aria-components";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useReplyStore } from "@/hooks/use-reply-store";
-import { $Enums, Comment } from "@prisma/client";
+import { Heart } from "lucide-react";
+import { CommentWithReplies } from "@/app/(main)/p/[post_id]/page";
+import { useAuth } from "@/hooks/use-auth-hook";
+import { usePathname } from "next/navigation";
 
 const CommentItem = ({
-  profile_name,
-  profile_picture_url,
-  created_at,
-  text,
-  replies,
-  replying_to_id,
-  username,
+  comment,
   index,
-  id,
 }: {
-  profile_picture_url: string | null;
-  profile_name: string;
-  replying_to_id: string;
-  username: string;
-  created_at: Date;
-  text: string;
-  replies: ({
-    user: {
-      profile_name: string;
-      username: string;
-      profile_picture_url: string | null;
-    };
-  } & {
-    id: string;
-    text: string;
-    user_id: string;
-    content_type: $Enums.ContentType;
-    post_id: string | null;
-    reel_id: string | null;
-    parent_comment_id: string | null;
-    replying_to_id: string | null;
-    created_at: Date;
-    updated_at: Date;
-  })[];
+  comment: CommentWithReplies;
   index: number;
-  id: string;
 }) => {
+  const user = useAuth();
+  const initialLikeStatus = useMemo(() => {
+    return comment.Comment_interaction.some(
+      (interaction) => interaction.user_id === user.id,
+    );
+  }, [user.id, comment.Comment_interaction]);
   const [viewReplies, setViewReplies] = useState(false);
+  const [liked, setLiked] = useState(initialLikeStatus);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const set_reply_target = useReplyStore((state) => state.set_reply_target);
+
+  const onLike = async (value: boolean) => {
+    try {
+      setIsSubmitting(true);
+      const response = await fetch(`/api/comments/${comment.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          user_id: user.id,
+          liked: value,
+        }),
+      });
+      if (!response.ok) throw new Error("Something went wrong!");
+      setLiked(value);
+      comment.Comment_interaction
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  let amountOfLikes = comment.Comment_interaction.length
+  if (initialLikeStatus && !liked) {
+    amountOfLikes -= 1
+  } else if (!initialLikeStatus && liked) {
+    amountOfLikes += 1
+  }
 
   return (
     <div className="flex gap-2">
       <Image
-        src={profile_picture_url || "/default_profile.jpeg"}
-        alt={profile_name}
+        src={comment.user.profile_picture_url || "/default_profile.jpeg"}
+        alt={comment.user.profile_name}
         width={32}
         height={32}
         className="self-start rounded-full"
       />
-      <article>
-        <h2 className="text-">
-          <Link href={`/${username}`} className="mr-2 font-semibold">
-            {username}
-          </Link>
-          <span className="text-neutral-400">
-            {getShortenedRelative(created_at)}
-          </span>
-        </h2>
-        <p>{convertText(text)}</p>
-        <div className="flex gap-2 pb-4 pt-2 text-xs text-neutral-400">
-          <Button className="font-semibold">Like</Button>
-          <Button
-            className="font-semibold"
-            onPress={() =>
-              set_reply_target({
-                replying_to_id,
-                username,
-                index,
-                parent_comment_id: id,
-              })
-            }
-          >
-            Reply
-          </Button>
+      <article className="w-full">
+        <div>
+          <h2 className="text-">
+            <Link
+              href={`/${comment.user.username}`}
+              className="mr-2 font-semibold"
+            >
+              {comment.user.username}
+            </Link>
+            <span className="text-neutral-400">
+              {getShortenedRelative(comment.created_at)}
+            </span>
+          </h2>
+          <div className="flex w-full items-center justify-between">
+            <p>{convertText(comment.text)}</p>
+            <Button onPress={() => onLike(!liked)} isDisabled={isSubmitting}>
+              <Heart
+                className="h-4 w-4 text-muted-foreground"
+                role="button"
+                stroke={liked ? "red" : "currentColor"}
+                fill="red"
+                fillOpacity={liked ? "100" : "0"}
+              />
+            </Button>
+          </div>
+          <div className="flex gap-2 pb-4 pt-2 text-xs text-neutral-400">
+            {!!amountOfLikes && (
+              <Button className="font-semibold">
+                {amountOfLikes} Like{amountOfLikes > 1 && "s"}
+              </Button>
+            )}
+            {/* <Button
+              className="font-semibold"
+              onPress={() =>
+                set_reply_target({
+                  replying_to_id: comment.id,
+                  username: comment.user.username,
+                  index,
+                  parent_comment_id: comment.id,
+                })
+              }
+            >
+              Reply
+            </Button> */}
+          </div>
         </div>
-        {replies && !!replies.length && (
+        {/* {comment.Children && !!comment.Children.length && (
           <Button
             onPress={() => setViewReplies((prev) => !prev)}
             className="flex items-center gap-2 text-xs"
@@ -93,13 +120,13 @@ const CommentItem = ({
             <span>
               {viewReplies
                 ? "Hide replies"
-                : `View replies (${replies.length})`}
+                : `View replies (${comment.Children.length})`}
             </span>
           </Button>
         )}
         {viewReplies && (
           <div className="mt-2">
-            {replies.map((reply) => (
+            {comment.Children.map((reply) => (
               <div key={reply.id} className="flex gap-3">
                 <Image
                   src={
@@ -123,10 +150,10 @@ const CommentItem = ({
                       className="font-semibold"
                       onPress={() =>
                         set_reply_target({
-                          replying_to_id,
-                          username,
+                          replying_to_id: reply.id,
+                          username: reply.user.username,
                           index,
-                          parent_comment_id: id,
+                          parent_comment_id: comment.id,
                         })
                       }
                     >
@@ -137,7 +164,7 @@ const CommentItem = ({
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </article>
     </div>
   );

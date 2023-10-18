@@ -7,6 +7,7 @@ const commentWithReplies = Prisma.validator<Prisma.CommentDefaultArgs>()({
     created_at: true,
     text: true,
     id: true,
+    post_id: true,
     user: {
       select: {
         username: true,
@@ -14,13 +15,23 @@ const commentWithReplies = Prisma.validator<Prisma.CommentDefaultArgs>()({
         profile_picture_url: true,
       },
     },
-    children: {
+    Comment_interaction: {
+      where: {
+        liked: true,
+      },
+    },
+    Children: {
       include: {
         user: {
           select: {
             username: true,
             profile_name: true,
             profile_picture_url: true,
+          },
+        },
+        Comment_interaction: {
+          where: {
+            liked: true,
           },
         },
       },
@@ -70,7 +81,13 @@ export default async function Page({
       created_at: true,
       text: true,
       id: true,
-      children: {
+      post_id: true,
+      Comment_interaction: {
+        where: {
+          liked: true,
+        },
+      },
+      Children: {
         include: {
           user: {
             select: {
@@ -79,11 +96,18 @@ export default async function Page({
               profile_picture_url: true,
             },
           },
+          Comment_interaction: {
+            where: {
+              liked: true,
+            },
+          },
         },
       },
     },
+    orderBy: {
+      created_at: "desc",
+    },
   });
-
 
   return (
     <PostPage

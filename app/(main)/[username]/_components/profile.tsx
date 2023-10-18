@@ -1,3 +1,4 @@
+"use client";
 import GuidesIcon from "@/Icons/GuidesIcon";
 import OptionsIcon from "@/Icons/OptionsIcon";
 import PlusIcon from "@/Icons/PlusIcon";
@@ -19,6 +20,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { User } from "@prisma/client";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useAuth } from "@/hooks/use-auth-hook";
+import { Button, FileTrigger } from "react-aria-components";
+import { v4 as uuid } from 'uuid';
+import { useRouter } from "next/navigation";
 
 export function Profile({
   user,
@@ -34,6 +47,62 @@ export function Profile({
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(36);
   const [following, setFollowing] = useState(false);
+  const [profilePictureOpen, setProfilePictureOpen] = useState(false);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const onRemoveProfilePic = async () => {
+    try {
+      setIsSubmitting(true);
+      const response = await fetch(`/api/user/${user.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          profile_picture_url: null,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Something went wrong!");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+      setProfilePictureOpen(false);
+    }
+  };
+
+  const onAddProfilePic = async (files: FileList | null) => {
+    try {
+      setIsSubmitting(true);
+      if (files === null) return;
+      const uniqueId = uuid();
+      await supabase?.storage.from("media").upload(uniqueId, files[0]);
+
+      const url = supabase?.storage.from("media").getPublicUrl(uniqueId).data
+        .publicUrl;
+
+      const response = await fetch(`/api/user/${user.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          profile_picture_url: url,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Something went wrong!");
+
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+      setProfilePictureOpen(false);
+    }
+  };
+
+  let isAuthorized = false;
+  const currentUser = useAuth();
+  if (currentUser.id === user.id) isAuthorized = true;
 
   return (
     <div className="mx-auto max-w-[935px] grow px-5 pt-8">
@@ -51,14 +120,50 @@ export function Profile({
         </div>
       </div>
       <header className="flex items-center justify-between pb-11">
-        <div className="mr-10 flex shrink-0 grow justify-center">
-          <Image
-            src={user.profile_picture_url || "/default_profile.jpeg"}
-            alt="profile picture"
-            width={200}
-            height={200}
-            className="h-[150px] w-[150px] rounded-full object-cover"
-          />
+        <div className="mr-10 flex grow justify-center">
+          <Dialog
+            open={profilePictureOpen}
+            onOpenChange={(open) => setProfilePictureOpen(open)}
+          >
+            <DialogTrigger disabled={!isAuthorized}>
+              <Image
+                src={user.profile_picture_url || "/default_profile.jpeg"}
+                alt="profile picture"
+                width={200}
+                height={200}
+                className="h-[150px] w-[150px] rounded-full object-cover"
+              />
+            </DialogTrigger>
+            <DialogContent className="flex max-w-[400px] flex-col items-center gap-0 bg-neutral-800 p-0">
+              <DialogHeader className="py-6 text-xl">
+                Change Profile Photo
+              </DialogHeader>
+              <FileTrigger
+                onSelect={onAddProfilePic}
+                acceptedFileTypes={["image/jpeg", "image/png"]}
+              >
+                <Button
+                  className=" w-full rounded-none border-t border-neutral-700 bg-transparent py-3 text-sm font-semibold text-sky-500"
+                  isDisabled={isSubmitting}
+                >
+                  Upload Photo
+                </Button>
+              </FileTrigger>
+              <Button
+                isDisabled={isSubmitting}
+                onPress={onRemoveProfilePic}
+                className="w-full rounded-none border-t border-neutral-700 py-3 text-sm font-semibold text-rose-500"
+              >
+                Remove Current Photo
+              </Button>
+              <Button
+                isDisabled={isSubmitting}
+                className="w-full rounded-none border-t border-neutral-700 py-3 text-sm text-neutral-300"
+              >
+                Cancel
+              </Button>
+            </DialogContent>
+          </Dialog>
         </div>
         <section className="flex grow-[2] flex-col">
           <div className="flex items-center gap-2">
@@ -73,7 +178,7 @@ export function Profile({
                 </Tooltip>
               </TooltipProvider>
             )}
-
+            {/*
             {!following && (
               <button
                 onClick={() => setFollowing(true)}
@@ -84,7 +189,7 @@ export function Profile({
             )}
             {following && (
               <FollowDialog user={user} setFollowing={setFollowing} />
-            )}
+            )} */}
             <button className="cursor-default rounded-lg bg-[#efefef] px-4 py-1.5 text-sm font-semibold line-through dark:bg-[#363636]">
               Message
             </button>

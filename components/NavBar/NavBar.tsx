@@ -87,7 +87,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             {/* OVER HERE JUNSU */}
             <PostButton />
             <Link
-              href={user.username}
+              href={`/${user.username}`}
               className="group flex items-center gap-4 rounded-lg p-3 transition hover:bg-gray-100 active:brightness-50 dark:hover:bg-hover"
             >
               <div className="transition-transform group-hover:scale-110 group-active:scale-100">

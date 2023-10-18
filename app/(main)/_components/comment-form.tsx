@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { CommentType, commentSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Comment, Post } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import {
   Dispatch,
   RefObject,

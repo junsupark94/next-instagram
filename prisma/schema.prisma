@@ -29,20 +29,21 @@ model User {
   who_can_comment PeopleType @default(EVERYONE)
   who_can_tag     PeopleType @default(EVERYONE)
 
-  post                Post[]               @relation("creator")
-  story               Story[]
-  sound               Sound[]
-  reel                Reel[]
-  message             Message[]
-  media               Media[]
-  agent               Relationship[]       @relation("agent")
-  target              Relationship[]       @relation("target")
-  comment             Comment[]
-  post_tag            PostTag[]
-  post_interaction    PostInteraction[]
-  story_interaction   StoryInteraction[]
-  reel_interaction    ReelInteraction[]
-  conversation_member ConversationMember[]
+  Post                Post[]               @relation("creator")
+  Story               Story[]
+  Sound               Sound[]
+  Reel                Reel[]
+  Message             Message[]
+  Media               Media[]
+  Agent               Relationship[]       @relation("agent")
+  Target              Relationship[]       @relation("target")
+  Comment             Comment[]
+  Post_tag            PostTag[]
+  Post_interaction    PostInteraction[]
+  Story_interaction   StoryInteraction[]
+  Reel_interaction    ReelInteraction[]
+  Conversation_member ConversationMember[]
+  Comment_interaction CommentInteraction[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -54,10 +55,10 @@ model User {
 
 model PostInteraction {
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  User    User   @relation(fields: [user_id], references: [id])
 
   post_id String
-  post    Post   @relation(fields: [post_id], references: [id])
+  Post    Post   @relation(fields: [post_id], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -73,10 +74,10 @@ model PostInteraction {
 
 model StoryInteraction {
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  User    User   @relation(fields: [user_id], references: [id])
 
   story_id String
-  story    Story  @relation(fields: [story_id], references: [id])
+  Story    Story  @relation(fields: [story_id], references: [id])
 
   is_liked  Boolean @default(false)
   is_shared Boolean @default(false)
@@ -237,17 +238,19 @@ model Comment {
   content_type ContentType
 
   post_id String?
-  post    Post?   @relation(fields: [post_id], references: [id])
+  Post    Post?   @relation(fields: [post_id], references: [id])
 
   reel_id String?
-  reel    Reel?   @relation(fields: [reel_id], references: [id])
+  Reel    Reel?   @relation(fields: [reel_id], references: [id])
 
   parent_comment_id String?
-  parent_comment    Comment?  @relation(fields: [parent_comment_id], references: [id], name: "parent", onDelete: Restrict, onUpdate: Restrict)
-  children          Comment[] @relation("parent")
+  Parent_comment    Comment?  @relation(fields: [parent_comment_id], references: [id], name: "parent", onDelete: Restrict, onUpdate: Restrict)
+  Children          Comment[] @relation("parent")
   replying_to_id    String?
-  comment           Comment?  @relation(fields: [replying_to_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
-  replies           Comment[] @relation("reply")
+  Comment           Comment?  @relation(fields: [replying_to_id], references: [id], name: "reply", onDelete: Restrict, onUpdate: Restrict)
+  Replies           Comment[] @relation("reply")
+
+  Comment_interaction CommentInteraction[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -257,6 +260,23 @@ model Comment {
   @@index([user_id])
   @@index([post_id, user_id])
   @@index([reel_id, user_id])
+}
+
+model CommentInteraction {
+  comment_id String
+  Comment Comment @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+  @@index([comment_id])
+
+  user_id String
+  User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  @@index([user_id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  liked Boolean @default(true)
+
+  @@unique([comment_id, user_id])
 }
 
 enum ContentType {
