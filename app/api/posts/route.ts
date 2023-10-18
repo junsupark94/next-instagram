@@ -52,14 +52,15 @@ export async function POST(req: NextRequest) {
                   year: "numeric",
                 })}`,
               position,
-              user_id: creator_id,
+              user_id: creator_id
             })),
           },
         },
       },
     });
 
-    return NextResponse.redirect(`${req.nextUrl.origin}/p/${response.id}`);
+    const redirectUrl = new URL(`/p/${response.id}`, req.nextUrl.origin )
+    return NextResponse.redirect(redirectUrl);
   } catch (error) {
     console.log("[POSTS_POST]", error);
     return new NextResponse("Internal error", { status: 500 });

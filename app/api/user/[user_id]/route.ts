@@ -23,3 +23,27 @@ export async function PATCH(
     return new NextResponse("Internal error", { status: 500 });
   }
 }
+
+export async function POST(
+  req: NextRequest,
+  { params } : { params: { user_id: string}}
+) {
+  try {
+    const {profile_name, bio} = await req.json();
+
+    const response = await db.user.update({
+      where: {
+        id: params.user_id
+      },
+      data: {
+        profile_name,
+        bio
+      }
+    })
+
+    return NextResponse.json(response);
+  } catch (error) {
+    console.log('[POST_ID_POST]', error);
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}

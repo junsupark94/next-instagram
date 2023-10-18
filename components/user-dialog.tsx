@@ -51,7 +51,7 @@ const UserDialog: React.FC<UserDialogProps> = ({ user }) => {
             See why this information is important.
           </Link>
         </p>
-        <div className="flex grow flex-col gap-2 self-start px-3 text-base">
+        <div className="flex grow flex-col gap-2 px-3 text-base w-full">
           <article className="flex items-center gap-2">
             <CalendarIcon className="h-7 w-7" />
             <div>
@@ -109,7 +109,7 @@ const UserDialog: React.FC<UserDialogProps> = ({ user }) => {
               </button>
             </article>
           )}
-          <Close className="p-3 text-sm">Close</Close>
+          <Close className="py-3 text-sm border-t border-neutral-700 -mx-3">Close</Close>
         </div>
       </DialogContent>
     </Dialog>

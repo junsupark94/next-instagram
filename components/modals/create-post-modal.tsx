@@ -56,6 +56,7 @@ const CreatePostModal = () => {
 
   if (!state.isOpen) return null;
 
+
   return (
     <Overlay>
       <div
@@ -89,6 +90,7 @@ const CreatePostModal = () => {
                 files={files}
                 titleProps={titleProps}
                 setShowWarning={setShowWarning}
+                close={() => state.setOpen(false)}
               />
             )}
             {showWarning && (

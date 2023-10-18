@@ -26,15 +26,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PostType, postSchema } from "@/lib/zod";
 import { supabase } from "@/lib/db";
 import { PicsAndVids } from "./create-post-modal";
+import { useRouter } from "next/navigation";
 const EditPost = ({
   files,
   titleProps,
   setShowWarning,
+  close
 }: {
   files: PicsAndVids[];
   titleProps: any;
   setShowWarning: any;
+  close: () => void;
 }) => {
+  const router = useRouter();
   const [description, setDescription] = useState("");
   const [uploadError, setUploadError] = useState(false);
   const [index, setIndex] = useState(0);
@@ -76,8 +80,6 @@ const EditPost = ({
   const onSubmit = async (formData: PostType) => {
     setUploadError(false);
     try {
-      console.log("formData", formData);
-      console.log("files", files);
       const promises: Promise<any>[] = [];
       files.forEach((file) => {
         const uploadFile = file.uploadFile;
@@ -102,9 +104,10 @@ const EditPost = ({
         throw new Error("Something went wrong!");
       }
 
-      const responseData = await response.json();
-
-      console.log("responseData", responseData);
+      if (response.redirected) {
+        close();
+        router.push(response.url);
+      }
     } catch (error) {
       console.log(error);
       setUploadError(true);

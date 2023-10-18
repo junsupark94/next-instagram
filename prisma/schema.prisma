@@ -131,12 +131,13 @@ model Post {
   comment Comment[]
 
   archived Boolean @default(false)
+  pinned Boolean @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@index([location_id])
-  @@index([creator_id])
+  @@index([creator_id, pinned])
 }
 
 model Story {
