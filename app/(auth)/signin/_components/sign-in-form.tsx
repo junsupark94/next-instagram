@@ -80,12 +80,12 @@ const SignInForm = () => {
             password.
           </p>
         )}
-        <Link
-          href="/resetpassword"
-          className="mt-3 text-center text-xs text-[#385185]"
+        <span
+          // href="/resetpassword"
+          className="mt-3 text-center text-xs text-[#385185] line-through"
         >
           Forgot password?
-        </Link>
+        </span>
       </div>
     </>
   );
