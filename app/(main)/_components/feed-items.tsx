@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Media, User, Post } from "@prisma/client";
 import FeedItem from "./feed-item";
+import { PostWithThings } from "./feed";
 
 const elementIsVisibleInViewport = (
   el: HTMLElement,
@@ -72,12 +73,7 @@ function videoScroll() {
 
 const width = 5;
 
-export type PostsWithMediaWithCreator = ({
-  media: Media[],
-  creator: User
-} & Post)[]
-
-const FeedItems = ({posts} : {posts: PostsWithMediaWithCreator}) => {
+const FeedItems = ({posts} : {posts: PostWithThings[]}) => {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(startIndex + width);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -99,7 +95,7 @@ const FeedItems = ({posts} : {posts: PostsWithMediaWithCreator}) => {
           return prev + 1;
         });
         setEndIndex((prev) => {
-          if (prev === 20) return prev;
+          if (prev === posts.length) return prev;
           return prev + 1;
         });
       } else if (foo.y >= -500) {

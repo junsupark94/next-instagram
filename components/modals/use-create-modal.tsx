@@ -12,6 +12,7 @@ export function useCreateModal() {
   );
   useEffect(() => {
     setTriggerProps(triggerProps);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const modalRef = useRef(null);

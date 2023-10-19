@@ -77,8 +77,8 @@ const ReplyForm: React.FC<ReplyFormProps> = ({
         const { index } = reply_target;
         setStateComments((prev) => {
           const target = prev[index];
-          if (!target.children) target.children = [];
-          target.children = [...target.children, data];
+          if (!target.Children) target.Children = [];
+          target.Children = [...target.Children, data];
           return [...prev];
         });
       } else {

@@ -9,16 +9,13 @@ import PostIcons from "@/components/PostIcons";
 import { useAuth } from "@/hooks/use-auth-hook";
 import { convertText } from "@/utils/text";
 import CommentForm from "./comment-form";
+import { PostWithThings } from "./feed";
 
-type FeedItemProps = {
-  postWithUserWithMedia: {
-    media: Media[];
-    creator: User;
-    comment: Comment[];
-  } & Post;
-};
-
-const FeedItem: React.FC<FeedItemProps> = ({ postWithUserWithMedia }) => {
+const FeedItem = ({
+  postWithUserWithMedia,
+}: {
+  postWithUserWithMedia: PostWithThings;
+}) => {
   const { creator, media, comment, ...post } = postWithUserWithMedia;
   const [liked, setLiked] = useState(false);
   const [newComments, setNewComments] = useState<Comment[]>([]);
@@ -28,6 +25,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ postWithUserWithMedia }) => {
   return (
     <div className="border-gray-200 pb-4 dark:border-gray-800 xs:border-b">
       <PostHeader
+        creator_id={postWithUserWithMedia.creator_id}
         follower_count={100}
         following_count={100}
         post_count={100}

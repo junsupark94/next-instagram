@@ -40,13 +40,13 @@ const FollowDialog: React.FC<FollowDialogProps> = ({
         <DialogHeader>
           <DialogTitle className="flex flex-col items-center text-sm gap-1 py-4 border">
             <Image
-              src={user.profilePicture}
+              src={user.profile_picture_url || "/default_profile.jpeg"}
               alt="profile picture"
               width={56}
               height={56}
               className="rounded-full"
             />
-            <span>{user.account}</span>
+            <span>{user.username}</span>
           </DialogTitle>
           <DialogDescription className="dark:text-[#f5f5f5] text-black">
             <button

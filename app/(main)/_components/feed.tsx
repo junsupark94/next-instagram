@@ -1,9 +1,20 @@
 import { db } from "@/lib/db";
 import FeedItems from "./feed-items";
+import { Prisma } from "@prisma/client";
+
+const postWithThings = Prisma.validator<Prisma.PostDefaultArgs>()({
+  include: {
+    media: true,
+    creator: true,
+    comment: true
+  }
+})
+
+export type PostWithThings = Prisma.PostGetPayload<typeof postWithThings>
 
 
 const Feed = async () => {
-  const posts = await db.post.findMany({
+  const posts : PostWithThings[] = await db.post.findMany({
     take: 100,
     include: {
       media: true,

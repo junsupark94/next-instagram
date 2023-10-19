@@ -9,7 +9,6 @@ import {
 } from "react-aria";
 import SelectMedia from "./select-media";
 import { cn } from "@/utils/cn";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Button } from "react-aria-components";
 import EditPost from "./edit-post";
 import { useCreateModalStore } from "@/hooks/use-create-modal-store";
@@ -42,6 +41,7 @@ const CreatePostModal = () => {
   );
   useEffect(() => {
     setTriggerProps(triggerProps);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const modalRef = useRef(null);
@@ -102,7 +102,7 @@ const CreatePostModal = () => {
                   <div className="flex grow flex-col items-center justify-center">
                     <h1 className="text-xl">Discard post?</h1>
                     <p className="mt-1 text-sm text-neutral-400">
-                      If you leave, your edits wont' be saved.
+                      If you leave, your edits won&apos;t be saved.
                     </p>
                   </div>
                   <Button
