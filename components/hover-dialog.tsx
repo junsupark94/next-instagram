@@ -1,15 +1,20 @@
+"use client";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import MessengerIcon from "@/Icons/MessengerIcon";
+import { Post } from "@prisma/client";
+import { PostWithMedia } from "@/app/(main)/[username]/page";
 
 type HoverDialogProps = {
   children: JSX.Element;
   post_count: number;
   follower_count: number;
   following_count: number;
+  profile_picture_url: string | null;
+  creator_id: string;
 };
 
 const HoverDialog: React.FC<HoverDialogProps> = ({
@@ -17,6 +22,8 @@ const HoverDialog: React.FC<HoverDialogProps> = ({
   post_count,
   follower_count,
   following_count,
+  profile_picture_url,
+  creator_id,
 }) => {
   let timer: NodeJS.Timeout;
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -40,6 +47,17 @@ const HoverDialog: React.FC<HoverDialogProps> = ({
     return () => clearTimeout(timer);
   }, []);
 
+  const [posts, setPosts] = useState<PostWithMedia[]>([]);
+
+  useEffect(() => {
+    async function getPosts() {
+      const response = await fetch(`/api/posts/${creator_id}`)
+      const body = await response.json();
+      setPosts(body.data);
+    }
+    getPosts();
+  }, []);
+
   return (
     <div
       onMouseEnter={mouseEnterHandler}
@@ -56,10 +74,11 @@ const HoverDialog: React.FC<HoverDialogProps> = ({
         >
           <div className="flex items-center gap-3 p-3 pb-1">
             <Image
-              src="/default_profile.jpeg"
+              src={profile_picture_url || "/default_profile.jpeg"}
               width={44}
               height={44}
               alt="image"
+              className="rounded-full"
             />
             <div>
               <div className="text-base">account</div>
@@ -81,33 +100,17 @@ const HoverDialog: React.FC<HoverDialogProps> = ({
             </div>
           </article>
           <div className="grid grid-cols-3 gap-1">
-            <Link href={`/p/1`}>
-              <Image
-                src="/posts/post1.jpg"
-                alt="image"
-                width={120}
-                height={120}
-                className="h-[120px] w-[120px] object-cover"
-              />
-            </Link>
-            <Link href={`/p/2`}>
-              <Image
-                src="/posts/post2.jpg"
-                alt="image"
-                width={120}
-                height={120}
-                className="h-[120px] w-[120px] object-cover"
-              />
-            </Link>
-            <Link href={`/p/3`}>
-              <Image
-                src="/posts/post3.jpg"
-                alt="image"
-                width={120}
-                height={120}
-                className="h-[120px] w-[120px] object-cover"
-              />
-            </Link>
+            {posts.map((post) => (
+              <Link href={`/p/${post.id}`} key={post.id}>
+                <Image
+                  src={post.media[0].src}
+                  alt="image"
+                  width={120}
+                  height={120}
+                  className="h-[120px] w-[120px] object-cover"
+                />
+              </Link>
+            ))}
           </div>
           <div className="flex gap-2 p-3 font-semibold">
             <button className="flex grow items-center justify-center gap-2 rounded-lg bg-[#0095f6] py-1.5">

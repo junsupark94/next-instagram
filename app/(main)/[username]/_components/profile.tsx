@@ -8,7 +8,7 @@ import { useState } from "react";
 import CogIcon from "@/Icons/CogIcon";
 import { useAuth } from "@/hooks/use-auth-hook";
 import { useRouter } from "next/navigation";
-import { UserWithPosts } from "../page";
+import { PostWithMedia, UserWithPosts } from "../page";
 import {
   Tooltip,
   TooltipContent,
@@ -22,17 +22,20 @@ import OptionsIcon from "@/Icons/OptionsIcon";
 import EditProfileDialog from "./edit-profile-dialog";
 import EditProfilePictureDialog from "./edit-profile-picture-dialog";
 import MorePosts from "@/components/more-posts";
+import { Post } from "@prisma/client";
 
 export function Profile({
   user,
   followerCount,
   followingCount,
   postCount,
+  pinnedPosts
 }: {
   user: UserWithPosts;
   postCount: number;
   followingCount: number;
   followerCount: number;
+  pinnedPosts: PostWithMedia[]
 }) {
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(36);
@@ -149,6 +152,7 @@ export function Profile({
       </article>
       <MorePosts
         creator={user}
+        pinnedPosts={pinnedPosts}
         startIndex={startIndex}
         endIndex={endIndex}
         setStartIndex={setStartIndex}

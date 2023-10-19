@@ -16,6 +16,14 @@ const userWithPosts = Prisma.validator<Prisma.UserDefaultArgs>()({
 
 export type UserWithPosts = Prisma.UserGetPayload<typeof userWithPosts>
 
+const postWithMedia = Prisma.validator<Prisma.PostDefaultArgs>()({
+  include: {
+    media: true
+  }
+})
+
+export type PostWithMedia = Prisma.PostGetPayload<typeof postWithMedia>
+
 export default async function UserPage({
   params,
 }: {
@@ -31,16 +39,32 @@ export default async function UserPage({
         take: 100,
         include: {
           media: true
+        },
+        orderBy: {
+          created_at: "desc"
         }
       }
     }
   });
+
+  const pinnedPosts : PostWithMedia[] = await db.post.findMany({
+    where: {
+      creator: {
+        username
+      },
+      pinned: true
+    },
+    include: {
+      media: true
+    }
+  })
 
   if (!user) return <div>User not found</div>;
 
   return (
     <Profile
       user={user}
+      pinnedPosts={pinnedPosts}
       postCount={100}
       followerCount={100}
       followingCount={100}

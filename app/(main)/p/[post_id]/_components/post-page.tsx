@@ -8,10 +8,12 @@ import PostIcons from "@/components/PostIcons";
 import Link from "next/link";
 import { useState } from "react";
 import { getRelativeTimeString } from "@/utils/relative-time";
-import { Comment, Media, PostInteraction } from "@prisma/client";
+import { Media, Post, PostInteraction } from "@prisma/client";
 import { useAuth } from "@/hooks/use-auth-hook";
 import CommentItems from "@/components/comment-items";
 import CommentForm from "@/components/comment-form";
+import MorePosts from "@/components/more-posts";
+import { PostWithMedia } from "@/app/(main)/[username]/page";
 
 const PostPage = ({
   media,
@@ -24,6 +26,9 @@ const PostPage = ({
   description,
   id,
   post_interaction,
+  creator,
+  pinnedPosts,
+  creator_id
 }: {
   media: Media[];
   comments: any;
@@ -35,6 +40,9 @@ const PostPage = ({
   description: string;
   id: string;
   post_interaction: PostInteraction[];
+  creator: any;
+  pinnedPosts: PostWithMedia[]
+  creator_id: string;
 }) => {
   const [stateComments, setStateComments] = useState(comments);
   const [liked, setLiked] = useState(false);
@@ -69,6 +77,7 @@ const PostPage = ({
             follower_count={10}
             following_count={10}
             post_count={10}
+            creator_id={creator_id}
           />
           <article className="flex grow flex-col gap-2 overflow-auto p-4">
             <PostDescription
@@ -104,7 +113,7 @@ const PostPage = ({
             {username}
           </Link>
         </h1>
-        {/* <MorePosts creator={creator} exclude={params.id} /> */}
+        <MorePosts creator={creator}  pinnedPosts={pinnedPosts}/>
       </section>
       <Footer />
       <span className="text-[#00376b] dark:text-[#e0f1ff]" />

@@ -17,6 +17,7 @@ type PostHeaderProps = {
   follower_count: number;
   following_count: number;
   post_count: number;
+  creator_id: string;
 };
 
 const PostHeader: React.FC<PostHeaderProps> = ({
@@ -28,6 +29,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({
   follower_count,
   following_count,
   post_count,
+  creator_id
 }) => {
   const [following, setFollowing] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -44,6 +46,8 @@ const PostHeader: React.FC<PostHeaderProps> = ({
           follower_count={follower_count}
           following_count={following_count}
           post_count={post_count}
+          profile_picture_url={profile_picture_url}
+          creator_id={creator_id}
         >
           <Link href={`/${username}`}>
             <Image
@@ -61,6 +65,8 @@ const PostHeader: React.FC<PostHeaderProps> = ({
               follower_count={follower_count}
               following_count={following_count}
               post_count={post_count}
+              profile_picture_url={profile_picture_url}
+              creator_id={creator_id}
             >
               <Link
                 href={`/${username}`}

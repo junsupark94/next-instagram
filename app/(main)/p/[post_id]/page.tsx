@@ -48,7 +48,7 @@ export default async function Page({
 }: {
   params: { post_id: string };
 }) {
-  const post = await db.post.findUnique({
+  const post  = await db.post.findUnique({
     where: {
       id: params.post_id,
     },
@@ -57,7 +57,19 @@ export default async function Page({
       media: true,
       created_at: true,
       description: true,
-      creator: true,
+      creator: {
+        include: {
+          Post: {
+            take: 6,
+            orderBy: {
+              created_at: "desc"
+            },
+            include: {
+              media: true
+            }
+          }
+        }
+      },
       location_name: true,
       post_interaction: true,
     },
@@ -109,10 +121,24 @@ export default async function Page({
     },
   });
 
+  const pinnedPosts = await db.post.findMany({
+    where: {
+      creator_id: post.creator.id,
+      pinned: true
+    },
+    include: {
+      media: true
+    }
+  })
+
+
   return (
     <PostPage
       id={post.id}
+      creator_id={post.creator.id}
+      pinnedPosts={pinnedPosts}
       media={post.media}
+      creator={post.creator}
       created_at={post.created_at}
       description={post.description}
       username={post.creator.username}
