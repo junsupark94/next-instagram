@@ -20,12 +20,6 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<SignUpType>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: {
-      login: "1112223333",
-      password: "123456jP!",
-      username: "junsumoney",
-      fullname: "Junsu Park",
-    },
     mode: "onBlur",
   });
 
