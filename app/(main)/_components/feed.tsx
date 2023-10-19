@@ -10,6 +10,9 @@ const Feed = async () => {
       creator: true,
       comment: true
     },
+    orderBy: {
+      created_at: "desc"
+    }
   })
 
   if (!posts) return <div>404 Error</div>

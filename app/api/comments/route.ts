@@ -21,10 +21,11 @@ export async function POST(req: NextRequest) {
           },
         },
         text: true,
-        replies: true,
+        Replies: true,
         id: true,
         created_at: true,
         replying_to_id: true,
+        Comment_interaction: true,
       },
     });
 

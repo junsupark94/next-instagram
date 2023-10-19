@@ -14,6 +14,7 @@ import CommentItems from "@/components/comment-items";
 import CommentForm from "@/components/comment-form";
 import MorePosts from "@/components/more-posts";
 import { PostWithMedia } from "@/app/(main)/[username]/page";
+import { CommentWithReplies } from "../page";
 
 const PostPage = ({
   media,
@@ -31,7 +32,7 @@ const PostPage = ({
   creator_id
 }: {
   media: Media[];
-  comments: any;
+  comments: CommentWithReplies[];
   location_name: string | null;
   created_at: Date;
   verified: boolean;

@@ -39,10 +39,8 @@ const EditProfileDialog = ({
       const profile_name = profileNameRef.current?.value;
       const bio = profileBioRef.current?.value;
 
-      console.log("profile_name", profile_name, "bio", bio);
-
       const response = await fetch(`/api/user/${user_id}`, {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify({
           profile_name,
           bio,

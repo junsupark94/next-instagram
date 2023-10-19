@@ -33,11 +33,13 @@ const PostDescription: React.FC<PostDescriptionProps> = ({
         className="self-start rounded-full object-cover"
       />
       <div>
-        <div className="flex items-center gap-1">
-          <Link href={`/${username}`} className="font-semibold">
-            {username}
-          </Link>
-          {verified && <VerifiedIcon className="h-3 w-3" />}
+        <div>
+          <div className="flex gap-1 items-center">
+            <Link href={`/${username}`} className="font-semibold">
+              {username}
+            </Link>
+            {verified && <VerifiedIcon className="h-3 w-3" />}
+          </div>
           <p className="whitespace-pre-wrap">{convertText(description)}</p>
         </div>
         <span className="pb-1 text-xs text-neutral-400">

@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import CogIcon from "@/Icons/CogIcon";
 import ActivityIcon from "@/Icons/ActivityIcon";
@@ -6,9 +7,9 @@ import ShortcutsIcon from "@/Icons/ShortcutsIcon";
 import DarkModeIcon from "@/Icons/DarkModeIcon";
 import ProblemIcon from "@/Icons/ProblemIcon";
 import { cn } from "@/utils/cn";
-import { useGlobalStore } from "@/utils/zustand";
-import { redirect, useRouter } from "next/navigation";
-
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth-hook";
+import { revalidatePath } from "next/cache";
 
 type NavBarMenuProps = {
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,10 +18,7 @@ type NavBarMenuProps = {
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
   const router = useRouter();
   const [showDarkMode, setShowDarkMode] = useState(false);
-  const [darkMode, toggleDarkMode] = useGlobalStore((state) => [
-    state.darkMode,
-    state.toggleDarkMode,
-  ]);
+  const user = useAuth();
   const menuRef = useRef<HTMLDivElement>(null);
   const mainMenuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -35,17 +33,31 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
     };
   }, [menuRef, setShowMenu]);
 
+  const onToggleDarkMode = async () => {
+    try {
+      const response = await fetch(`/api/user/${user.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          dark_mode: !user.dark_mode,
+        }),
+      });
+      if (!response.ok) throw new Error("Something went wrong!");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const logout = async () => {
-    await fetch('/api/auth/signout')
+    await fetch("/api/auth/signout");
     router.refresh();
-  }
+  };
 
   return (
     <div
       className={cn(
-        "rounded-2xl p-2 dark:bg-[#262626] bg-white drop-shadow-around overflow-hidden h-[440px] transition-[transform,height]",
-        showDarkMode && "h-[125px]"
+        "h-[440px] overflow-hidden rounded-2xl bg-white p-2 drop-shadow-around transition-[transform,height] dark:bg-[#262626]",
+        showDarkMode && "h-[125px]",
       )}
       ref={menuRef}
     >
@@ -54,45 +66,49 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
         ref={mainMenuRef}
       >
         <Button className="cursor-default line-through">
-          <CogIcon className="w-4 h-4" />
+          <CogIcon className="h-4 w-4" />
           <span>Settings</span>
         </Button>
         <Button className="cursor-default line-through">
-          <ActivityIcon className="w-4 h-4" />
+          <ActivityIcon className="h-4 w-4" />
           <span>Your activity</span>
         </Button>
         <Button>
-          <BookmarkIcon className="w-4 h-4" />
+          <BookmarkIcon className="h-4 w-4" />
           <span>Saved</span>
         </Button>
         <Button className="cursor-default line-through">
-          <ShortcutsIcon className="w-4 h-4" />
+          <ShortcutsIcon className="h-4 w-4" />
           <span>Keyboard shortcuts</span>
         </Button>
         <Button onClick={() => setShowDarkMode(true)}>
-          {darkMode ? <DarkModeIcon className="w-4 h-4" /> : <LightModeIcon />}
+          {user.dark_mode ? (
+            <DarkModeIcon className="h-4 w-4" />
+          ) : (
+            <LightModeIcon />
+          )}
           <span>Switch appearance</span>
         </Button>
         <Button className="cursor-default line-through">
-          <ProblemIcon className="w-4 h-4" />
+          <ProblemIcon className="h-4 w-4" />
           <span>Report a problem</span>
         </Button>
-        <div className="border-[3px] border-[#5555554c] -mx-2 my-2" />
+        <div className="-mx-2 my-2 border-[3px] border-[#5555554c]" />
         <Button className="cursor-default line-through">
           <span>Switch accounts</span>
         </Button>
-        <div className="border border-[#5555554c] -mx-2 my-2" />
+        <div className="-mx-2 my-2 border border-[#5555554c]" />
         <Button onClick={logout}>
           <span>Log out</span>
         </Button>
       </section>
       <div
         className={cn(
-          "translate-x-[100%] invisible opacity-0 w-full top-0 left-0 absolute rounded-2xl transition",
-          `${showDarkMode && "translate-x-0 visible opacity-100"}`
+          "invisible absolute left-0 top-0 w-full translate-x-[100%] rounded-2xl opacity-0 transition",
+          `${showDarkMode && "visible translate-x-0 opacity-100"}`,
         )}
       >
-        <div className="flex items-center justify-between border-b p-4 border-[#555555]">
+        <div className="flex items-center justify-between border-b border-[#555555] p-4">
           <div className="flex gap-2">
             <button
               className="text-[#737373]"
@@ -104,32 +120,32 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ setShowMenu }) => {
           </div>
           <DarkModeIcon
             className={cn(
-              "w-4 h-4 transition",
-              darkMode ? "opacity-100" : "opacity-0 hidden"
+              "h-4 w-4 transition",
+              user.dark_mode ? "opacity-100" : "hidden opacity-0",
             )}
           />
           <LightModeIcon
             className={cn(
-              "w-4 h-4 transition",
-              darkMode ? "opacity-0 hidden" : "opacity-100"
+              "h-4 w-4 transition",
+              user.dark_mode ? "hidden opacity-0" : "opacity-100",
             )}
           />
         </div>
         <div className="p-2 text-sm">
           <button
-            onClick={toggleDarkMode}
-            className="flex w-full justify-between items-center p-4 dark:hover:bg-gray-600/30 hover:bg-gray-200 rounded-lg transition"
+            onClick={onToggleDarkMode}
+            className="flex w-full items-center justify-between rounded-lg p-4 transition hover:bg-gray-200 dark:hover:bg-gray-600/30"
           >
             <span>Dark mode</span>
             <div
               className={cn(
-                "flex w-8 dark:bg-blue-500 bg-gray-400 rounded-lg px-1"
+                "flex w-8 rounded-lg bg-gray-400 px-1 dark:bg-blue-500",
               )}
             >
               <div
                 className={cn(
-                  "p-2 bg-white drop-shadow-around rounded-full transition-transform",
-                  darkMode && "translate-x-[60%]"
+                  "rounded-full bg-white p-2 drop-shadow-around transition-transform",
+                  user.dark_mode && "translate-x-[60%]",
                 )}
               />
             </div>
@@ -153,8 +169,8 @@ function Button({
   return (
     <button
       className={cn(
-        "flex items-center gap-2 p-4 rounded-lg hover:bg-[#ffffff19] transition text-[14px] leading-4",
-        className
+        "flex items-center gap-2 rounded-lg p-4 text-[14px] leading-4 transition hover:bg-[#ffffff19]",
+        className,
       )}
       onClick={onClick}
     >

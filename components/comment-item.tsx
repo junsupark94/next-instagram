@@ -9,7 +9,6 @@ import { useReplyStore } from "@/hooks/use-reply-store";
 import { Heart } from "lucide-react";
 import { CommentWithReplies } from "@/app/(main)/p/[post_id]/page";
 import { useAuth } from "@/hooks/use-auth-hook";
-import { usePathname } from "next/navigation";
 
 const CommentItem = ({
   comment,
@@ -41,7 +40,6 @@ const CommentItem = ({
       });
       if (!response.ok) throw new Error("Something went wrong!");
       setLiked(value);
-      comment.Comment_interaction
     } catch (error) {
       console.log(error);
     } finally {
