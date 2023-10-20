@@ -1,24 +1,28 @@
+'use client'
 import React from "react";
 import FollowSuggestion from "./FollowSuggestion";
 import Footer from "./Footer";
 import Image from "next/image";
+import { useAuth } from "@/hooks/use-auth-hook";
 
 type RightSideBarProps = {};
 
 const RightSideBar: React.FC<RightSideBarProps> = () => {
+  const user = useAuth();
+
   return (
     <aside className="hidden md:block w-[319px] px-4 mt-9 mb-[46px] h-fit text-[14px]">
       <article className="flex justify-between mb-6">
         <section className="flex gap-2">
           <Image
-            src="/junsu park.jpeg"
-            alt="Junsu Park"
+            src={user.profile_picture_url || "/default_profile.jpeg"}
+            alt={user.username}
             width={40}
             height={40}
             className="rounded-full"
           />
           <div>
-            <div className="font-bold">junsupark</div>
+            <div className="font-bold">{user.username}</div>
             <div className="dark:text-[#a8a8a8] text-[#737373]">Junsu Park</div>
           </div>
         </section>
